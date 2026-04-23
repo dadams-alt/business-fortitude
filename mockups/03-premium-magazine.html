@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Business Fortitude — Premium Magazine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,400&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root {
+    --bg: #fdfbf7;
+    --ink: #111111;
+    --soft: #4a4a4a;
+    --accent: #e94b29;   /* Fast Co-ish orange */
+    --mustard: #edb73b;
+    --blue: #2a3cdb;
+    --teal: #0f766e;
+    --surface: #f2ede2;
+    --rule: #e6dfd0;
+  }
+  body { background: var(--bg); color: var(--ink); font-family: 'Manrope', system-ui, sans-serif; font-feature-settings: "ss01", "ss02"; }
+  .display { font-family: 'Fraunces', serif; font-variation-settings: "opsz" 144, "SOFT" 50; font-weight: 900; letter-spacing: -0.025em; line-height: 0.95; }
+  .soft { color: var(--soft); }
+  .accent { color: var(--accent); }
+  .bg-accent { background: var(--accent); color: white; }
+  .bg-mustard { background: var(--mustard); color: var(--ink); }
+  .bg-blue { background: var(--blue); color: white; }
+  .bg-teal { background: var(--teal); color: white; }
+  .bg-surface { background: var(--surface); }
+  .bg-ink { background: var(--ink); color: white; }
+  .rule { border-color: var(--rule); }
+  .kicker { font-weight: 700; text-transform: uppercase; letter-spacing: 0.18em; font-size: 11px; }
+  .issue-band { background: var(--ink); }
+  .cover-hero { background: linear-gradient(135deg, var(--accent) 0%, #c41e3a 100%); }
+  .skew-strip { transform: skewY(-1.5deg); transform-origin: 0 0; }
+  .pulse-dot { width: 8px; height: 8px; border-radius: 999px; background: #22c55e; display: inline-block; animation: pulse 1.5s infinite; }
+  @keyframes pulse { 0%,100% {opacity:1;} 50% {opacity:.35;} }
+  .card-tilt:hover { transform: translateY(-4px) rotate(-.3deg); transition: transform .4s ease; }
+  .underline-grow { position: relative; }
+  .underline-grow::after { content: ""; position: absolute; left:0; right:0; bottom: -4px; height: 4px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform .35s ease; }
+  .underline-grow:hover::after { transform: scaleX(1); }
+  .bigquote::before { content: '"'; font-family: 'Fraunces', serif; font-size: 8rem; color: var(--accent); line-height: 0.5; vertical-align: top; display: block; }
+  .rotate-chip { transform: rotate(-2deg); display: inline-block; }
+  .grid-pattern { background-image: radial-gradient(circle, #d9d2c4 1px, transparent 1px); background-size: 20px 20px; }
+  .number-pill { border-radius: 999px; background: var(--ink); color: white; width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center; font-weight: 800; }
+</style>
+</head>
+<body class="min-h-screen">
+
+<!-- Issue band -->
+<div class="issue-band text-white">
+  <div class="max-w-[1280px] mx-auto px-6 py-2 flex items-center justify-between text-[12px]">
+    <div class="flex items-center gap-6">
+      <span class="font-semibold tracking-widest uppercase text-[11px]">Issue №24 · Spring 2026</span>
+      <span class="opacity-70 hidden md:inline">Rebuilding discipline</span>
+    </div>
+    <div class="flex items-center gap-4 text-[11px]">
+      <span class="flex items-center gap-2"><span class="pulse-dot"></span> Live markets</span>
+      <a href="#" class="opacity-80 hover:opacity-100">Podcasts</a>
+      <a href="#" class="opacity-80 hover:opacity-100">Events</a>
+      <a href="#" class="opacity-80 hover:opacity-100">Newsletters</a>
+    </div>
+  </div>
+</div>
+
+<!-- Masthead -->
+<header class="border-b rule">
+  <div class="max-w-[1280px] mx-auto px-6 py-6 flex items-center justify-between">
+    <div class="flex items-center gap-6">
+      <button id="menuBtn" class="flex items-center gap-2 text-[13px] uppercase tracking-widest hover:accent">
+        <svg width="20" height="14" viewBox="0 0 20 14" fill="none"><path d="M0 1h20M0 7h20M0 13h20" stroke="currentColor" stroke-width="1.8"/></svg>
+        Sections
+      </button>
+    </div>
+    <a href="/" class="display text-[34px] md:text-[42px]">Business Fortitude<span class="accent">.</span></a>
+    <div class="flex items-center gap-4 text-[13px]">
+      <a href="#" aria-label="Search" class="hover:accent"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></a>
+      <a href="#" class="hidden md:inline bg-accent text-white px-4 py-2 rounded-full font-semibold">Become a member</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- Cover hero -->
+  <section class="cover-hero text-white relative overflow-hidden">
+    <div class="max-w-[1280px] mx-auto px-6 py-20 md:py-24 relative">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-10 items-center">
+        <div class="md:col-span-7">
+          <div class="rotate-chip bg-mustard text-ink px-4 py-1.5 rounded-full text-[11px] uppercase tracking-widest font-bold mb-6">The cover story</div>
+          <h1 class="display text-[56px] md:text-[96px] leading-[0.92]">Who's really<br>running<br>your company?</h1>
+          <p class="mt-6 text-[18px] md:text-[20px] leading-[1.55] max-w-xl opacity-95">Eight founders. Four sectors. One question: how do you keep your hands on the wheel when the machine you built keeps asking you to let go?</p>
+          <div class="mt-8 flex items-center gap-4 text-[13px]">
+            <img src="https://i.pravatar.cc/80?img=22" class="w-10 h-10 rounded-full border-2 border-white" alt="">
+            <div>
+              <div class="font-bold">By the Editorial Desk · Photography by Lara Knox</div>
+              <div class="opacity-85">Reporting over 6 months · 24 min read</div>
+            </div>
+          </div>
+          <a href="#" class="inline-flex items-center gap-2 mt-8 bg-white text-ink px-6 py-3 rounded-full font-bold hover:bg-mustard transition">Read the cover story
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+        <div class="md:col-span-5">
+          <div class="aspect-[3/4] overflow-hidden rounded-sm rotate-1 shadow-2xl">
+            <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=900&q=90" class="w-full h-full object-cover grayscale contrast-125" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Decorative -->
+    <div class="absolute -bottom-10 left-0 right-0 h-20 bg-[color:var(--bg)] skew-strip"></div>
+  </section>
+
+  <!-- Editor's letter + breaking strip -->
+  <section class="max-w-[1280px] mx-auto px-6 pt-16 pb-12 grid grid-cols-1 lg:grid-cols-12 gap-10 relative">
+    <div class="lg:col-span-8">
+      <div class="kicker accent mb-3">Editor's letter</div>
+      <blockquote class="bigquote display text-[32px] md:text-[40px] leading-[1.1]">The most durable businesses we covered this quarter share one unglamorous trait. They've learned to treat complexity as a cost, not a signal of sophistication.</blockquote>
+      <div class="mt-6 flex items-center gap-3">
+        <img src="https://i.pravatar.cc/80?img=52" class="w-12 h-12 rounded-full" alt="">
+        <div>
+          <div class="font-bold">Priya Shah</div>
+          <div class="text-[12px] soft">Editor-in-Chief</div>
+        </div>
+      </div>
+    </div>
+    <div class="lg:col-span-4 bg-surface rounded-xl p-6 relative">
+      <div class="absolute -top-3 left-6 bg-ink text-white text-[11px] uppercase tracking-widest px-3 py-1 rounded-full">Today · Breaking</div>
+      <ul class="space-y-4 mt-4 text-[14px]">
+        <li class="flex gap-3"><span class="number-pill">1</span><a href="#" class="underline-grow"><b>Vanta</b> raises $3bn at $12bn valuation — IPO talk intensifies</a></li>
+        <li class="flex gap-3"><span class="number-pill">2</span><a href="#" class="underline-grow">FCA signals sharper line on fintech safeguarding after <b>Revolut</b> probe</a></li>
+        <li class="flex gap-3"><span class="number-pill">3</span><a href="#" class="underline-grow"><b>Monzo</b> quietly retires its lending product to rebuild foundations</a></li>
+        <li class="flex gap-3"><span class="number-pill">4</span><a href="#" class="underline-grow">US labour data prompts reassessment of Fed path</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Color-blocked features -->
+  <section class="max-w-[1280px] mx-auto px-6 pb-16 grid grid-cols-1 md:grid-cols-12 gap-6">
+    <a href="#" class="md:col-span-7 bg-mustard p-8 rounded-sm card-tilt block">
+      <div class="kicker mb-4">Long read · The Decision</div>
+      <h2 class="display text-[44px] md:text-[60px] leading-[0.95]">Inside Monzo's second act: killing a beloved product</h2>
+      <p class="mt-5 text-[15px] leading-[1.6] max-w-lg">The call was quieter than anyone expected. An inside account of a product team that rebuilt discipline from the floor up.</p>
+      <div class="mt-6 flex items-center gap-3 text-[13px]">
+        <span class="font-bold">Tom Nakamura</span><span>·</span><span>18 min read</span>
+      </div>
+    </a>
+    <a href="#" class="md:col-span-5 bg-blue text-white p-8 rounded-sm card-tilt block">
+      <div class="kicker mb-4 opacity-90">Playbook</div>
+      <h2 class="display text-[34px] md:text-[42px] leading-[1]">The 7 questions every board asks before a CEO buyback</h2>
+      <p class="mt-5 text-[15px] leading-[1.6] opacity-95">A chairman's checklist, open-sourced for the first time.</p>
+      <div class="mt-6 text-[13px] opacity-90">Nadia Carson · 9 min read</div>
+    </a>
+    <a href="#" class="md:col-span-5 bg-ink text-white p-8 rounded-sm card-tilt block">
+      <div class="kicker mb-4 opacity-90">Market</div>
+      <h2 class="display text-[34px] md:text-[42px] leading-[1]">Private credit's reckoning is quieter than you think — and closer</h2>
+      <p class="mt-5 text-[15px] leading-[1.6] opacity-90">Why the next wave of covenant breaches is hiding in plain sight.</p>
+      <div class="mt-6 text-[13px] opacity-85">Marcus Holden · 7 min read</div>
+    </a>
+    <a href="#" class="md:col-span-7 bg-surface p-8 rounded-sm card-tilt block">
+      <div class="kicker mb-4 accent">The Profile</div>
+      <h2 class="display text-[40px] md:text-[52px] leading-[0.98]">The FTSE director who investigates every board before accepting a seat</h2>
+      <div class="grid grid-cols-12 gap-6 mt-6">
+        <div class="col-span-7 text-[15px] leading-[1.6] soft">It takes her eight weeks, on average. She has walked away from four in the last year. This is how she decides.</div>
+        <div class="col-span-5"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80" class="rounded-sm" alt=""></div>
+      </div>
+      <div class="mt-5 text-[13px] soft">Nadia Carson · Photography Jem Goulding · 14 min</div>
+    </a>
+  </section>
+
+  <!-- Dept: Markets -->
+  <section class="border-y-2 border-ink">
+    <div class="max-w-[1280px] mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-12 gap-10">
+      <div class="lg:col-span-3">
+        <div class="kicker accent mb-2">Department</div>
+        <h2 class="display text-[52px] leading-[0.95]">Markets</h2>
+        <p class="soft mt-4 text-[15px] leading-[1.6]">What the tape is saying, what the flow is showing, and what our desks are arguing about.</p>
+        <a href="#" class="inline-block mt-4 text-[13px] font-semibold underline-grow">Enter the department →</a>
+      </div>
+      <div class="lg:col-span-9 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <article class="card-tilt">
+          <div class="aspect-[5/4] overflow-hidden bg-surface mb-3"><img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&q=80" class="w-full h-full object-cover" alt=""></div>
+          <span class="kicker accent">Equities</span>
+          <h3 class="display text-[24px] leading-[1.08] mt-2"><a href="#" class="underline-grow">Why the FTSE 250 is suddenly the most interesting index in Europe</a></h3>
+          <div class="text-[12px] soft mt-2">Priya Shah · 4 min</div>
+        </article>
+        <article class="card-tilt">
+          <div class="aspect-[5/4] overflow-hidden bg-surface mb-3"><img src="https://images.unsplash.com/photo-1559523161-0fc0d8b38a7a?w=600&q=80" class="w-full h-full object-cover" alt=""></div>
+          <span class="kicker accent">FX</span>
+          <h3 class="display text-[24px] leading-[1.08] mt-2"><a href="#" class="underline-grow">Sterling's range is ending: three signals traders are watching</a></h3>
+          <div class="text-[12px] soft mt-2">Elena Vasquez · 5 min</div>
+        </article>
+        <article class="card-tilt">
+          <div class="aspect-[5/4] overflow-hidden bg-surface mb-3"><img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=600&q=80" class="w-full h-full object-cover" alt=""></div>
+          <span class="kicker accent">Commodities</span>
+          <h3 class="display text-[24px] leading-[1.08] mt-2"><a href="#" class="underline-grow">The copper squeeze is being priced too calmly</a></h3>
+          <div class="text-[12px] soft mt-2">Marcus Holden · 6 min</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dept: Leadership with different color -->
+  <section class="bg-surface">
+    <div class="max-w-[1280px] mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-12 gap-10">
+      <div class="lg:col-span-3">
+        <div class="kicker" style="color:var(--teal);">Department</div>
+        <h2 class="display text-[52px] leading-[0.95] mt-2" style="color:var(--teal);">Leadership</h2>
+        <p class="soft mt-4 text-[15px] leading-[1.6]">Case studies, playbooks, and close-range reporting on how operators actually lead.</p>
+      </div>
+      <div class="lg:col-span-9 grid grid-cols-1 md:grid-cols-2 gap-8">
+        <article class="card-tilt">
+          <div class="aspect-[4/3] overflow-hidden mb-3"><img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&q=80" class="w-full h-full object-cover" alt=""></div>
+          <span class="kicker" style="color:var(--teal);">Case study</span>
+          <h3 class="display text-[28px] leading-[1.05] mt-2"><a href="#" class="underline-grow">A COO's decision log cut meeting time by 41% — here's the template</a></h3>
+          <p class="soft mt-3 text-[14px] leading-[1.6]">A simple written protocol, borrowed from Bridgewater's "issue log" tradition, produced compounding clarity.</p>
+          <div class="text-[12px] soft mt-3">Yasmin Rahimi · 12 min</div>
+        </article>
+        <div class="space-y-6">
+          <article class="card-tilt border-b rule pb-6">
+            <span class="kicker" style="color:var(--teal);">Hiring</span>
+            <h3 class="display text-[22px] leading-[1.1] mt-1"><a href="#" class="underline-grow">The "T-shape" hire is back — and you're probably underpaying for it</a></h3>
+            <div class="text-[12px] soft mt-2">Jonah Okafor · 6 min</div>
+          </article>
+          <article class="card-tilt border-b rule pb-6">
+            <span class="kicker" style="color:var(--teal);">Culture</span>
+            <h3 class="display text-[22px] leading-[1.1] mt-1"><a href="#" class="underline-grow">Why "radical candour" keeps failing — and what the research shows</a></h3>
+            <div class="text-[12px] soft mt-2">Dr. Amelia Grey · 8 min</div>
+          </article>
+          <article class="card-tilt">
+            <span class="kicker" style="color:var(--teal);">Boardroom</span>
+            <h3 class="display text-[22px] leading-[1.1] mt-1"><a href="#" class="underline-grow">What a good non-exec actually does</a></h3>
+            <div class="text-[12px] soft mt-2">Nadia Carson · 7 min</div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Podcast + video -->
+  <section class="max-w-[1280px] mx-auto px-6 py-14">
+    <div class="flex items-end justify-between mb-8">
+      <div>
+        <div class="kicker accent mb-2">Sound &amp; Vision</div>
+        <h2 class="display text-[40px]">Listen &amp; watch</h2>
+      </div>
+      <a href="#" class="text-[13px] font-semibold underline-grow">All episodes →</a>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <article class="rounded-sm overflow-hidden card-tilt bg-ink text-white p-6">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="chip bg-mustard px-3 py-1 rounded-full text-ink text-[11px] uppercase tracking-widest font-bold">Podcast</span>
+          <span class="text-[12px] opacity-80">Ep. 87 · 54 min</span>
+        </div>
+        <h3 class="display text-[24px] leading-[1.1]"><a href="#">The anatomy of a quiet boardroom coup — with Dame Helena Tait</a></h3>
+        <button class="mt-5 flex items-center gap-2 bg-white text-ink px-4 py-2 rounded-full text-[13px] font-bold">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><path d="M2 1l9 5-9 5V1z"/></svg>
+          Play
+        </button>
+      </article>
+      <article class="rounded-sm overflow-hidden card-tilt bg-teal text-white p-6">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="chip bg-white px-3 py-1 rounded-full text-ink text-[11px] uppercase tracking-widest font-bold">Video</span>
+          <span class="text-[12px] opacity-80">9 min</span>
+        </div>
+        <h3 class="display text-[24px] leading-[1.1]"><a href="#">The desk walkthrough: how we read a 10-Q in under twelve minutes</a></h3>
+        <button class="mt-5 flex items-center gap-2 bg-white text-ink px-4 py-2 rounded-full text-[13px] font-bold">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><path d="M2 1l9 5-9 5V1z"/></svg>
+          Watch
+        </button>
+      </article>
+      <article class="rounded-sm overflow-hidden card-tilt bg-blue text-white p-6">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="chip bg-mustard px-3 py-1 rounded-full text-ink text-[11px] uppercase tracking-widest font-bold">Series</span>
+          <span class="text-[12px] opacity-80">4 parts</span>
+        </div>
+        <h3 class="display text-[24px] leading-[1.1]"><a href="#">The agent economy: what broke, what works, what's next</a></h3>
+        <button class="mt-5 flex items-center gap-2 bg-white text-ink px-4 py-2 rounded-full text-[13px] font-bold">
+          Start series
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </button>
+      </article>
+    </div>
+  </section>
+
+  <!-- Membership CTA -->
+  <section class="bg-accent text-white">
+    <div class="max-w-[1280px] mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+      <div class="md:col-span-8">
+        <div class="kicker opacity-80 mb-3">Membership</div>
+        <h2 class="display text-[52px] md:text-[68px] leading-[0.95]">The magazine, the briefings, the room.</h2>
+        <p class="mt-5 text-[17px] leading-[1.6] max-w-xl">Quarterly print. Unlimited web. Private subscriber roundtables in London, New York, and Singapore.</p>
+      </div>
+      <div class="md:col-span-4 bg-white text-ink rounded-sm p-8">
+        <div class="text-[12px] uppercase tracking-widest font-bold mb-2">Annual · £180</div>
+        <div class="display text-[30px] leading-[1] mb-4">Four issues.<br>One community.</div>
+        <button class="bg-ink text-white w-full py-3 rounded-full font-bold">Start membership</button>
+        <div class="text-[11px] soft text-center mt-3">14-day money-back guarantee.</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Footer -->
+<footer class="bg-ink text-white">
+  <div class="max-w-[1280px] mx-auto px-6 py-16 grid grid-cols-2 md:grid-cols-5 gap-8 text-[13px]">
+    <div class="col-span-2">
+      <div class="display text-[32px] mb-3">Business Fortitude<span class="accent">.</span></div>
+      <p class="opacity-70 leading-relaxed max-w-xs">Independent journalism for operators, founders, and boards. Published in London.</p>
+    </div>
+    <div><div class="kicker opacity-60 mb-3">Magazine</div><ul class="space-y-2"><li><a href="#" class="hover:accent">Current issue</a></li><li><a href="#" class="hover:accent">Back issues</a></li><li><a href="#" class="hover:accent">Long reads</a></li></ul></div>
+    <div><div class="kicker opacity-60 mb-3">Company</div><ul class="space-y-2"><li><a href="#" class="hover:accent">About</a></li><li><a href="#" class="hover:accent">Masthead</a></li><li><a href="#" class="hover:accent">Careers</a></li></ul></div>
+    <div><div class="kicker opacity-60 mb-3">Legal</div><ul class="space-y-2"><li><a href="#" class="hover:accent">Privacy</a></li><li><a href="#" class="hover:accent">Terms</a></li><li><a href="#" class="hover:accent">Cookies</a></li></ul></div>
+  </div>
+  <div class="border-t border-white/10">
+    <div class="max-w-[1280px] mx-auto px-6 py-5 text-[12px] flex flex-col md:flex-row items-center justify-between gap-3 opacity-70">
+      <span>© 2026 Business Fortitude Ltd.</span>
+      <span>Not investment advice. Capital at risk.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Hover bg on buttons
+  document.querySelectorAll('.card-tilt').forEach(c => {
+    c.addEventListener('mouseenter', () => c.style.willChange = 'transform');
+    c.addEventListener('mouseleave', () => c.style.willChange = '');
+  });
+</script>
+</body>
+</html>

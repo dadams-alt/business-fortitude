@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The quiet repricing — Business Fortitude</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root {
+    --bg: #ffffff; --ink: #0a0a0a; --soft: #4a4a4a;
+    --accent: #0055ff; --lime: #d4ff3a;
+    --surface: #f5f5f4; --rule: #e7e5e4;
+  }
+  body { background: var(--bg); color: var(--ink); font-family: 'Inter', system-ui, sans-serif; }
+  .display { font-family: 'Inter', sans-serif; font-weight: 900; letter-spacing: -0.03em; line-height: 0.98; }
+  .mono { font-family: 'Space Grotesk', monospace; }
+  .accent { color: var(--accent); }
+  .bg-accent { background: var(--accent); }
+  .bg-lime { background: var(--lime); color: var(--ink); }
+  .bg-surface { background: var(--surface); }
+  .bg-ink { background: var(--ink); color: white; }
+  .soft { color: var(--soft); }
+  .rule { border-color: var(--rule); }
+  .kicker { font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; font-size: 11px; }
+  .chip { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
+  .card:hover .title-link { color: var(--accent); }
+  .card { transition: transform .35s ease; }
+  .card:hover { transform: translateY(-3px); }
+  .ticker-wrap { overflow: hidden; }
+  .ticker { display: inline-flex; gap: 40px; white-space: nowrap; animation: marquee 35s linear infinite; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .up { color: #059669; } .down { color: #dc2626; }
+  .btn-primary { background: var(--ink); color: white; border-radius: 999px; padding: 10px 20px; font-weight: 600; }
+  .btn-primary:hover { background: var(--accent); }
+  .pill-nav a.active { background: var(--ink); color: white; }
+  .lime-underline { background-image: linear-gradient(var(--lime), var(--lime)); background-size: 100% 0.35em; background-repeat: no-repeat; background-position: 0 88%; padding: 0 2px; }
+  .arrow-link svg { transition: transform .2s ease; }
+  .arrow-link:hover svg { transform: translateX(4px); }
+
+  /* Article body */
+  .article-body { font-size: 18px; line-height: 1.75; color: var(--ink); }
+  .article-body > p { margin-bottom: 1.25em; }
+  .article-body .lead { font-size: 21px; line-height: 1.55; font-weight: 500; color: var(--ink); }
+  .article-body h2 { font-family: 'Inter', sans-serif; font-weight: 900; font-size: 30px; line-height: 1.1; letter-spacing: -0.02em; margin: 2.2em 0 0.5em; }
+  .article-body h3 { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 20px; line-height: 1.2; letter-spacing: -0.01em; margin: 1.8em 0 0.4em; }
+  .article-body a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+  .article-body a:hover { text-decoration-thickness: 2px; }
+  .article-body blockquote { border-left: 4px solid var(--lime); padding: 0.2em 0 0.2em 1.3em; margin: 1.5em 0; font-style: normal; font-size: 20px; font-weight: 500; color: var(--ink); }
+  .article-body ul { margin: 1em 0 1.3em 1.3em; list-style: disc; }
+  .article-body ul li { margin-bottom: 0.5em; }
+  .article-body .pull-quote {
+    background: var(--ink); color: white; border-radius: 24px; padding: 2em 2.2em; margin: 2em 0;
+    font-family: 'Inter', sans-serif; font-weight: 800; font-size: 26px; line-height: 1.25; letter-spacing: -0.01em;
+  }
+  .article-body .pull-quote .attr { display: block; font-family: 'Space Grotesk', monospace; font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.12em; color: var(--lime); margin-top: 1em; }
+
+  .entity-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 12px; font-weight: 600;
+    padding: 5px 12px; border-radius: 999px;
+    background: var(--surface); color: var(--ink);
+    border: 1px solid var(--rule);
+    text-decoration: none !important;
+  }
+  .entity-chip:hover { background: var(--accent); color: white; border-color: var(--accent); }
+  .entity-chip .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+  .entity-chip:hover .dot { background: var(--lime); }
+
+  .ticker-inline {
+    font-family: 'Space Grotesk', monospace; font-size: 12px; font-weight: 600;
+    padding: 3px 9px; border-radius: 999px; background: var(--ink); color: white;
+    text-decoration: none !important; letter-spacing: 0.04em;
+  }
+  .ticker-inline:hover { background: var(--accent); }
+
+  .takeaways { background: var(--lime); border-radius: 24px; padding: 1.6em 1.8em; margin: 2em 0; }
+  .takeaways h4 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em; font-weight: 700; margin-bottom: .8em; }
+  .takeaways ul { margin: 0; list-style: none; }
+  .takeaways ul li { font-size: 15px; line-height: 1.55; padding-left: 1.4em; position: relative; margin-bottom: .6em; font-weight: 500; }
+  .takeaways ul li::before { content: "→"; position: absolute; left: 0; font-weight: 700; }
+
+  .share-btn { width: 40px; height: 40px; border-radius: 999px; background: var(--surface); display: inline-flex; align-items: center; justify-content: center; color: var(--ink); transition: all .2s; }
+  .share-btn:hover { background: var(--ink); color: white; }
+
+  .progress { position: fixed; top: 0; left: 0; height: 3px; background: var(--accent); width: 0; z-index: 100; }
+
+  .disclosure { font-size: 12.5px; line-height: 1.6; color: var(--soft); background: var(--surface); border-radius: 18px; padding: 1.2em 1.4em; margin: 2em 0; }
+  .disclosure strong { color: var(--ink); }
+</style>
+</head>
+<body class="min-h-screen">
+
+<div class="progress" id="progress"></div>
+
+<!-- Header -->
+<header class="border-b rule bg-white sticky top-0 z-40">
+  <div class="max-w-[1360px] mx-auto px-6 flex items-center justify-between h-16">
+    <a href="01-editorial-authority.html" class="flex items-center gap-2">
+      <span class="display text-[22px]">Business <span class="accent">Fortitude</span></span>
+    </a>
+    <nav class="hidden lg:flex items-center gap-1 pill-nav">
+      <a href="01-editorial-authority.html" class="px-3 py-1.5 rounded-full text-[13px] font-medium hover:bg-surface">Latest</a>
+      <a href="category-markets.html" class="active px-3 py-1.5 rounded-full text-[13px] font-medium">Markets</a>
+      <a href="#" class="px-3 py-1.5 rounded-full text-[13px] font-medium hover:bg-surface">Deals</a>
+      <a href="#" class="px-3 py-1.5 rounded-full text-[13px] font-medium hover:bg-surface">Leadership</a>
+      <a href="#" class="px-3 py-1.5 rounded-full text-[13px] font-medium hover:bg-surface">AI</a>
+      <a href="#" class="px-3 py-1.5 rounded-full text-[13px] font-medium hover:bg-surface">Startups</a>
+      <a href="#" class="px-3 py-1.5 rounded-full text-[13px] font-medium hover:bg-surface">Opinion</a>
+    </nav>
+    <div class="flex items-center gap-3">
+      <button aria-label="Search" class="p-2 hover:bg-surface rounded-full">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      </button>
+      <a href="#" class="hidden md:inline btn-primary text-[13px]">Subscribe</a>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-[1360px] mx-auto px-6">
+
+  <!-- Breadcrumb -->
+  <div class="pt-6 text-[12px] mono soft uppercase tracking-widest">
+    <a href="01-editorial-authority.html" class="hover:accent">Home</a>
+    <span class="mx-2 opacity-40">/</span>
+    <a href="category-markets.html" class="hover:accent">Markets</a>
+    <span class="mx-2 opacity-40">/</span>
+    <span class="opacity-60">Analysis</span>
+  </div>
+
+  <!-- Article header -->
+  <section class="pt-6 pb-8">
+    <div class="max-w-[820px]">
+      <div class="flex items-center gap-2 mb-5">
+        <span class="chip bg-accent text-white">Markets</span>
+        <span class="chip bg-lime">Analysis</span>
+        <span class="chip bg-surface">8 min read</span>
+      </div>
+      <h1 class="display text-[46px] md:text-[72px]">The quiet <span class="lime-underline">repricing</span>: why midcap earnings are rewriting the playbook</h1>
+      <p class="text-[20px] md:text-[22px] leading-[1.5] soft mt-6 font-medium">For two years the story was megacap dominance. A new quarter of filings suggests a different kind of discipline is winning — lean operators with pricing power are outpacing their larger rivals.</p>
+
+      <!-- Byline -->
+      <div class="flex flex-wrap items-center gap-5 mt-8 pt-6 border-t rule">
+        <div class="flex items-center gap-3">
+          <img src="https://i.pravatar.cc/80?img=47" class="w-11 h-11 rounded-full object-cover" alt="">
+          <div>
+            <div class="text-[14px] font-bold">Sarah Mendel</div>
+            <div class="text-[12px] soft">Markets editor · London</div>
+          </div>
+        </div>
+        <div class="text-[12px] soft mono">
+          21 Apr 2026 · 07:10 · Updated 09:14 BST
+        </div>
+        <div class="flex items-center gap-2 ml-auto">
+          <a href="#" class="share-btn" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+          <a href="#" class="share-btn" aria-label="LinkedIn"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          <a href="#" class="share-btn" aria-label="Save"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></a>
+          <a href="#" class="share-btn" aria-label="Copy"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.72"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.72-1.72"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hero image -->
+  <figure class="pb-8">
+    <div class="relative aspect-[16/8] overflow-hidden rounded-3xl bg-surface">
+      <img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=1800&q=85" class="w-full h-full object-cover" alt="">
+      <div class="absolute top-5 left-5 flex gap-2">
+        <span class="chip bg-white/90">Photo · Ayesha Khan</span>
+      </div>
+    </div>
+    <figcaption class="text-[12px] soft mt-3 italic">A quieter kind of discipline is winning — lean midcaps with pricing power are outpacing their megacap rivals.</figcaption>
+  </figure>
+
+  <!-- Entity chips -->
+  <div class="pb-6">
+    <div class="max-w-[820px] flex flex-wrap items-center gap-2">
+      <span class="text-[11px] mono uppercase tracking-widest soft mr-1">In this story:</span>
+      <a href="ticker-ftse250.html" class="ticker-inline">FTSE:MCX</a>
+      <a href="#" class="ticker-inline">NYSE:SPY</a>
+      <a href="#" class="entity-chip"><span class="dot"></span>Rightmove</a>
+      <a href="company-games-workshop.html" class="entity-chip"><span class="dot"></span>Games Workshop</a>
+      <a href="person-ashley-steel.html" class="entity-chip"><span class="dot"></span>Ashley Steel</a>
+      <a href="sector-consumer.html" class="entity-chip"><span class="dot"></span>Consumer</a>
+    </div>
+  </div>
+
+  <!-- Body + rail -->
+  <div class="pb-16 grid grid-cols-1 lg:grid-cols-12 gap-10">
+    <article class="lg:col-span-8 article-body">
+      <p class="lead">The quarter began with the assumption that midcaps were a trade, not a story. By the time the filings closed, both halves of that sentence looked wrong. Across the <a href="ticker-ftse250.html" class="ticker-inline">FTSE:MCX</a> and the US equivalents, a group of companies largely ignored by the megacap narrative reported margins their larger rivals couldn't match — and, more interestingly, forward guidance their larger rivals wouldn't commit to.</p>
+
+      <p>What changed isn't demand. Demand has been soft, unevenly, across most of the cycle. What changed is that a cohort of operators — mostly in consumer, industrial distribution, and specialty software — finished the capital-discipline work they began in 2023. Headcount is leaner. Leases are shorter. Pricing is sharper. And the customer base is stickier than it was.</p>
+
+      <p>"We stopped chasing revenue that required us to apologise for our prices," one FTSE 250 CFO told <em>Business Fortitude</em>, asking for anonymity because the company is in a quiet period.</p>
+
+      <div class="pull-quote">
+        "We stopped chasing revenue that required us to apologise for our prices. The customers who were annoyed by the price were also the ones costing us the most to serve."
+        <span class="attr">FTSE 250 CFO · On background</span>
+      </div>
+
+      <h2>What the filings actually show</h2>
+
+      <p>Strip out the top decile of the index and the picture is different from the headline one. In Q1 2026 filings through last Friday, the median FTSE 250 operator expanded gross margin by 140 basis points year over year. The median megacap expanded by 30.</p>
+
+      <p>That's a wider gap than any quarter since the period right before the GFC. It is not, on its own, a signal to rotate. It is a signal that the assumptions baked into index construction are starting to look stale. <a href="#" class="title-link">Rightmove</a>'s most recent update, with its quiet 11% rise in ARPU, is a better example than any macro chart.</p>
+
+      <div class="takeaways">
+        <h4>Key takeaways</h4>
+        <ul>
+          <li>Median FTSE 250 gross margin expanded 140bps YoY in Q1 2026; megacap peers expanded 30bps.</li>
+          <li>Pricing power — not revenue growth — is the differentiator. Operators who held price in 2023–24 are now compounding on the base.</li>
+          <li>The repricing is most visible in consumer specialty and industrial distribution; least visible in large-cap tech.</li>
+          <li>Capital-allocation discipline (buybacks over M&amp;A, shorter leases, tighter headcount) is correlated with the outperformance.</li>
+        </ul>
+      </div>
+
+      <h2>The operators who got there first</h2>
+
+      <p>If you want to see what pricing discipline looks like in practice, <a href="company-games-workshop.html">Games Workshop</a> is still the most-studied case — and the most misunderstood. The usual reading is that a niche business can charge what it likes; the more useful reading is that it spent a decade teaching its customer base what the product was actually worth.</p>
+
+      <h3>Three patterns that show up in the data</h3>
+
+      <p><strong>First</strong>, buybacks have taken the place of M&amp;A. Median announced buyback authorisation across the index is up 28% year over year; announced acquisition value is down 19%.</p>
+
+      <p><strong>Second</strong>, guidance tenor has changed. More midcaps are guiding to full-year operating margin than at any point in the last five quarters; fewer are guiding to revenue.</p>
+
+      <p><strong>Third</strong>, capex is discretionary again. It's being directed toward efficiency rather than capacity — <a href="person-ashley-steel.html">Ashley Steel</a>'s comments to shareholders last month were the cleanest articulation of this shift.</p>
+
+      <blockquote>The board's job in this cycle is to make sure the next round of capex is earning its seat. We're not funding anything that can't show us a clean 12-month payback. That's not austerity. That's discipline.</blockquote>
+
+      <h2>Why the narrative lags</h2>
+
+      <p>The repricing has been visible to operators for two quarters. It has been visible to analysts for one. It is only now becoming visible to the broader market — and the broader market is where the narrative gets written. Expect the framing to shift through the summer.</p>
+
+      <p>For readers who care less about the index and more about what this implies for their own business: pricing power is the thing to protect. The window in which you can hold a price increase without losing material volume is longer than most operators believe.</p>
+
+      <p>None of this is a forecast about where the cycle goes next. It is a claim about where the discipline has settled. The midcap re-rating is not a trade. It is the visible outcome of two years of quieter work.</p>
+
+      <div class="disclosure">
+        <strong>Disclosure.</strong> This article is for general information only. It is not financial advice, investment advice, or a recommendation to buy or sell any security. Price and company data are indicative and may be delayed. Past performance is not a reliable indicator of future results. Capital at risk. Business Fortitude is not authorised or regulated by the Financial Conduct Authority.
+      </div>
+
+      <div class="mt-8 pt-6 border-t rule">
+        <div class="kicker soft mb-3">Sources</div>
+        <ul class="text-[13px] space-y-2 soft list-disc pl-5">
+          <li>Q1 2026 company filings, LSE RNS feed, 07–18 April 2026.</li>
+          <li>FTSE Russell index data, accessed 20 April 2026.</li>
+          <li>Background interviews with three FTSE 250 CFOs, under embargo.</li>
+          <li>Investor presentations, Rightmove and Games Workshop, March 2026.</li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- Right rail -->
+    <aside class="lg:col-span-4 space-y-5">
+      <!-- Trending -->
+      <div class="bg-surface rounded-2xl p-5">
+        <div class="kicker soft mb-4">Trending now</div>
+        <ol class="space-y-4 divide-y rule">
+          <li class="flex gap-3 pt-0">
+            <span class="display text-[22px] accent">01</span>
+            <a href="#" class="font-bold text-[15px] leading-snug hover:accent">The 12-founder cohort that walked away from YC</a>
+          </li>
+          <li class="flex gap-3 pt-4">
+            <span class="display text-[22px] accent">02</span>
+            <a href="#" class="font-bold text-[15px] leading-snug hover:accent">UK productivity's lost decade may end with a whimper</a>
+          </li>
+          <li class="flex gap-3 pt-4">
+            <span class="display text-[22px] accent">03</span>
+            <a href="#" class="font-bold text-[15px] leading-snug hover:accent">The grid-scale battery boom is eating solar alive</a>
+          </li>
+          <li class="flex gap-3 pt-4">
+            <span class="display text-[22px] accent">04</span>
+            <a href="#" class="font-bold text-[15px] leading-snug hover:accent">Your "AI strategy" probably needs three strategies</a>
+          </li>
+        </ol>
+      </div>
+
+      <!-- Newsletter -->
+      <div class="bg-ink text-white rounded-2xl p-6">
+        <div class="kicker mb-2" style="color:var(--lime);">Newsletter</div>
+        <div class="display text-[24px] leading-[1.05] mb-3">The Morning Brief, in your inbox by 7.</div>
+        <form class="flex gap-2">
+          <input type="email" placeholder="you@company.com" class="flex-1 px-3 py-2 rounded-full text-[13px] text-ink">
+          <button type="button" class="bg-lime text-ink px-4 py-2 rounded-full text-[13px] font-bold">Join</button>
+        </form>
+        <div class="text-[11px] mt-3 opacity-70">134,000+ operators. No spam.</div>
+      </div>
+
+      <!-- Ticker card -->
+      <a href="ticker-ftse250.html" class="card block rounded-2xl border rule p-5 hover:border-[color:var(--accent)]">
+        <div class="flex items-center justify-between mb-2">
+          <span class="chip bg-surface">FTSE 250</span>
+          <span class="mono text-[12px] font-semibold up">+0.84%</span>
+        </div>
+        <div class="display text-[30px]">21,148.06</div>
+        <div class="text-[11px] soft mono mt-1">Last tick 09:12 BST · 15m delayed</div>
+        <div class="mt-3 arrow-link inline-flex items-center gap-1 text-[13px] font-semibold accent">See ticker <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></div>
+      </a>
+    </aside>
+  </div>
+
+  <!-- Author card -->
+  <section class="py-12 border-t rule">
+    <div class="bg-surface rounded-3xl p-8 md:p-10 grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+      <div class="md:col-span-2">
+        <img src="https://i.pravatar.cc/240?img=47" class="w-24 h-24 rounded-full object-cover" alt="">
+      </div>
+      <div class="md:col-span-8">
+        <div class="kicker soft mb-2">About the author</div>
+        <div class="display text-[28px] mb-2">Sarah Mendel</div>
+        <p class="soft text-[15px] leading-[1.6]">Markets editor at Business Fortitude. Twelve years covering UK equities — previously at Reuters and the Telegraph. Writes the weekly <em>Repricing</em> column.</p>
+      </div>
+      <div class="md:col-span-2 flex md:justify-end">
+        <a href="#" class="btn-primary text-[13px] inline-block">All articles →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Related -->
+  <section class="py-10 border-t rule">
+    <div class="flex items-end justify-between mb-6">
+      <div>
+        <div class="kicker soft mb-2">Keep reading</div>
+        <h2 class="display text-[32px]">More from Markets</h2>
+      </div>
+      <a href="category-markets.html" class="arrow-link inline-flex items-center gap-2 text-[14px] font-semibold">All markets <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <article class="card">
+        <div class="aspect-[4/3] overflow-hidden rounded-2xl bg-surface mb-3"><img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&q=80" class="w-full h-full object-cover" alt=""></div>
+        <span class="chip bg-surface">Equities</span>
+        <h3 class="font-bold text-[18px] leading-snug mt-2"><a href="#" class="title-link">Why the FTSE 250 is suddenly the most interesting index in Europe</a></h3>
+        <div class="text-[12px] soft mt-1">Priya Shah · 4 min</div>
+      </article>
+      <article class="card">
+        <div class="aspect-[4/3] overflow-hidden rounded-2xl bg-surface mb-3"><img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=600&q=80&sat=-30" class="w-full h-full object-cover" alt=""></div>
+        <span class="chip bg-surface">Credit</span>
+        <h3 class="font-bold text-[18px] leading-snug mt-2"><a href="#" class="title-link">Private credit's reckoning is quieter than you think</a></h3>
+        <div class="text-[12px] soft mt-1">Marcus Holden · 7 min</div>
+      </article>
+      <article class="card">
+        <div class="aspect-[4/3] overflow-hidden rounded-2xl bg-surface mb-3"><img src="https://images.unsplash.com/photo-1559523161-0fc0d8b38a7a?w=600&q=80" class="w-full h-full object-cover" alt=""></div>
+        <span class="chip bg-lime">FX</span>
+        <h3 class="font-bold text-[18px] leading-snug mt-2"><a href="#" class="title-link">Sterling's range is ending: three signals traders are watching</a></h3>
+        <div class="text-[12px] soft mt-1">Elena Vasquez · 5 min</div>
+      </article>
+    </div>
+  </section>
+
+</main>
+
+<!-- Footer -->
+<footer class="bg-ink text-white mt-10">
+  <div class="max-w-[1360px] mx-auto px-6 py-14 grid grid-cols-2 md:grid-cols-6 gap-8 text-[13px]">
+    <div class="col-span-2">
+      <div class="display text-[26px] mb-3">Business <span class="accent">Fortitude</span></div>
+      <p class="opacity-70 leading-relaxed max-w-xs">Independent journalism for operators, founders, and boards. Published in London.</p>
+    </div>
+    <div>
+      <div class="kicker opacity-60 mb-3">Read</div>
+      <ul class="space-y-2"><li><a href="#" class="hover:text-lime">Latest</a></li><li><a href="category-markets.html" class="hover:text-lime">Markets</a></li><li><a href="#" class="hover:text-lime">Leadership</a></li><li><a href="#" class="hover:text-lime">Long Reads</a></li></ul>
+    </div>
+    <div>
+      <div class="kicker opacity-60 mb-3">Pro</div>
+      <ul class="space-y-2"><li><a href="#" class="hover:text-lime">Roundtables</a></li><li><a href="#" class="hover:text-lime">Model portfolios</a></li><li><a href="#" class="hover:text-lime">Deal database</a></li></ul>
+    </div>
+    <div>
+      <div class="kicker opacity-60 mb-3">Company</div>
+      <ul class="space-y-2"><li><a href="#" class="hover:text-lime">About</a></li><li><a href="#" class="hover:text-lime">Careers</a></li><li><a href="#" class="hover:text-lime">Advertise</a></li></ul>
+    </div>
+    <div>
+      <div class="kicker opacity-60 mb-3">Legal</div>
+      <ul class="space-y-2"><li><a href="#" class="hover:text-lime">Privacy</a></li><li><a href="#" class="hover:text-lime">Terms</a></li><li><a href="#" class="hover:text-lime">Cookies</a></li></ul>
+    </div>
+  </div>
+  <div class="border-t border-white/10 text-[12px]">
+    <div class="max-w-[1360px] mx-auto px-6 py-5 flex flex-col md:flex-row items-center justify-between gap-3 opacity-70">
+      <span>© 2026 Business Fortitude Ltd.</span>
+      <span>Not investment advice. Capital at risk.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.pill-nav a').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      // allow navigation for real hrefs, just toggle visual
+      if (el.getAttribute('href') === '#') {
+        document.querySelectorAll('.pill-nav a').forEach(s => s.classList.remove('active'));
+        el.classList.add('active');
+      }
+    });
+  });
+  const progress = document.getElementById('progress');
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+    progress.style.width = pct + '%';
+  });
+</script>
+</body>
+</html>

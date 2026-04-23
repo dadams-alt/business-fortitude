@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Business Fortitude — Editorial Authority</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root {
+    --cream: #f4efe6;
+    --cream-dark: #ebe4d6;
+    --ink: #12181c;
+    --ink-soft: #2c3339;
+    --accent: #a11d33;
+    --rule: #d9d2c4;
+  }
+  body { background: var(--cream); color: var(--ink); font-family: 'Source Serif 4', Georgia, serif; }
+  .display { font-family: 'Playfair Display', Georgia, serif; font-weight: 900; letter-spacing: -0.02em; line-height: 1.02; }
+  .ui { font-family: 'Inter', system-ui, sans-serif; }
+  .rule { border-color: var(--rule); }
+  .accent { color: var(--accent); }
+  .bg-accent { background: var(--accent); }
+  .bg-cream { background: var(--cream); }
+  .bg-cream-dark { background: var(--cream-dark); }
+  .ink { color: var(--ink); }
+  .ink-soft { color: var(--ink-soft); }
+  .bg-ink { background: var(--ink); }
+  .headline a { background-image: linear-gradient(var(--accent), var(--accent)); background-size: 0% 2px; background-repeat: no-repeat; background-position: 0 100%; transition: background-size .3s ease; }
+  .headline a:hover { background-size: 100% 2px; }
+  .kicker { font-family: 'Inter', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; font-size: 11px; color: var(--accent); }
+  .byline { font-family: 'Inter', sans-serif; font-size: 12px; color: #6b6355; letter-spacing: .02em; }
+  .tab.active { color: var(--accent); border-bottom: 2px solid var(--accent); }
+  .tab { border-bottom: 2px solid transparent; }
+  .drop-cap::first-letter {
+    font-family: 'Playfair Display', serif; font-weight: 900;
+    float: left; font-size: 4.8rem; line-height: .85; padding-right: 8px; padding-top: 4px; color: var(--accent);
+  }
+  .news-rule::before {
+    content: ""; display: inline-block; width: 24px; height: 2px; background: var(--accent); vertical-align: middle; margin-right: 10px;
+  }
+  .grid-card:hover .headline a { background-size: 100% 2px; }
+  .topline { background: var(--ink); color: var(--cream); }
+  details[open] summary svg { transform: rotate(180deg); }
+</style>
+</head>
+<body class="min-h-screen">
+
+<!-- Top strip -->
+<div class="topline text-[12px] ui">
+  <div class="max-w-[1200px] mx-auto px-6 py-2 flex items-center justify-between">
+    <div class="flex items-center gap-6">
+      <span class="opacity-80">Tuesday, 21 April 2026</span>
+      <span class="opacity-60 hidden md:inline">London · 13°C · Overcast</span>
+    </div>
+    <div class="flex items-center gap-5">
+      <a href="#" class="opacity-80 hover:opacity-100">Newsletter</a>
+      <a href="#" class="opacity-80 hover:opacity-100">Podcasts</a>
+      <a href="#" class="opacity-80 hover:opacity-100 hidden md:inline">Events</a>
+      <a href="#" class="ui bg-accent text-white px-3 py-1 text-[11px] uppercase tracking-widest font-semibold">Subscribe</a>
+    </div>
+  </div>
+</div>
+
+<!-- Masthead -->
+<header class="border-b-2 rule pt-7 pb-4">
+  <div class="max-w-[1200px] mx-auto px-6 text-center relative">
+    <button id="menuBtn" class="ui absolute left-6 top-1/2 -translate-y-1/2 text-[12px] uppercase tracking-widest flex items-center gap-2 hover:accent">
+      <svg width="18" height="12" viewBox="0 0 18 12" fill="none"><path d="M0 1h18M0 6h18M0 11h18" stroke="currentColor" stroke-width="1.5"/></svg>
+      Menu
+    </button>
+    <a href="/" class="inline-block">
+      <div class="display text-[44px] md:text-[64px] leading-none">Business Fortitude</div>
+      <div class="ui text-[11px] uppercase tracking-[0.3em] mt-2 ink-soft">The journal of building, leading &amp; enduring</div>
+    </a>
+    <div class="ui absolute right-6 top-1/2 -translate-y-1/2 text-[12px] uppercase tracking-widest flex items-center gap-4">
+      <a href="#" class="hover:accent">Sign in</a>
+      <a href="#" aria-label="Search" class="hover:accent">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- Section nav -->
+<nav class="border-b rule sticky top-0 bg-cream/95 backdrop-blur z-40">
+  <div class="max-w-[1200px] mx-auto px-6 overflow-x-auto">
+    <ul class="ui flex items-center gap-7 text-[13px] py-3 whitespace-nowrap">
+      <li><a href="#" class="tab active pb-1">Today</a></li>
+      <li><a href="#" class="tab pb-1 hover:accent">Markets</a></li>
+      <li><a href="#" class="tab pb-1 hover:accent">Deals</a></li>
+      <li><a href="#" class="tab pb-1 hover:accent">Leadership</a></li>
+      <li><a href="#" class="tab pb-1 hover:accent">AI &amp; Tech</a></li>
+      <li><a href="#" class="tab pb-1 hover:accent">Economy</a></li>
+      <li><a href="#" class="tab pb-1 hover:accent">Startups</a></li>
+      <li><a href="#" class="tab pb-1 hover:accent">Regulation</a></li>
+      <li><a href="#" class="tab pb-1 hover:accent">Opinion</a></li>
+      <li><a href="#" class="tab pb-1 hover:accent">Long Reads</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Slide-in menu -->
+<aside id="menuPanel" class="fixed inset-y-0 left-0 w-80 bg-cream-dark z-50 -translate-x-full transition-transform duration-300 shadow-2xl">
+  <div class="p-6 ui">
+    <button id="menuClose" class="mb-8 text-[12px] uppercase tracking-widest">✕ Close</button>
+    <div class="display text-2xl mb-6">Sections</div>
+    <ul class="space-y-3 text-[15px]">
+      <li><a href="#" class="hover:accent">Markets</a></li>
+      <li><a href="#" class="hover:accent">Deals &amp; M&amp;A</a></li>
+      <li><a href="#" class="hover:accent">Leadership</a></li>
+      <li><a href="#" class="hover:accent">AI &amp; Technology</a></li>
+      <li><a href="#" class="hover:accent">Economy</a></li>
+      <li><a href="#" class="hover:accent">Startups &amp; VC</a></li>
+      <li><a href="#" class="hover:accent">Regulation</a></li>
+      <li><a href="#" class="hover:accent">Energy &amp; Climate</a></li>
+      <li><a href="#" class="hover:accent">Opinion</a></li>
+      <li><a href="#" class="hover:accent">Long Reads</a></li>
+    </ul>
+    <div class="display text-2xl mt-8 mb-4">More</div>
+    <ul class="space-y-3 text-[15px]">
+      <li><a href="#" class="hover:accent">Newsletters</a></li>
+      <li><a href="#" class="hover:accent">Podcasts</a></li>
+      <li><a href="#" class="hover:accent">Events</a></li>
+      <li><a href="#" class="hover:accent">About</a></li>
+    </ul>
+  </div>
+</aside>
+
+<!-- Hero -->
+<main class="max-w-[1200px] mx-auto px-6 pt-10">
+  <section class="grid grid-cols-1 lg:grid-cols-12 gap-10 pb-12 border-b rule">
+    <!-- Lead -->
+    <article class="lg:col-span-8 headline">
+      <div class="kicker mb-3">Markets · Analysis</div>
+      <h1 class="display text-[42px] md:text-[60px] mb-5"><a href="#">The quiet repricing: why midcap earnings are rewriting the playbook</a></h1>
+      <p class="text-[20px] leading-[1.55] ink-soft mb-5">For two years the story was megacap dominance. A new quarter of filings suggests a different kind of discipline is winning — lean operators with pricing power are outpacing their larger rivals.</p>
+      <div class="byline">By <span class="underline">Sarah Mendel</span> &nbsp;·&nbsp; 8 min read &nbsp;·&nbsp; Updated 09:14 BST</div>
+      <div class="mt-6 aspect-[16/9] overflow-hidden bg-cream-dark">
+        <img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=1200&q=80" class="w-full h-full object-cover" alt="">
+      </div>
+      <div class="byline mt-2 text-right italic">Illustration · Stuart Patience for Business Fortitude</div>
+    </article>
+
+    <!-- Sidebar: priority list -->
+    <aside class="lg:col-span-4">
+      <div class="ui text-[11px] uppercase tracking-[0.18em] accent font-bold mb-4 news-rule pl-0">Today at a glance</div>
+      <ol class="divide-y rule">
+        <li class="py-4">
+          <div class="kicker">Deals</div>
+          <a href="#" class="headline block display text-[22px] leading-[1.15] mt-1"><a href="#">Vanta's $3bn raise puts compliance category on IPO watch</a></a>
+          <div class="byline mt-2">3 min · 06:40</div>
+        </li>
+        <li class="py-4">
+          <div class="kicker">Leadership</div>
+          <a href="#" class="headline block display text-[22px] leading-[1.15] mt-1"><a href="#">Why half of first-time CEOs get fired in year two — and the pattern that predicts it</a></a>
+          <div class="byline mt-2">6 min · 05:55</div>
+        </li>
+        <li class="py-4">
+          <div class="kicker">Regulation</div>
+          <a href="#" class="headline block display text-[22px] leading-[1.15] mt-1"><a href="#">FCA signals sharper line on fintech safeguarding after Revolut probe</a></a>
+          <div class="byline mt-2">5 min · Yesterday</div>
+        </li>
+        <li class="py-4">
+          <div class="kicker">AI &amp; Tech</div>
+          <a href="#" class="headline block display text-[22px] leading-[1.15] mt-1"><a href="#">The agent economy is already here — and it's breaking SaaS pricing</a></a>
+          <div class="byline mt-2">9 min · Yesterday</div>
+        </li>
+      </ol>
+    </aside>
+  </section>
+
+  <!-- Opinion strip -->
+  <section class="grid grid-cols-1 lg:grid-cols-12 gap-10 py-12 border-b rule">
+    <div class="lg:col-span-4">
+      <div class="kicker mb-3">Opinion</div>
+      <h2 class="display text-[32px] leading-[1.1]">The voices in the boardroom this week</h2>
+      <p class="ink-soft mt-3 text-[15px] leading-[1.6]">Columns, letters, and argument from operators and economists who disagree — sharply.</p>
+      <a href="#" class="ui text-[12px] uppercase tracking-widest accent inline-block mt-4 border-b border-current pb-1">All opinion →</a>
+    </div>
+    <div class="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+      <article class="headline">
+        <div class="flex items-center gap-3 mb-3">
+          <img src="https://i.pravatar.cc/80?img=12" class="w-10 h-10 rounded-full object-cover" alt="">
+          <div>
+            <div class="ui text-[13px] font-semibold">Ishaan Gupta</div>
+            <div class="byline">Columnist · Operations</div>
+          </div>
+        </div>
+        <h3 class="display text-[24px] leading-[1.15]"><a href="#">Stop rewarding velocity. Start rewarding removed complexity.</a></h3>
+        <p class="ink-soft mt-3 text-[15px] leading-[1.6]">The most useful metric in your business is probably the one you're not tracking: how much friction your teams are quietly absorbing.</p>
+      </article>
+      <article class="headline">
+        <div class="flex items-center gap-3 mb-3">
+          <img src="https://i.pravatar.cc/80?img=32" class="w-10 h-10 rounded-full object-cover" alt="">
+          <div>
+            <div class="ui text-[13px] font-semibold">Rachel Okonkwo</div>
+            <div class="byline">Columnist · Capital</div>
+          </div>
+        </div>
+        <h3 class="display text-[24px] leading-[1.15]"><a href="#">The founder dilution myth: how priced rounds got their reputation wrong</a></h3>
+        <p class="ink-soft mt-3 text-[15px] leading-[1.6]">SAFEs feel cheap until you run the math three rounds out. A quiet return to priced rounds is reshaping early cap tables.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- Feature: long read with drop cap -->
+  <section class="grid grid-cols-1 lg:grid-cols-12 gap-10 py-12 border-b rule">
+    <div class="lg:col-span-7">
+      <div class="kicker mb-3">Long Read · The Decision</div>
+      <h2 class="display text-[40px] leading-[1.05] mb-5"><a href="#" class="headline"><a href="#">Inside Monzo's second act: what it took to kill a beloved product</a></a></h2>
+      <p class="drop-cap text-[17px] leading-[1.75] ink">In the autumn of 2025, Monzo's product team began a review that nobody at the company had wanted to commission. The question on the whiteboard was blunt — if we were starting today, would we build this? The answer was quieter than anyone expected, and it reshaped the company's roadmap through 2026. This is the story of how the call was made, and what it cost the team that built the thing in the first place.</p>
+      <div class="byline mt-5">By Tom Nakamura · Photography by Gabriel Reeves · 18 min read</div>
+    </div>
+    <div class="lg:col-span-5">
+      <div class="aspect-[4/5] overflow-hidden bg-cream-dark">
+        <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=900&q=80" class="w-full h-full object-cover" alt="">
+      </div>
+    </div>
+  </section>
+
+  <!-- Category strip: Markets -->
+  <section class="py-12 border-b rule">
+    <div class="flex items-end justify-between mb-8">
+      <div>
+        <div class="kicker mb-2">Section</div>
+        <h2 class="display text-[36px] leading-none">Markets</h2>
+      </div>
+      <div class="ui flex items-center gap-6 text-[13px]">
+        <button class="tab active pb-1">All</button>
+        <button class="tab pb-1 hover:accent">Equities</button>
+        <button class="tab pb-1 hover:accent">Credit</button>
+        <button class="tab pb-1 hover:accent">FX</button>
+        <button class="tab pb-1 hover:accent">Commodities</button>
+      </div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <article class="grid-card headline">
+        <div class="aspect-[4/3] overflow-hidden bg-cream-dark mb-4">
+          <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80" class="w-full h-full object-cover" alt="">
+        </div>
+        <div class="kicker">Equities</div>
+        <h3 class="display text-[22px] leading-[1.15] mt-1"><a href="#">Why the FTSE 250 is suddenly the most interesting index in Europe</a></h3>
+        <div class="byline mt-2">By Priya Shah · 4 min</div>
+      </article>
+      <article class="grid-card headline">
+        <div class="aspect-[4/3] overflow-hidden bg-cream-dark mb-4">
+          <img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=800&q=80&sat=-20" class="w-full h-full object-cover" alt="">
+        </div>
+        <div class="kicker">Credit</div>
+        <h3 class="display text-[22px] leading-[1.15] mt-1"><a href="#">Private credit's reckoning is quieter than you think — and closer</a></h3>
+        <div class="byline mt-2">By Marcus Holden · 7 min</div>
+      </article>
+      <article class="grid-card headline">
+        <div class="aspect-[4/3] overflow-hidden bg-cream-dark mb-4">
+          <img src="https://images.unsplash.com/photo-1559523161-0fc0d8b38a7a?w=800&q=80" class="w-full h-full object-cover" alt="">
+        </div>
+        <div class="kicker">FX</div>
+        <h3 class="display text-[22px] leading-[1.15] mt-1"><a href="#">Sterling's range is ending: three signals traders are watching</a></h3>
+        <div class="byline mt-2">By Elena Vasquez · 5 min</div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Newsletter block -->
+  <section class="py-14 border-b rule">
+    <div class="bg-cream-dark p-10 md:p-14">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+        <div class="md:col-span-7">
+          <div class="kicker mb-3">Newsletter</div>
+          <h2 class="display text-[34px] leading-[1.1] mb-3">The Morning Brief — in your inbox by 7am.</h2>
+          <p class="ink-soft text-[16px] leading-[1.6]">Eight minutes on what moved overnight, why it matters, and who it affects. Written by our editors, not a template. Free.</p>
+        </div>
+        <form class="md:col-span-5 ui flex flex-col gap-3">
+          <input type="email" placeholder="you@company.com" class="w-full px-4 py-3 bg-white rule border text-[15px] focus:outline-none focus:border-[color:var(--accent)]">
+          <button type="button" class="bg-ink text-white py-3 text-[13px] uppercase tracking-widest font-semibold hover:bg-accent transition">Subscribe</button>
+          <div class="byline">No spam. Unsubscribe with one click.</div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Category strip: Leadership -->
+  <section class="py-12 border-b rule">
+    <div class="flex items-end justify-between mb-8">
+      <div>
+        <div class="kicker mb-2">Section</div>
+        <h2 class="display text-[36px] leading-none">Leadership</h2>
+      </div>
+      <a href="#" class="ui text-[12px] uppercase tracking-widest accent border-b border-current pb-1">See all →</a>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+      <article class="md:col-span-5 headline">
+        <div class="aspect-[4/3] overflow-hidden bg-cream-dark mb-4">
+          <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=900&q=80" class="w-full h-full object-cover" alt="">
+        </div>
+        <div class="kicker">Case study</div>
+        <h3 class="display text-[28px] leading-[1.1] mt-1"><a href="#">How one COO rewrote her company's decision log — and cut meeting time by 41%</a></h3>
+        <p class="ink-soft mt-3 text-[15px] leading-[1.6]">A simple written protocol, borrowed from Bridgewater's "issue log" tradition, produced compounding clarity. The mechanics are more mundane than the results.</p>
+        <div class="byline mt-3">By Yasmin Rahimi · 12 min</div>
+      </article>
+      <div class="md:col-span-7 divide-y rule">
+        <article class="py-5 headline">
+          <div class="kicker">Hiring</div>
+          <h3 class="display text-[22px] leading-[1.15] mt-1"><a href="#">The "T-shape" hire is back — and you're probably under-paying for it</a></h3>
+          <div class="byline mt-2">By Jonah Okafor · 6 min</div>
+        </article>
+        <article class="py-5 headline">
+          <div class="kicker">Culture</div>
+          <h3 class="display text-[22px] leading-[1.15] mt-1"><a href="#">Why "radical candour" keeps failing — and what the research actually shows</a></h3>
+          <div class="byline mt-2">By Dr. Amelia Grey · 8 min</div>
+        </article>
+        <article class="py-5 headline">
+          <div class="kicker">Succession</div>
+          <h3 class="display text-[22px] leading-[1.15] mt-1"><a href="#">The quiet season of CEO departures has a pattern worth studying</a></h3>
+          <div class="byline mt-2">By Editorial · 4 min</div>
+        </article>
+        <article class="py-5 headline">
+          <div class="kicker">Boardroom</div>
+          <h3 class="display text-[22px] leading-[1.15] mt-1"><a href="#">What a good non-exec actually does — and how to tell they're earning their seat</a></h3>
+          <div class="byline mt-2">By Nadia Carson · 7 min</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Most read + Editor's picks -->
+  <section class="py-12 border-b rule grid grid-cols-1 lg:grid-cols-12 gap-10">
+    <div class="lg:col-span-7">
+      <h2 class="display text-[28px] mb-5">Most read this week</h2>
+      <ol class="counter-list">
+        <li class="flex gap-6 py-5 border-t rule headline">
+          <span class="display text-[56px] leading-none accent">01</span>
+          <div>
+            <div class="kicker">Startups</div>
+            <h3 class="display text-[22px] leading-[1.15]"><a href="#">The 12-founder cohort that walked away from YC, and what happened next</a></h3>
+            <div class="byline mt-1">Aisha Williams · 11 min</div>
+          </div>
+        </li>
+        <li class="flex gap-6 py-5 border-t rule headline">
+          <span class="display text-[56px] leading-none accent">02</span>
+          <div>
+            <div class="kicker">Economy</div>
+            <h3 class="display text-[22px] leading-[1.15]"><a href="#">UK productivity's lost decade may end with a whimper, not a bang</a></h3>
+            <div class="byline mt-1">David Okonjo · 9 min</div>
+          </div>
+        </li>
+        <li class="flex gap-6 py-5 border-t rule headline">
+          <span class="display text-[56px] leading-none accent">03</span>
+          <div>
+            <div class="kicker">Energy</div>
+            <h3 class="display text-[22px] leading-[1.15]"><a href="#">The grid-scale battery boom is eating the solar developers alive</a></h3>
+            <div class="byline mt-1">Marcus Holden · 7 min</div>
+          </div>
+        </li>
+        <li class="flex gap-6 py-5 border-t border-b rule headline">
+          <span class="display text-[56px] leading-none accent">04</span>
+          <div>
+            <div class="kicker">AI</div>
+            <h3 class="display text-[22px] leading-[1.15]"><a href="#">Why your "AI strategy" probably needs three strategies, not one</a></h3>
+            <div class="byline mt-1">Priya Shah · 8 min</div>
+          </div>
+        </li>
+      </ol>
+    </div>
+    <div class="lg:col-span-5">
+      <h2 class="display text-[28px] mb-5">Editor's picks</h2>
+      <div class="space-y-6">
+        <article class="headline">
+          <div class="aspect-[16/9] overflow-hidden bg-cream-dark mb-3">
+            <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800&q=80" class="w-full h-full object-cover" alt="">
+          </div>
+          <div class="kicker">Profile</div>
+          <h3 class="display text-[22px] leading-[1.15] mt-1"><a href="#">The FTSE director who hasn't taken a board seat she didn't investigate first</a></h3>
+        </article>
+        <article class="headline">
+          <div class="aspect-[16/9] overflow-hidden bg-cream-dark mb-3">
+            <img src="https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=800&q=80" class="w-full h-full object-cover" alt="">
+          </div>
+          <div class="kicker">Deal anatomy</div>
+          <h3 class="display text-[22px] leading-[1.15] mt-1"><a href="#">How the Monzo-Revolut partnership died in 14 pages of redlines</a></h3>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Footer -->
+<footer class="bg-ink text-[color:var(--cream)] mt-16">
+  <div class="max-w-[1200px] mx-auto px-6 py-14 grid grid-cols-2 md:grid-cols-5 gap-8 ui text-[13px]">
+    <div class="col-span-2">
+      <div class="display text-[28px] mb-3">Business Fortitude</div>
+      <p class="opacity-70 leading-relaxed">Independent journalism for operators, founders, and boards. Published in London since 2023.</p>
+    </div>
+    <div>
+      <div class="uppercase tracking-widest text-[11px] opacity-60 mb-3">Sections</div>
+      <ul class="space-y-2"><li><a href="#" class="hover:text-white">Markets</a></li><li><a href="#" class="hover:text-white">Leadership</a></li><li><a href="#" class="hover:text-white">AI &amp; Tech</a></li><li><a href="#" class="hover:text-white">Opinion</a></li></ul>
+    </div>
+    <div>
+      <div class="uppercase tracking-widest text-[11px] opacity-60 mb-3">Company</div>
+      <ul class="space-y-2"><li><a href="#" class="hover:text-white">About</a></li><li><a href="#" class="hover:text-white">Contact</a></li><li><a href="#" class="hover:text-white">Advertise</a></li><li><a href="#" class="hover:text-white">Careers</a></li></ul>
+    </div>
+    <div>
+      <div class="uppercase tracking-widest text-[11px] opacity-60 mb-3">Legal</div>
+      <ul class="space-y-2"><li><a href="#" class="hover:text-white">Privacy</a></li><li><a href="#" class="hover:text-white">Terms</a></li><li><a href="#" class="hover:text-white">Cookies</a></li></ul>
+    </div>
+  </div>
+  <div class="border-t border-white/10">
+    <div class="max-w-[1200px] mx-auto px-6 py-5 ui text-[12px] flex flex-col md:flex-row items-center justify-between gap-3 opacity-70">
+      <span>© 2026 Business Fortitude Ltd. All rights reserved.</span>
+      <span>Not investment advice. Capital at risk.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const btn = document.getElementById('menuBtn');
+  const panel = document.getElementById('menuPanel');
+  const close = document.getElementById('menuClose');
+  btn?.addEventListener('click', () => panel.classList.remove('-translate-x-full'));
+  close?.addEventListener('click', () => panel.classList.add('-translate-x-full'));
+  document.querySelectorAll('.tab').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      const sibs = el.parentElement.querySelectorAll('.tab');
+      sibs.forEach(s => s.classList.remove('active'));
+      el.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>

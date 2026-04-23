@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ashley Steel — Business Fortitude</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root {
+    --bg: #ffffff; --ink: #0a0a0a; --soft: #4a4a4a;
+    --accent: #0055ff; --lime: #d4ff3a;
+    --surface: #f5f5f4; --rule: #e7e5e4;
+  }
+  body { background: var(--bg); color: var(--ink); font-family: 'Inter', system-ui, sans-serif; }
+  .display { font-family: 'Inter', sans-serif; font-weight: 900; letter-spacing: -0.03em; line-height: 0.98; }
+  .mono { font-family: 'Space Grotesk', monospace; }
+  .accent { color: var(--accent); }
+  .bg-accent { background: var(--accent); }
+  .bg-lime { background: var(--lime); color: var(--ink); }
+  .bg-surface { background: var(--surface); }
+  .bg-ink { background: var(--ink); color: white; }
+  .soft { color: var(--soft); }
+  .rule { border-color: var(--rule); }
+  .kicker { font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; font-size: 11px; }
+  .chip { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
+  .card { transition: transform .35s ease; }
+  .card:hover { transform: translateY(-3px); }
+  .card:hover .title-link { color: var(--accent); }
+  .ticker-wrap { overflow: hidden; }
+  .ticker { display: inline-flex; gap: 40px; white-space: nowrap; animation: marquee 35s linear infinite; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .up { color: #059669; } .down { color: #dc2626; }
+  .btn-primary { background: var(--ink); color: white; border-radius: 999px; padding: 10px 20px; font-weight: 600; }
+  .btn-primary:hover { background: var(--accent); }
+  .btn-secondary { background: white; color: var(--ink); border-radius: 999px; padding: 10px 20px; font-weight: 600; border: 1px solid var(--rule); }
+  .btn-secondary:hover { border-color: var(--ink); }
+  .pill-nav a.active { background: var(--ink); color: white; }
+  .pill-nav a { transition: all .2s; }
+  .lime-underline { background-image: linear-gradient(var(--lime), var(--lime)); background-size: 100% 0.35em; background-repeat: no-repeat; background-position: 0 88%; padding: 0 2px; }
+  .arrow-link svg { transition: transform .2s ease; }
+  .arrow-link:hover svg { transform: translateX(4px); }
+  .timeline-item { position: relative; padding-left: 28px; }
+  .timeline-item::before { content: ''; position: absolute; left: 6px; top: 6px; width: 10px; height: 10px; border-radius: 999px; background: var(--ink); }
+  .timeline-item::after { content: ''; position: absolute; left: 10px; top: 20px; bottom: -28px; width: 2px; background: var(--rule); }
+  .timeline-item:last-child::after { display: none; }
+</style>
+</head>
+<body class="min-h-screen">
+
+<!-- Header -->
+<header class="border-b rule bg-white sticky top-0 z-40">
+  <div class="max-w-[1360px] mx-auto px-6 flex items-center justify-between h-16">
+    <a href="index.html" class="flex items-center gap-2">
+      <span class="display text-[22px]">Business <span class="accent">Fortitude</span></span>
+    </a>
+    <nav class="hidden lg:flex items-center gap-1 pill-nav">
+      <a href="#" class="px-3 py-1.5 rounded-full text-[13px] font-medium hover:bg-surface">Latest</a>
+      <a href="category-markets.html" class="px-3 py-1.5 rounded-full text-[13px] font-medium hover:bg-surface">Markets</a>
+      <a href="#" class="px-3 py-1.5 rounded-full text-[13px] font-medium hover:bg-surface">Deals</a>
+      <a href="#" class="active px-3 py-1.5 rounded-full text-[13px] font-medium">Leadership</a>
+      <a href="#" class="px-3 py-1.5 rounded-full text-[13px] font-medium hover:bg-surface">AI</a>
+      <a href="#" class="px-3 py-1.5 rounded-full text-[13px] font-medium hover:bg-surface">Startups</a>
+      <a href="#" class="px-3 py-1.5 rounded-full text-[13px] font-medium hover:bg-surface">Opinion</a>
+    </nav>
+    <div class="flex items-center gap-3">
+      <button aria-label="Search" class="p-2 hover:bg-surface rounded-full">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      </button>
+      <a href="#" class="hidden md:inline btn-primary text-[13px]">Subscribe</a>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-[1360px] mx-auto px-6">
+
+  <!-- Breadcrumb -->
+  <div class="mono text-[12px] uppercase tracking-[0.18em] soft pt-8 pb-2">
+    <a href="index.html" class="hover:text-[color:var(--accent)]">Home</a>
+    <span class="mx-2">/</span>
+    <a href="#" class="hover:text-[color:var(--accent)]">People</a>
+    <span class="mx-2">/</span>
+    <span>Ashley Steel</span>
+  </div>
+
+  <!-- Hero -->
+  <section class="py-10 border-b rule grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+    <div class="lg:col-span-4 order-2 lg:order-1">
+      <div class="aspect-square rounded-3xl overflow-hidden bg-surface">
+        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80" class="w-full h-full object-cover" alt="Ashley Steel">
+      </div>
+    </div>
+    <div class="lg:col-span-8 order-1 lg:order-2">
+      <div class="flex items-center gap-2 mb-4">
+        <span class="chip bg-lime">Person · Board director</span>
+        <span class="chip bg-surface">4 boards</span>
+      </div>
+      <h1 class="display text-[56px] md:text-[88px] leading-[0.92]">
+        Ashley <span class="lime-underline">Steel</span>
+      </h1>
+      <p class="text-[18px] leading-[1.55] soft mt-6 max-w-2xl">
+        A former KPMG vice-chair who has turned a career built on audit-committee rigour into one of the most sought-after non-executive portfolios in the UK. Operators say she asks the question the CEO would rather not hear first.
+      </p>
+      <div class="flex flex-wrap items-center gap-3 mt-7">
+        <a href="#" class="btn-primary text-[13px]">Follow this person</a>
+        <a href="#" class="btn-secondary text-[13px]">Add to watchlist</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick stats -->
+  <section class="py-8 border-b rule grid grid-cols-2 md:grid-cols-4 gap-4">
+    <div class="rounded-2xl bg-surface p-5">
+      <div class="mono text-[11px] uppercase tracking-widest soft">Active boards</div>
+      <div class="display text-[40px] mt-2">4</div>
+      <div class="text-[12px] soft mt-1">incl. 2 FTSE 250</div>
+    </div>
+    <div class="rounded-2xl bg-surface p-5">
+      <div class="mono text-[11px] uppercase tracking-widest soft">Committees chaired</div>
+      <div class="display text-[40px] mt-2">3</div>
+      <div class="text-[12px] soft mt-1">audit, risk, remuneration</div>
+    </div>
+    <div class="rounded-2xl bg-surface p-5">
+      <div class="mono text-[11px] uppercase tracking-widest soft">BF coverage</div>
+      <div class="display text-[40px] mt-2">14</div>
+      <div class="text-[12px] soft mt-1">mentions · 3 profiles</div>
+    </div>
+    <div class="rounded-2xl bg-ink text-white p-5">
+      <div class="kicker mb-2" style="color:var(--lime);">First appointed</div>
+      <div class="display text-[40px] mt-2">2011</div>
+      <div class="text-[12px] opacity-70 mt-1">Rolls-Royce NED</div>
+    </div>
+  </section>
+
+  <!-- Body -->
+  <section class="py-10 grid grid-cols-1 lg:grid-cols-12 gap-10">
+
+    <div class="lg:col-span-8">
+      <h2 class="display text-[34px] mb-5">Profile</h2>
+      <div class="space-y-5 text-[17px] leading-[1.7] max-w-[68ch]">
+        <p>Ashley Steel's second act began the day she stopped signing off audits and started sitting across the table asking what else had been left out. After two decades at KPMG — rising to vice-chair before stepping out in 2013 — she has assembled one of the most deliberate non-executive portfolios in London.</p>
+        <p>Operators describe her method as "pre-rehearsed discomfort": she tells new boards, publicly, the three questions she will insist on answering within her first year. If a CEO flinches at any of them, she says so. One chair describes her contribution as "the single vote I know I can't predict, and the one I check my thinking against first."</p>
+
+        <!-- Pull quote -->
+        <blockquote class="my-10 rounded-3xl bg-ink text-white p-8 md:p-10">
+          <div class="display text-[30px] md:text-[40px] leading-[1.05]">
+            "The job is not to avoid hard questions. The job is to make sure the <span class="lime-underline">wrong</span> ones don't get asked first."
+          </div>
+          <div class="mt-5 text-[12px] uppercase tracking-widest" style="color:var(--lime);">Ashley Steel · FT Non-Executive Directors' Award, 2023</div>
+        </blockquote>
+
+        <p>Steel has been particularly influential at <a href="company-games-workshop.html" class="underline hover:text-[color:var(--accent)]">Games Workshop</a>, where her audit-committee review of the Amazon licensing arrangement is credited with tightening disclosure around royalty revenue recognition — a detail the sell-side later flagged as material.</p>
+        <p>Her style is sometimes described as exacting. She is unapologetic about it: "If a committee's uncomfortable, it's probably because the business is, too."</p>
+      </div>
+
+      <!-- Timeline -->
+      <h3 class="display text-[28px] mt-12 mb-6">Career timeline</h3>
+      <div class="space-y-6">
+        <div class="timeline-item">
+          <div class="mono text-[12px] uppercase tracking-widest soft">2024 — present</div>
+          <div class="font-bold text-[17px] mt-1">Non-executive director, Games Workshop (GAW)</div>
+          <div class="soft text-[14px] mt-1">Chairs the audit committee; key voice on Amazon licensing disclosure.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="mono text-[12px] uppercase tracking-widest soft">2019 — present</div>
+          <div class="font-bold text-[17px] mt-1">Non-executive director, SThree plc</div>
+          <div class="soft text-[14px] mt-1">Chair of risk committee; led the cyber-resilience review in 2022.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="mono text-[12px] uppercase tracking-widest soft">2016 — 2023</div>
+          <div class="font-bold text-[17px] mt-1">Non-executive director, TP ICAP</div>
+          <div class="soft text-[14px] mt-1">Audit committee member through the CAP acquisition and rebrand.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="mono text-[12px] uppercase tracking-widest soft">2011 — 2019</div>
+          <div class="font-bold text-[17px] mt-1">Non-executive director, Rolls-Royce Holdings</div>
+          <div class="soft text-[14px] mt-1">Audit committee during the 2017 deferred-prosecution period.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="mono text-[12px] uppercase tracking-widest soft">1983 — 2013</div>
+          <div class="font-bold text-[17px] mt-1">KPMG — partner, then vice-chair</div>
+          <div class="soft text-[14px] mt-1">Led the firm's UK transport, leisure and media audit practice.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right col -->
+    <aside class="lg:col-span-4 space-y-6">
+      <!-- Current boards -->
+      <div class="rounded-2xl border rule p-6">
+        <div class="kicker soft mb-4">Current boards</div>
+        <ul class="space-y-4">
+          <li class="flex items-center justify-between">
+            <div>
+              <div class="font-bold"><a href="company-games-workshop.html" class="hover:text-[color:var(--accent)]">Games Workshop</a></div>
+              <div class="text-[12px] soft">NED · Audit chair</div>
+            </div>
+            <span class="mono text-[12px]">FTSE 250</span>
+          </li>
+          <li class="flex items-center justify-between border-t rule pt-4">
+            <div>
+              <div class="font-bold"><a href="#" class="hover:text-[color:var(--accent)]">SThree plc</a></div>
+              <div class="text-[12px] soft">NED · Risk chair</div>
+            </div>
+            <span class="mono text-[12px]">FTSE 250</span>
+          </li>
+          <li class="flex items-center justify-between border-t rule pt-4">
+            <div>
+              <div class="font-bold"><a href="#" class="hover:text-[color:var(--accent)]">Hyve Group</a></div>
+              <div class="text-[12px] soft">NED · Remuneration chair</div>
+            </div>
+            <span class="mono text-[12px]">Private</span>
+          </li>
+          <li class="flex items-center justify-between border-t rule pt-4">
+            <div>
+              <div class="font-bold"><a href="#" class="hover:text-[color:var(--accent)]">National Express</a></div>
+              <div class="text-[12px] soft">Senior independent director</div>
+            </div>
+            <span class="mono text-[12px]">FTSE 250</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Expertise -->
+      <div class="rounded-2xl bg-surface p-6">
+        <div class="kicker soft mb-4">Areas of expertise</div>
+        <div class="flex flex-wrap gap-2">
+          <span class="chip bg-ink text-white">Audit</span>
+          <span class="chip bg-white border rule">Risk</span>
+          <span class="chip bg-white border rule">Governance</span>
+          <span class="chip bg-lime">Remuneration</span>
+          <span class="chip bg-white border rule">Cyber</span>
+          <span class="chip bg-white border rule">M&amp;A</span>
+          <span class="chip bg-white border rule">Media &amp; IP</span>
+          <span class="chip bg-white border rule">Transport</span>
+        </div>
+      </div>
+
+      <!-- Newsletter -->
+      <div class="rounded-2xl bg-ink text-white p-6">
+        <div class="kicker mb-2" style="color:var(--lime);">Leadership brief</div>
+        <div class="display text-[22px] leading-[1.1] mb-3">Inside the boardrooms reshaping UK plc.</div>
+        <form class="flex gap-2">
+          <input type="email" placeholder="you@company.com" class="flex-1 px-3 py-2 rounded-full text-[13px] text-ink">
+          <button class="bg-lime text-ink px-4 py-2 rounded-full text-[13px] font-bold">Join</button>
+        </form>
+        <div class="text-[11px] mt-3 opacity-70">Fortnightly. No spam.</div>
+      </div>
+    </aside>
+  </section>
+
+  <!-- Recent coverage -->
+  <section class="py-10 border-t rule">
+    <div class="flex items-end justify-between mb-6">
+      <h2 class="display text-[32px]">Recent coverage</h2>
+      <a href="#" class="arrow-link inline-flex items-center gap-2 text-[13px] font-semibold">All 14 mentions <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <article class="card">
+        <div class="aspect-[4/3] overflow-hidden rounded-xl bg-surface mb-3"><img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&q=80" class="w-full h-full object-cover" alt=""></div>
+        <span class="chip bg-accent text-white">Profile</span>
+        <h3 class="font-bold text-[18px] leading-snug mt-2"><a href="#" class="title-link">Ashley Steel's board playbook — and why GAW keeps putting her in the room</a></h3>
+        <div class="text-[12px] soft mt-1">Nadia Carson · 9 min</div>
+      </article>
+      <article class="card">
+        <div class="aspect-[4/3] overflow-hidden rounded-xl bg-surface mb-3"><img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=600&q=80" class="w-full h-full object-cover" alt=""></div>
+        <span class="chip bg-lime">Opinion</span>
+        <h3 class="font-bold text-[18px] leading-snug mt-2"><a href="#" class="title-link">What Steel's audit chair tenure teaches the new class of NEDs</a></h3>
+        <div class="text-[12px] soft mt-1">Ishaan Gupta · 6 min</div>
+      </article>
+      <article class="card">
+        <div class="aspect-[4/3] overflow-hidden rounded-xl bg-surface mb-3"><img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&q=80" class="w-full h-full object-cover" alt=""></div>
+        <span class="chip bg-surface">Governance</span>
+        <h3 class="font-bold text-[18px] leading-snug mt-2"><a href="#" class="title-link">The audit committee decade: a quiet re-ordering of UK board power</a></h3>
+        <div class="text-[12px] soft mt-1">Rachel Okonkwo · 11 min</div>
+      </article>
+    </div>
+  </section>
+</main>
+
+<!-- Footer -->
+<footer class="bg-ink text-white mt-10">
+  <div class="border-b border-white/10 py-3 mono text-[12px]">
+    <div class="max-w-[1360px] mx-auto flex items-center">
+      <span class="chip bg-lime mx-4">LIVE</span>
+      <div class="ticker-wrap flex-1">
+        <div class="ticker">
+          <span>FTSE 250 <b>20,614.3</b> <span class="up">+0.38%</span></span>
+          <span>FTSE 100 <b>8,214.9</b> <span class="down">−0.18%</span></span>
+          <span>S&amp;P 500 <b>5,842.1</b> <span class="up">+0.42%</span></span>
+          <span>NVDA <b>$142.88</b> <span class="up">+3.02%</span></span>
+          <span>GAW <b>£145.20</b> <span class="up">+2.10%</span></span>
+          <span>Brent <b>$73.14</b> <span class="down">−0.44%</span></span>
+          <span>FTSE 250 <b>20,614.3</b> <span class="up">+0.38%</span></span>
+          <span>NVDA <b>$142.88</b> <span class="up">+3.02%</span></span>
+          <span>GAW <b>£145.20</b> <span class="up">+2.10%</span></span>
+          <span>Brent <b>$73.14</b> <span class="down">−0.44%</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="max-w-[1360px] mx-auto px-6 py-14 grid grid-cols-2 md:grid-cols-6 gap-8 text-[13px]">
+    <div class="col-span-2">
+      <div class="display text-[26px] mb-3">Business <span class="accent">Fortitude</span></div>
+      <p class="opacity-70 leading-relaxed max-w-xs">Independent journalism for operators, founders, and boards. Published in London.</p>
+    </div>
+    <div>
+      <div class="kicker opacity-60 mb-3">Read</div>
+      <ul class="space-y-2"><li><a href="#" class="hover:text-lime">Latest</a></li><li><a href="#" class="hover:text-lime">Markets</a></li><li><a href="#" class="hover:text-lime">Leadership</a></li><li><a href="#" class="hover:text-lime">Long Reads</a></li></ul>
+    </div>
+    <div>
+      <div class="kicker opacity-60 mb-3">Pro</div>
+      <ul class="space-y-2"><li><a href="#" class="hover:text-lime">Roundtables</a></li><li><a href="#" class="hover:text-lime">Model portfolios</a></li><li><a href="#" class="hover:text-lime">Deal database</a></li></ul>
+    </div>
+    <div>
+      <div class="kicker opacity-60 mb-3">Company</div>
+      <ul class="space-y-2"><li><a href="#" class="hover:text-lime">About</a></li><li><a href="#" class="hover:text-lime">Careers</a></li><li><a href="#" class="hover:text-lime">Advertise</a></li></ul>
+    </div>
+    <div>
+      <div class="kicker opacity-60 mb-3">Legal</div>
+      <ul class="space-y-2"><li><a href="#" class="hover:text-lime">Privacy</a></li><li><a href="#" class="hover:text-lime">Terms</a></li><li><a href="#" class="hover:text-lime">Cookies</a></li></ul>
+    </div>
+  </div>
+  <div class="border-t border-white/10 text-[12px]">
+    <div class="max-w-[1360px] mx-auto px-6 py-5 flex flex-col md:flex-row items-center justify-between gap-3 opacity-70">
+      <span>© 2026 Business Fortitude Ltd.</span>
+      <span>Not investment advice. Capital at risk.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.pill-nav a').forEach(el => {
+    el.addEventListener('click', (e) => {
+      if (el.getAttribute('href') === '#') e.preventDefault();
+      document.querySelectorAll('.pill-nav a').forEach(s => s.classList.remove('active'));
+      el.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>

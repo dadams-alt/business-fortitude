@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Business Fortitude — Founder Longform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root {
+    --bg: #fafaf8;
+    --ink: #1a1a1a;
+    --soft: #5a5a5a;
+    --softer: #8a8a8a;
+    --accent: #c6542e;
+    --warm: #f1ece1;
+    --rule: #e5e0d4;
+    --gold: #b8936b;
+  }
+  body { background: var(--bg); color: var(--ink); font-family: 'Newsreader', Georgia, serif; font-feature-settings: "ss01"; font-size: 18px; line-height: 1.6; }
+  .ui { font-family: 'Inter', system-ui, sans-serif; }
+  .display { font-family: 'Newsreader', Georgia, serif; font-weight: 700; letter-spacing: -0.02em; line-height: 1.08; }
+  .soft { color: var(--soft); }
+  .softer { color: var(--softer); }
+  .accent { color: var(--accent); }
+  .rule { border-color: var(--rule); }
+  .bg-warm { background: var(--warm); }
+  .bg-ink { background: var(--ink); color: #fafaf8; }
+  .kicker { font-family: 'Inter', sans-serif; font-weight: 600; text-transform: uppercase; letter-spacing: 0.16em; font-size: 11px; color: var(--accent); }
+  a.underline-soft { background: linear-gradient(var(--ink), var(--ink)) 0 100% / 0 1px no-repeat; transition: background-size .3s ease; padding-bottom: 2px; }
+  a.underline-soft:hover { background-size: 100% 1px; }
+  .num-counter { font-family: 'Newsreader', serif; font-weight: 400; color: var(--gold); font-size: 20px; letter-spacing: -0.02em; font-style: italic; }
+  .dot-separator { display: inline-block; width: 3px; height: 3px; border-radius: 999px; background: var(--softer); margin: 0 10px; vertical-align: middle; }
+  .quote-mark { font-family: 'Newsreader', serif; color: var(--gold); font-size: 4.5rem; line-height: 0.5; display: block; }
+  .progress-bar { position: fixed; top: 0; left: 0; height: 3px; background: var(--accent); width: 0%; z-index: 50; transition: width .15s ease; }
+  nav .active { color: var(--ink); }
+  nav a { color: var(--softer); transition: color .2s; }
+  nav a:hover { color: var(--ink); }
+  .article-card:hover .headline { color: var(--accent); }
+  .headline { transition: color .2s; }
+  .pill-sub { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--rule); padding: 4px 10px; border-radius: 999px; font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: 0.04em; color: var(--soft); }
+  .chapter-divider { display: flex; align-items: center; gap: 16px; }
+  .chapter-divider::before, .chapter-divider::after { content: ""; flex: 1; border-top: 1px solid var(--rule); }
+  .ornament { color: var(--gold); }
+</style>
+</head>
+<body class="min-h-screen">
+
+<!-- Scroll progress -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- Header -->
+<header class="pt-7 pb-5">
+  <div class="max-w-[1080px] mx-auto px-6 flex items-center justify-between">
+    <a href="/" class="flex items-center gap-3">
+      <span class="display text-[24px]">Business Fortitude</span>
+    </a>
+    <nav class="hidden md:flex items-center gap-7 ui text-[13px]">
+      <a href="#" class="active">Today</a>
+      <a href="#">Essays</a>
+      <a href="#">Playbooks</a>
+      <a href="#">Profiles</a>
+      <a href="#">Podcasts</a>
+      <a href="#">Archive</a>
+    </nav>
+    <div class="flex items-center gap-3 ui text-[13px]">
+      <a href="#" aria-label="Search" class="softer hover:text-[color:var(--ink)]">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      </a>
+      <a href="#" class="pill-sub"><span class="w-1.5 h-1.5 bg-[color:var(--accent)] rounded-full"></span> Subscribe · Free</a>
+    </div>
+  </div>
+  <div class="max-w-[1080px] mx-auto px-6 mt-3 ui text-[12px] softer">
+    Tuesday, 21 April 2026 <span class="dot-separator"></span> Issue №214 <span class="dot-separator"></span> <span class="accent">134,000 operators reading</span>
+  </div>
+</header>
+
+<hr class="rule border-t max-w-[1080px] mx-auto">
+
+<!-- Hero essay -->
+<main>
+<section class="max-w-[780px] mx-auto px-6 pt-20 pb-28 text-center">
+  <div class="kicker mb-5">The Essay · This week</div>
+  <h1 class="display text-[48px] md:text-[70px] mb-8">The quiet repricing: why <em class="accent">midcap earnings</em> are rewriting the playbook</h1>
+  <p class="text-[22px] soft leading-[1.55] mb-8 max-w-[620px] mx-auto">For two years the story was megacap dominance. A new quarter of filings suggests a different kind of discipline is winning — and the operators who understand it already look different on the inside.</p>
+  <div class="ui text-[13px] softer flex items-center justify-center gap-3 flex-wrap">
+    <div class="flex items-center gap-2">
+      <img src="https://i.pravatar.cc/80?img=41" class="w-8 h-8 rounded-full" alt="">
+      <span class="text-[color:var(--ink)] font-semibold">Sarah Mendel</span>
+    </div>
+    <span class="dot-separator"></span>
+    <span>8 minute read</span>
+    <span class="dot-separator"></span>
+    <span>Today, 09:14</span>
+  </div>
+  <div class="chapter-divider mt-14 mb-6">
+    <span class="ornament">✦</span>
+  </div>
+</section>
+
+<!-- Excerpt of essay (drop cap) -->
+<section class="max-w-[680px] mx-auto px-6 pb-20">
+  <p class="text-[20px] leading-[1.7]">
+    <span style="font-family: 'Newsreader', serif; font-weight: 700; float: left; font-size: 4.8rem; line-height: .85; padding-right: 10px; padding-top: 6px; color: var(--ink);">I</span>n the autumn of 2025, a handful of small-cap filings began telling a story the rest of the market had stopped listening for. The pattern was unglamorous at first: pricing power, disciplined working-capital cycles, and CFOs who had learned to say no.
+  </p>
+  <p class="mt-6 text-[18px] leading-[1.75] soft">It took another two quarters before anyone in New York put a name to what was happening. By then the repricing was already underway, and the operators who understood it were doing something that, on paper, looked almost conservative — something that would have seemed out of place in 2023.</p>
+  <div class="my-10 pl-6 border-l-2 border-[color:var(--gold)]">
+    <span class="quote-mark">“</span>
+    <p class="text-[22px] leading-[1.5] display mb-2">The companies that have done best this quarter are the ones that stopped confusing velocity with progress.</p>
+    <div class="ui text-[12px] softer">Anna Choi · CFO, Vertices Capital</div>
+  </div>
+  <p class="text-[18px] leading-[1.75] soft">That sentence — in a routine analyst call on a Wednesday in March — is what the rest of this essay is about.</p>
+  <div class="mt-10 text-center">
+    <a href="#" class="ui inline-flex items-center gap-2 text-[14px] font-semibold text-[color:var(--ink)] hover:accent">Continue reading the essay
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</section>
+
+<div class="chapter-divider max-w-[780px] mx-auto px-6"><span class="ornament">✦ ✦ ✦</span></div>
+
+<!-- This week: index -->
+<section class="max-w-[1080px] mx-auto px-6 py-20">
+  <div class="flex items-end justify-between mb-10">
+    <div>
+      <div class="kicker mb-3">This week · The index</div>
+      <h2 class="display text-[36px]">What we published</h2>
+    </div>
+    <a href="#" class="ui softer text-[13px] hover:text-[color:var(--ink)]">Full archive →</a>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-x-14 gap-y-10">
+    <article class="article-card">
+      <div class="flex items-baseline gap-4">
+        <span class="num-counter">01.</span>
+        <div class="kicker !text-[color:var(--softer)]">Playbook · Leadership</div>
+      </div>
+      <h3 class="display text-[26px] headline mt-2"><a href="#" class="underline-soft">A COO's decision log cut meeting time by 41% — the template, annotated</a></h3>
+      <p class="soft mt-3 text-[15px] leading-relaxed">A simple written protocol, borrowed from Bridgewater's "issue log" tradition, produced compounding clarity — and a changed culture.</p>
+      <div class="ui text-[12px] softer mt-3">Yasmin Rahimi <span class="dot-separator"></span> 12 min</div>
+    </article>
+    <article class="article-card">
+      <div class="flex items-baseline gap-4">
+        <span class="num-counter">02.</span>
+        <div class="kicker !text-[color:var(--softer)]">Profile</div>
+      </div>
+      <h3 class="display text-[26px] headline mt-2"><a href="#" class="underline-soft">The FTSE director who investigates every board before accepting a seat</a></h3>
+      <p class="soft mt-3 text-[15px] leading-relaxed">Eight weeks, on average. She has walked away from four boards in the last year. This is how she decides.</p>
+      <div class="ui text-[12px] softer mt-3">Nadia Carson <span class="dot-separator"></span> 14 min</div>
+    </article>
+    <article class="article-card">
+      <div class="flex items-baseline gap-4">
+        <span class="num-counter">03.</span>
+        <div class="kicker !text-[color:var(--softer)]">Argument · Capital</div>
+      </div>
+      <h3 class="display text-[26px] headline mt-2"><a href="#" class="underline-soft">The founder dilution myth: SAFEs got their reputation wrong</a></h3>
+      <p class="soft mt-3 text-[15px] leading-relaxed">A quiet return to priced rounds is reshaping early cap tables — and founders are the ones learning the math late.</p>
+      <div class="ui text-[12px] softer mt-3">Rachel Okonkwo <span class="dot-separator"></span> 9 min</div>
+    </article>
+    <article class="article-card">
+      <div class="flex items-baseline gap-4">
+        <span class="num-counter">04.</span>
+        <div class="kicker !text-[color:var(--softer)]">Case study · Product</div>
+      </div>
+      <h3 class="display text-[26px] headline mt-2"><a href="#" class="underline-soft">Inside Monzo's second act: what it took to kill a beloved product</a></h3>
+      <p class="soft mt-3 text-[15px] leading-relaxed">The call was quieter than anyone expected. An inside account of a product team that rebuilt discipline from the floor up.</p>
+      <div class="ui text-[12px] softer mt-3">Tom Nakamura <span class="dot-separator"></span> 18 min</div>
+    </article>
+    <article class="article-card">
+      <div class="flex items-baseline gap-4">
+        <span class="num-counter">05.</span>
+        <div class="kicker !text-[color:var(--softer)]">Long read · Founders</div>
+      </div>
+      <h3 class="display text-[26px] headline mt-2"><a href="#" class="underline-soft">The 12-founder cohort that walked away from YC, and what happened next</a></h3>
+      <p class="soft mt-3 text-[15px] leading-relaxed">Two years on, most are still running their companies. One is gone. The lessons are not the ones they expected.</p>
+      <div class="ui text-[12px] softer mt-3">Aisha Williams <span class="dot-separator"></span> 11 min</div>
+    </article>
+    <article class="article-card">
+      <div class="flex items-baseline gap-4">
+        <span class="num-counter">06.</span>
+        <div class="kicker !text-[color:var(--softer)]">Argument · Operations</div>
+      </div>
+      <h3 class="display text-[26px] headline mt-2"><a href="#" class="underline-soft">Stop rewarding velocity. Start rewarding removed complexity.</a></h3>
+      <p class="soft mt-3 text-[15px] leading-relaxed">The most useful metric in your business is probably the one you're not tracking.</p>
+      <div class="ui text-[12px] softer mt-3">Ishaan Gupta <span class="dot-separator"></span> 7 min</div>
+    </article>
+  </div>
+</section>
+
+<div class="chapter-divider max-w-[780px] mx-auto px-6"><span class="ornament">✦</span></div>
+
+<!-- Subscribe block -->
+<section class="bg-warm py-24 mt-10">
+  <div class="max-w-[720px] mx-auto px-6 text-center">
+    <div class="kicker mb-4">The Morning Brief</div>
+    <h2 class="display text-[42px] leading-[1.1] mb-5">A quiet email, delivered to operators at 7am.</h2>
+    <p class="soft text-[18px] leading-[1.65] mb-8 max-w-[560px] mx-auto">Eight minutes on what moved overnight, why it matters, and who it affects. Written by our editors, not generated from a template. Free.</p>
+    <form class="flex flex-col sm:flex-row items-stretch gap-3 max-w-[480px] mx-auto">
+      <input type="email" placeholder="you@company.com" class="flex-1 ui text-[15px] px-5 py-3 rounded-full border rule bg-white focus:outline-none focus:border-[color:var(--accent)]">
+      <button type="button" class="ui bg-[color:var(--ink)] text-white px-6 py-3 rounded-full font-semibold text-[14px] hover:bg-[color:var(--accent)] transition">Subscribe</button>
+    </form>
+    <div class="ui text-[12px] softer mt-5">Join 134,000+ founders, CEOs, and operators. One click unsubscribe.</div>
+  </div>
+</section>
+
+<!-- Playbook library -->
+<section class="max-w-[1080px] mx-auto px-6 py-24">
+  <div class="mb-10">
+    <div class="kicker mb-3">The shelf · Playbooks</div>
+    <h2 class="display text-[36px]">Evergreen guides, kept current.</h2>
+    <p class="soft mt-3 max-w-xl text-[16px]">Long-form operator playbooks, reviewed and updated quarterly. Read them when you need them.</p>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <a href="#" class="article-card border rule p-7 bg-white rounded-sm block hover:border-[color:var(--ink)]">
+      <div class="kicker mb-4">01 · Hiring</div>
+      <h3 class="display text-[22px] headline leading-[1.1]">Building your first twenty hires without breaking the culture</h3>
+      <p class="soft text-[14px] mt-3 leading-relaxed">A staged protocol for operators going from 10 to 30 people.</p>
+      <div class="ui text-[12px] softer mt-4">Updated March 2026 <span class="dot-separator"></span> 26 min</div>
+    </a>
+    <a href="#" class="article-card border rule p-7 bg-white rounded-sm block hover:border-[color:var(--ink)]">
+      <div class="kicker mb-4">02 · Finance</div>
+      <h3 class="display text-[22px] headline leading-[1.1]">The operator's guide to reading a 10-Q in twelve minutes</h3>
+      <p class="soft text-[14px] mt-3 leading-relaxed">What to look at, what to skip, and the three lines that tell you the most.</p>
+      <div class="ui text-[12px] softer mt-4">Updated Feb 2026 <span class="dot-separator"></span> 19 min</div>
+    </a>
+    <a href="#" class="article-card border rule p-7 bg-white rounded-sm block hover:border-[color:var(--ink)]">
+      <div class="kicker mb-4">03 · Board</div>
+      <h3 class="display text-[22px] headline leading-[1.1]">How to run a board meeting you'd actually want to sit in</h3>
+      <p class="soft text-[14px] mt-3 leading-relaxed">The agenda structure, the preread discipline, and the thing most chairs leave out.</p>
+      <div class="ui text-[12px] softer mt-4">Updated Jan 2026 <span class="dot-separator"></span> 22 min</div>
+    </a>
+  </div>
+</section>
+
+<!-- Podcast -->
+<section class="bg-ink text-[color:var(--warm)] py-24">
+  <div class="max-w-[1080px] mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-10 items-center">
+    <div class="md:col-span-7">
+      <div class="kicker mb-4 !text-[color:var(--gold)]">The podcast</div>
+      <h2 class="display text-[44px] leading-[1.05] mb-5">Long conversations with the people actually running companies.</h2>
+      <p class="opacity-85 text-[17px] leading-[1.65] mb-6">One guest. Ninety minutes. No press tour. The Fortitude Interview returns every Thursday.</p>
+      <div class="flex items-center gap-3">
+        <button class="bg-[color:var(--accent)] text-white px-5 py-2.5 rounded-full ui text-[13px] font-semibold">Play latest episode</button>
+        <a href="#" class="ui text-[13px] underline opacity-80 hover:opacity-100">All episodes</a>
+      </div>
+    </div>
+    <div class="md:col-span-5">
+      <div class="border rule border-white/20 p-6 rounded-sm">
+        <div class="flex items-center gap-4 mb-5">
+          <div class="w-14 h-14 rounded-full overflow-hidden bg-[color:var(--warm)]"><img src="https://i.pravatar.cc/100?img=47" class="w-full h-full object-cover" alt=""></div>
+          <div>
+            <div class="ui text-[11px] uppercase tracking-widest opacity-70">Episode 87 · This week</div>
+            <h3 class="display text-[20px]">Dame Helena Tait — the anatomy of a quiet boardroom coup</h3>
+          </div>
+        </div>
+        <div class="ui text-[12px] opacity-70">54 minutes <span class="dot-separator"></span> Released Thursday</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- Footer -->
+<footer class="border-t rule">
+  <div class="max-w-[1080px] mx-auto px-6 py-16 grid grid-cols-2 md:grid-cols-5 gap-8 ui text-[13px]">
+    <div class="col-span-2">
+      <div class="display text-[24px] mb-3">Business Fortitude</div>
+      <p class="soft leading-relaxed max-w-xs">A publication for operators, founders, and boards. Published in London since 2023.</p>
+    </div>
+    <div><div class="text-[11px] uppercase tracking-widest softer mb-3">Read</div><ul class="space-y-2 soft"><li><a href="#" class="hover:text-[color:var(--ink)]">Essays</a></li><li><a href="#" class="hover:text-[color:var(--ink)]">Playbooks</a></li><li><a href="#" class="hover:text-[color:var(--ink)]">Profiles</a></li><li><a href="#" class="hover:text-[color:var(--ink)]">Archive</a></li></ul></div>
+    <div><div class="text-[11px] uppercase tracking-widest softer mb-3">Listen</div><ul class="space-y-2 soft"><li><a href="#" class="hover:text-[color:var(--ink)]">The Fortitude Interview</a></li><li><a href="#" class="hover:text-[color:var(--ink)]">Morning Brief</a></li></ul></div>
+    <div><div class="text-[11px] uppercase tracking-widest softer mb-3">About</div><ul class="space-y-2 soft"><li><a href="#" class="hover:text-[color:var(--ink)]">Masthead</a></li><li><a href="#" class="hover:text-[color:var(--ink)]">Contact</a></li><li><a href="#" class="hover:text-[color:var(--ink)]">Privacy</a></li><li><a href="#" class="hover:text-[color:var(--ink)]">Terms</a></li></ul></div>
+  </div>
+  <div class="border-t rule">
+    <div class="max-w-[1080px] mx-auto px-6 py-5 ui text-[12px] softer flex flex-col md:flex-row items-center justify-between gap-2">
+      <span>© 2026 Business Fortitude Ltd.</span>
+      <span>Not investment advice. Capital at risk.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Scroll progress
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+    document.getElementById('progressBar').style.width = pct + '%';
+  });
+  // Nav toggle
+  document.querySelectorAll('nav a').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      document.querySelectorAll('nav a').forEach(s => s.classList.remove('active'));
+      el.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>

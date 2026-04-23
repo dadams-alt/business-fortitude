@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Games Workshop (GAW) — Business Fortitude</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root {
+    --bg: #ffffff; --ink: #0a0a0a; --soft: #4a4a4a;
+    --accent: #0055ff; --lime: #d4ff3a;
+    --surface: #f5f5f4; --rule: #e7e5e4;
+  }
+  body { background: var(--bg); color: var(--ink); font-family: 'Inter', system-ui, sans-serif; }
+  .display { font-family: 'Inter', sans-serif; font-weight: 900; letter-spacing: -0.03em; line-height: 0.98; }
+  .mono { font-family: 'Space Grotesk', monospace; }
+  .accent { color: var(--accent); }
+  .bg-accent { background: var(--accent); }
+  .bg-lime { background: var(--lime); color: var(--ink); }
+  .bg-surface { background: var(--surface); }
+  .bg-ink { background: var(--ink); color: white; }
+  .soft { color: var(--soft); }
+  .rule { border-color: var(--rule); }
+  .kicker { font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; font-size: 11px; }
+  .chip { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
+  .card { transition: transform .35s ease; }
+  .card:hover { transform: translateY(-3px); }
+  .card:hover .title-link { color: var(--accent); }
+  .ticker-wrap { overflow: hidden; }
+  .ticker { display: inline-flex; gap: 40px; white-space: nowrap; animation: marquee 35s linear infinite; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .up { color: #059669; } .down { color: #dc2626; }
+  .btn-primary { background: var(--ink); color: white; border-radius: 999px; padding: 10px 20px; font-weight: 600; }
+  .btn-primary:hover { background: var(--accent); }
+  .btn-secondary { background: white; color: var(--ink); border-radius: 999px; padding: 10px 20px; font-weight: 600; border: 1px solid var(--rule); }
+  .btn-secondary:hover { border-color: var(--ink); }
+  .pill-nav a.active { background: var(--ink); color: white; }
+  .pill-nav a { transition: all .2s; }
+  .lime-underline { background-image: linear-gradient(var(--lime), var(--lime)); background-size: 100% 0.35em; background-repeat: no-repeat; background-position: 0 88%; padding: 0 2px; }
+  .arrow-link svg { transition: transform .2s ease; }
+  .arrow-link:hover svg { transform: translateX(4px); }
+  .entity-tab { padding: 10px 18px; border-radius: 999px; font-weight: 600; font-size: 13px; transition: all .2s; }
+  .entity-tab:hover { background: var(--surface); }
+  .entity-tab.active { background: var(--ink); color: white; }
+  .spark { height: 44px; width: 100%; }
+</style>
+</head>
+<body class="min-h-screen">
+
+<!-- Header -->
+<header class="border-b rule bg-white sticky top-0 z-40">
+  <div class="max-w-[1360px] mx-auto px-6 flex items-center justify-between h-16">
+    <a href="index.html" class="flex items-center gap-2">
+      <span class="display text-[22px]">Business <span class="accent">Fortitude</span></span>
+    </a>
+    <nav class="hidden lg:flex items-center gap-1 pill-nav">
+      <a href="#" class="px-3 py-1.5 rounded-full text-[13px] font-medium hover:bg-surface">Latest</a>
+      <a href="category-markets.html" class="px-3 py-1.5 rounded-full text-[13px] font-medium hover:bg-surface">Markets</a>
+      <a href="#" class="px-3 py-1.5 rounded-full text-[13px] font-medium hover:bg-surface">Deals</a>
+      <a href="#" class="px-3 py-1.5 rounded-full text-[13px] font-medium hover:bg-surface">Leadership</a>
+      <a href="#" class="px-3 py-1.5 rounded-full text-[13px] font-medium hover:bg-surface">AI</a>
+      <a href="#" class="px-3 py-1.5 rounded-full text-[13px] font-medium hover:bg-surface">Startups</a>
+      <a href="#" class="px-3 py-1.5 rounded-full text-[13px] font-medium hover:bg-surface">Opinion</a>
+    </nav>
+    <div class="flex items-center gap-3">
+      <button aria-label="Search" class="p-2 hover:bg-surface rounded-full">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      </button>
+      <a href="#" class="hidden md:inline btn-primary text-[13px]">Subscribe</a>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-[1360px] mx-auto px-6">
+
+  <!-- Breadcrumb -->
+  <div class="mono text-[12px] uppercase tracking-[0.18em] soft pt-8 pb-2">
+    <a href="index.html" class="hover:text-[color:var(--accent)]">Home</a>
+    <span class="mx-2">/</span>
+    <a href="#" class="hover:text-[color:var(--accent)]">Companies</a>
+    <span class="mx-2">/</span>
+    <span>Games Workshop</span>
+  </div>
+
+  <!-- Hero: company header -->
+  <section class="py-8 border-b rule grid grid-cols-1 lg:grid-cols-12 gap-10 items-end">
+    <div class="lg:col-span-8">
+      <div class="flex items-center gap-3 mb-5">
+        <div class="w-16 h-16 rounded-2xl bg-ink text-white display text-[22px] flex items-center justify-between p-3">
+          <span>GW</span>
+        </div>
+        <div>
+          <div class="mono text-[12px] uppercase tracking-widest soft">LSE · FTSE 250 · Consumer Discretionary</div>
+          <h1 class="display text-[56px] md:text-[84px] leading-[0.95] mt-1">
+            Games <span class="lime-underline">Workshop</span>
+          </h1>
+        </div>
+      </div>
+      <p class="text-[17px] leading-[1.6] soft max-w-2xl mt-4">
+        Nottingham-based designer and manufacturer of miniatures, rulebooks and hobby products for the Warhammer universe. Widely cited as the UK's highest-margin midcap — and the clearest case study in pricing power through fan community.
+      </p>
+      <div class="flex flex-wrap items-center gap-3 mt-6">
+        <a href="#" class="btn-primary text-[13px]">Follow</a>
+        <a href="#" class="btn-secondary text-[13px]">Add to watchlist</a>
+        <a href="ticker-ftse250.html" class="text-[13px] soft underline hover:text-[color:var(--accent)]">View in FTSE 250 →</a>
+      </div>
+    </div>
+
+    <!-- Price card -->
+    <aside class="lg:col-span-4">
+      <div class="rounded-2xl bg-surface p-6">
+        <div class="flex items-center justify-between mb-3">
+          <div class="mono text-[12px] uppercase tracking-widest soft">LSE: GAW</div>
+          <span class="chip bg-white/80 border rule">Live</span>
+        </div>
+        <div class="display text-[44px]">£145.20</div>
+        <div class="mono text-[14px] up mt-1">+£2.98 (+2.10%)</div>
+        <!-- spark -->
+        <svg class="spark mt-4" viewBox="0 0 200 44" preserveAspectRatio="none">
+          <polyline points="0,32 15,30 30,26 45,28 60,22 75,24 90,18 105,20 120,14 135,16 150,10 165,12 180,8 200,6"
+            fill="none" stroke="#059669" stroke-width="2" vector-effect="non-scaling-stroke"/>
+          <polyline points="0,32 15,30 30,26 45,28 60,22 75,24 90,18 105,20 120,14 135,16 150,10 165,12 180,8 200,6 200,44 0,44"
+            fill="rgba(5,150,105,0.08)" stroke="none"/>
+        </svg>
+        <div class="grid grid-cols-2 gap-3 mt-4 text-[12px]">
+          <div class="flex justify-between"><span class="soft">Market cap</span><b>£4.81bn</b></div>
+          <div class="flex justify-between"><span class="soft">P/E</span><b>21.4</b></div>
+          <div class="flex justify-between"><span class="soft">Div yield</span><b>3.80%</b></div>
+          <div class="flex justify-between"><span class="soft">Float</span><b>32.8M</b></div>
+          <div class="flex justify-between"><span class="soft">52w high</span><b>£155.10</b></div>
+          <div class="flex justify-between"><span class="soft">52w low</span><b>£97.42</b></div>
+        </div>
+        <div class="text-[11px] soft mt-4">Delayed 15 min · Data: LSE</div>
+      </div>
+    </aside>
+  </section>
+
+  <!-- Entity tabs -->
+  <section class="py-5 border-b rule">
+    <div class="flex items-center gap-1 overflow-x-auto">
+      <button class="entity-tab active">Overview</button>
+      <button class="entity-tab">Stories</button>
+      <button class="entity-tab">Earnings</button>
+      <button class="entity-tab">People</button>
+      <button class="entity-tab">Filings</button>
+      <button class="entity-tab">Sentiment</button>
+    </div>
+  </section>
+
+  <!-- Main + sidebar -->
+  <section class="grid grid-cols-1 lg:grid-cols-12 gap-10 py-10">
+
+    <div class="lg:col-span-8">
+      <!-- Takeaways -->
+      <div class="rounded-3xl bg-lime p-7 md:p-8 mb-10">
+        <div class="kicker mb-4">The thesis · in three lines</div>
+        <ul class="space-y-3 text-[17px] leading-[1.55] font-medium">
+          <li class="flex gap-3"><span class="display text-[18px]">→</span>Gross margins above 67% — an outlier even among UK consumer names.</li>
+          <li class="flex gap-3"><span class="display text-[18px]">→</span>Pricing power comes from IP control, not retail shelf space.</li>
+          <li class="flex gap-3"><span class="display text-[18px]">→</span>The Amazon production deal is optional upside, not the base case.</li>
+        </ul>
+      </div>
+
+      <h2 class="display text-[34px] mb-6">Latest coverage</h2>
+      <div class="space-y-6">
+        <article class="card grid grid-cols-1 md:grid-cols-12 gap-5 pb-6 border-b rule">
+          <div class="md:col-span-4 aspect-[4/3] overflow-hidden rounded-xl bg-surface">
+            <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&q=80" class="w-full h-full object-cover" alt="">
+          </div>
+          <div class="md:col-span-8">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="chip bg-lime">Analysis</span>
+              <span class="mono text-[11px] uppercase tracking-widest soft">Today, 09:14</span>
+            </div>
+            <h3 class="display text-[26px] leading-[1.1]">
+              <a href="article-01.html" class="title-link">The quiet <span class="lime-underline">repricing</span>: why midcap earnings are rewriting the playbook</a>
+            </h3>
+            <p class="soft mt-2 text-[15px] leading-[1.6]">Games Workshop is the textbook case — royalty revenue climbing faster than unit volume, and none of the warehouse drag.</p>
+            <div class="text-[12px] soft mt-3">Sarah Mendel · 8 min read</div>
+          </div>
+        </article>
+
+        <article class="card grid grid-cols-1 md:grid-cols-12 gap-5 pb-6 border-b rule">
+          <div class="md:col-span-4 aspect-[4/3] overflow-hidden rounded-xl bg-surface">
+            <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=600&q=80" class="w-full h-full object-cover" alt="">
+          </div>
+          <div class="md:col-span-8">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="chip bg-surface">Earnings</span>
+              <span class="mono text-[11px] uppercase tracking-widest soft">Mar 12, 2026</span>
+            </div>
+            <h3 class="display text-[26px] leading-[1.1]">
+              <a href="#" class="title-link">GAW's half-year beat: the three lines the sell-side underweighted</a>
+            </h3>
+            <p class="soft mt-2 text-[15px] leading-[1.6]">Licensing revenue is no longer a rounding error, and operating leverage is showing up in a way analysts didn't model.</p>
+            <div class="text-[12px] soft mt-3">Priya Shah · 6 min read</div>
+          </div>
+        </article>
+
+        <article class="card grid grid-cols-1 md:grid-cols-12 gap-5 pb-6 border-b rule">
+          <div class="md:col-span-4 aspect-[4/3] overflow-hidden rounded-xl bg-surface">
+            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&q=80" class="w-full h-full object-cover" alt="">
+          </div>
+          <div class="md:col-span-8">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="chip bg-accent text-white">Profile</span>
+              <span class="mono text-[11px] uppercase tracking-widest soft">Feb 22, 2026</span>
+            </div>
+            <h3 class="display text-[26px] leading-[1.1]">
+              <a href="person-ashley-steel.html" class="title-link">Ashley Steel's board playbook — and why GAW keeps putting her in the room</a>
+            </h3>
+            <p class="soft mt-2 text-[15px] leading-[1.6]">A career built on asking the one question the CEO would rather not hear first.</p>
+            <div class="text-[12px] soft mt-3">Nadia Carson · 9 min read</div>
+          </div>
+        </article>
+
+        <article class="card grid grid-cols-1 md:grid-cols-12 gap-5 pb-6 border-b rule">
+          <div class="md:col-span-4 aspect-[4/3] overflow-hidden rounded-xl bg-surface">
+            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&q=80" class="w-full h-full object-cover" alt="">
+          </div>
+          <div class="md:col-span-8">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="chip bg-surface">Licensing</span>
+              <span class="mono text-[11px] uppercase tracking-widest soft">Jan 30, 2026</span>
+            </div>
+            <h3 class="display text-[26px] leading-[1.1]">
+              <a href="#" class="title-link">The Amazon adaptation is not a consumer story. It's a balance-sheet story.</a>
+            </h3>
+            <p class="soft mt-2 text-[15px] leading-[1.6]">Why royalties hit at 90% margin — and why the real test arrives in FY27.</p>
+            <div class="text-[12px] soft mt-3">Marcus Holden · 7 min read</div>
+          </div>
+        </article>
+      </div>
+
+      <div class="mt-8">
+        <a href="#" class="arrow-link inline-flex items-center gap-2 font-semibold">All 47 stories on Games Workshop <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+
+    <!-- Right column -->
+    <aside class="lg:col-span-4 space-y-6">
+      <!-- Fundamentals -->
+      <div class="rounded-2xl border rule p-6">
+        <div class="kicker soft mb-4">Fundamentals · FY25</div>
+        <dl class="space-y-3 text-[14px]">
+          <div class="flex justify-between border-b rule pb-3"><dt class="soft">Revenue</dt><dd class="font-bold">£525.7M</dd></div>
+          <div class="flex justify-between border-b rule pb-3"><dt class="soft">Gross margin</dt><dd class="font-bold">67.4%</dd></div>
+          <div class="flex justify-between border-b rule pb-3"><dt class="soft">Operating margin</dt><dd class="font-bold">38.9%</dd></div>
+          <div class="flex justify-between border-b rule pb-3"><dt class="soft">Licensing revenue</dt><dd class="font-bold">£42.8M</dd></div>
+          <div class="flex justify-between border-b rule pb-3"><dt class="soft">Net cash</dt><dd class="font-bold">£118.3M</dd></div>
+          <div class="flex justify-between"><dt class="soft">Return on capital</dt><dd class="font-bold">68.1%</dd></div>
+        </dl>
+      </div>
+
+      <!-- Key people -->
+      <div class="rounded-2xl bg-surface p-6">
+        <div class="kicker soft mb-4">Board &amp; leadership</div>
+        <ul class="space-y-4">
+          <li class="flex items-center gap-3">
+            <img src="https://i.pravatar.cc/64?img=52" class="w-10 h-10 rounded-full" alt="">
+            <div>
+              <div class="font-semibold text-[14px]">Kevin Rountree</div>
+              <div class="text-[12px] soft">CEO · since 2015</div>
+            </div>
+          </li>
+          <li class="flex items-center gap-3">
+            <img src="https://i.pravatar.cc/64?img=5" class="w-10 h-10 rounded-full" alt="">
+            <div>
+              <div class="font-semibold text-[14px]"><a href="person-ashley-steel.html" class="hover:text-[color:var(--accent)]">Ashley Steel</a></div>
+              <div class="text-[12px] soft">Non-executive director · audit</div>
+            </div>
+          </li>
+          <li class="flex items-center gap-3">
+            <img src="https://i.pravatar.cc/64?img=14" class="w-10 h-10 rounded-full" alt="">
+            <div>
+              <div class="font-semibold text-[14px]">Liz Prescott</div>
+              <div class="text-[12px] soft">Chair · since 2023</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Sentiment -->
+      <div class="rounded-2xl bg-ink text-white p-6">
+        <div class="kicker mb-3" style="color:var(--lime);">Story sentiment · 90 days</div>
+        <div class="space-y-3 text-[14px]">
+          <div>
+            <div class="flex justify-between mb-1"><span>Positive</span><span class="mono">68%</span></div>
+            <div class="h-2 bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-lime" style="width:68%"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between mb-1"><span>Neutral</span><span class="mono">24%</span></div>
+            <div class="h-2 bg-white/10 rounded-full overflow-hidden"><div class="h-full" style="width:24%;background:white;"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between mb-1"><span>Negative</span><span class="mono">8%</span></div>
+            <div class="h-2 bg-white/10 rounded-full overflow-hidden"><div class="h-full" style="width:8%;background:#dc2626;"></div></div>
+          </div>
+        </div>
+        <div class="text-[11px] opacity-70 mt-4">Aggregated from 47 BF stories</div>
+      </div>
+
+      <!-- Related -->
+      <div class="rounded-2xl border rule p-6">
+        <div class="kicker soft mb-4">Also watched</div>
+        <ul class="space-y-3">
+          <li><a href="#" class="flex items-center justify-between text-[14px] hover:text-[color:var(--accent)]"><span class="font-bold">HAS</span><span class="mono text-[12px] up">+0.84%</span></a></li>
+          <li><a href="#" class="flex items-center justify-between text-[14px] hover:text-[color:var(--accent)]"><span class="font-bold">NEXT</span><span class="mono text-[12px] up">+0.42%</span></a></li>
+          <li><a href="#" class="flex items-center justify-between text-[14px] hover:text-[color:var(--accent)]"><span class="font-bold">JD.</span><span class="mono text-[12px] down">−0.68%</span></a></li>
+          <li><a href="#" class="flex items-center justify-between text-[14px] hover:text-[color:var(--accent)]"><span class="font-bold">RMV</span><span class="mono text-[12px] up">+1.12%</span></a></li>
+        </ul>
+      </div>
+    </aside>
+  </section>
+
+  <!-- Newsletter CTA -->
+  <section class="py-12 border-t rule">
+    <div class="rounded-3xl bg-lime p-10 md:p-14 grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+      <div class="md:col-span-8">
+        <div class="kicker mb-3">Follow the story</div>
+        <h2 class="display text-[40px] md:text-[50px] leading-[0.98]">Get every Games Workshop story by email.</h2>
+        <p class="text-[16px] mt-4 max-w-xl">We'll send you the BF Markets Brief plus any dedicated coverage of GAW — no duplicates, no filler.</p>
+      </div>
+      <div class="md:col-span-4 flex flex-col gap-3">
+        <form class="flex gap-2">
+          <input type="email" placeholder="you@company.com" class="flex-1 px-3 py-2 rounded-full text-[13px]">
+          <button class="btn-primary text-[13px]">Follow</button>
+        </form>
+        <a href="#" class="text-center underline text-[13px]">See all company follows →</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Footer -->
+<footer class="bg-ink text-white mt-10">
+  <div class="border-b border-white/10 py-3 mono text-[12px]">
+    <div class="max-w-[1360px] mx-auto flex items-center">
+      <span class="chip bg-lime mx-4">LIVE</span>
+      <div class="ticker-wrap flex-1">
+        <div class="ticker">
+          <span>GAW <b>£145.20</b> <span class="up">+2.10%</span></span>
+          <span>FTSE 250 <b>20,614.3</b> <span class="up">+0.38%</span></span>
+          <span>FTSE 100 <b>8,214.9</b> <span class="down">−0.18%</span></span>
+          <span>NVDA <b>$142.88</b> <span class="up">+3.02%</span></span>
+          <span>Brent <b>$73.14</b> <span class="down">−0.44%</span></span>
+          <span>GAW <b>£145.20</b> <span class="up">+2.10%</span></span>
+          <span>FTSE 250 <b>20,614.3</b> <span class="up">+0.38%</span></span>
+          <span>FTSE 100 <b>8,214.9</b> <span class="down">−0.18%</span></span>
+          <span>NVDA <b>$142.88</b> <span class="up">+3.02%</span></span>
+          <span>Brent <b>$73.14</b> <span class="down">−0.44%</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="max-w-[1360px] mx-auto px-6 py-14 grid grid-cols-2 md:grid-cols-6 gap-8 text-[13px]">
+    <div class="col-span-2">
+      <div class="display text-[26px] mb-3">Business <span class="accent">Fortitude</span></div>
+      <p class="opacity-70 leading-relaxed max-w-xs">Independent journalism for operators, founders, and boards. Published in London.</p>
+    </div>
+    <div>
+      <div class="kicker opacity-60 mb-3">Read</div>
+      <ul class="space-y-2"><li><a href="#" class="hover:text-lime">Latest</a></li><li><a href="#" class="hover:text-lime">Markets</a></li><li><a href="#" class="hover:text-lime">Leadership</a></li><li><a href="#" class="hover:text-lime">Long Reads</a></li></ul>
+    </div>
+    <div>
+      <div class="kicker opacity-60 mb-3">Pro</div>
+      <ul class="space-y-2"><li><a href="#" class="hover:text-lime">Roundtables</a></li><li><a href="#" class="hover:text-lime">Model portfolios</a></li><li><a href="#" class="hover:text-lime">Deal database</a></li></ul>
+    </div>
+    <div>
+      <div class="kicker opacity-60 mb-3">Company</div>
+      <ul class="space-y-2"><li><a href="#" class="hover:text-lime">About</a></li><li><a href="#" class="hover:text-lime">Careers</a></li><li><a href="#" class="hover:text-lime">Advertise</a></li></ul>
+    </div>
+    <div>
+      <div class="kicker opacity-60 mb-3">Legal</div>
+      <ul class="space-y-2"><li><a href="#" class="hover:text-lime">Privacy</a></li><li><a href="#" class="hover:text-lime">Terms</a></li><li><a href="#" class="hover:text-lime">Cookies</a></li></ul>
+    </div>
+  </div>
+  <div class="border-t border-white/10 text-[12px]">
+    <div class="max-w-[1360px] mx-auto px-6 py-5 flex flex-col md:flex-row items-center justify-between gap-3 opacity-70">
+      <span>© 2026 Business Fortitude Ltd.</span>
+      <span>Not investment advice. Capital at risk.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.pill-nav a').forEach(el => {
+    el.addEventListener('click', (e) => {
+      if (el.getAttribute('href') === '#') e.preventDefault();
+      document.querySelectorAll('.pill-nav a').forEach(s => s.classList.remove('active'));
+      el.classList.add('active');
+    });
+  });
+  document.querySelectorAll('.entity-tab').forEach(el => {
+    el.addEventListener('click', () => {
+      document.querySelectorAll('.entity-tab').forEach(s => s.classList.remove('active'));
+      el.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>

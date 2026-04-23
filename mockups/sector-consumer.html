@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Consumer Discretionary — Business Fortitude</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root {
+    --bg: #ffffff; --ink: #0a0a0a; --soft: #4a4a4a;
+    --accent: #0055ff; --lime: #d4ff3a;
+    --surface: #f5f5f4; --rule: #e7e5e4;
+  }
+  body { background: var(--bg); color: var(--ink); font-family: 'Inter', system-ui, sans-serif; }
+  .display { font-family: 'Inter', sans-serif; font-weight: 900; letter-spacing: -0.03em; line-height: 0.98; }
+  .mono { font-family: 'Space Grotesk', monospace; }
+  .accent { color: var(--accent); }
+  .bg-accent { background: var(--accent); }
+  .bg-lime { background: var(--lime); color: var(--ink); }
+  .bg-surface { background: var(--surface); }
+  .bg-ink { background: var(--ink); color: white; }
+  .soft { color: var(--soft); }
+  .rule { border-color: var(--rule); }
+  .kicker { font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; font-size: 11px; }
+  .chip { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
+  .card { transition: transform .35s ease; }
+  .card:hover { transform: translateY(-3px); }
+  .card:hover .title-link { color: var(--accent); }
+  .ticker-wrap { overflow: hidden; }
+  .ticker { display: inline-flex; gap: 40px; white-space: nowrap; animation: marquee 35s linear infinite; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .up { color: #059669; } .down { color: #dc2626; }
+  .btn-primary { background: var(--ink); color: white; border-radius: 999px; padding: 10px 20px; font-weight: 600; }
+  .btn-primary:hover { background: var(--accent); }
+  .btn-secondary { background: white; color: var(--ink); border-radius: 999px; padding: 10px 20px; font-weight: 600; border: 1px solid var(--rule); }
+  .btn-secondary:hover { border-color: var(--ink); }
+  .pill-nav a.active { background: var(--ink); color: white; }
+  .pill-nav a { transition: all .2s; }
+  .lime-underline { background-image: linear-gradient(var(--lime), var(--lime)); background-size: 100% 0.35em; background-repeat: no-repeat; background-position: 0 88%; padding: 0 2px; }
+  .arrow-link svg { transition: transform .2s ease; }
+  .arrow-link:hover svg { transform: translateX(4px); }
+  .sub-pill { padding: 8px 16px; border-radius: 999px; font-weight: 600; font-size: 13px; transition: all .2s; background: var(--surface); }
+  .sub-pill:hover { background: var(--lime); }
+  .sub-pill.active { background: var(--ink); color: white; }
+</style>
+</head>
+<body class="min-h-screen">
+
+<!-- Header -->
+<header class="border-b rule bg-white sticky top-0 z-40">
+  <div class="max-w-[1360px] mx-auto px-6 flex items-center justify-between h-16">
+    <a href="index.html" class="flex items-center gap-2">
+      <span class="display text-[22px]">Business <span class="accent">Fortitude</span></span>
+    </a>
+    <nav class="hidden lg:flex items-center gap-1 pill-nav">
+      <a href="#" class="px-3 py-1.5 rounded-full text-[13px] font-medium hover:bg-surface">Latest</a>
+      <a href="category-markets.html" class="px-3 py-1.5 rounded-full text-[13px] font-medium hover:bg-surface">Markets</a>
+      <a href="#" class="px-3 py-1.5 rounded-full text-[13px] font-medium hover:bg-surface">Deals</a>
+      <a href="#" class="px-3 py-1.5 rounded-full text-[13px] font-medium hover:bg-surface">Leadership</a>
+      <a href="#" class="px-3 py-1.5 rounded-full text-[13px] font-medium hover:bg-surface">AI</a>
+      <a href="#" class="px-3 py-1.5 rounded-full text-[13px] font-medium hover:bg-surface">Startups</a>
+      <a href="#" class="px-3 py-1.5 rounded-full text-[13px] font-medium hover:bg-surface">Opinion</a>
+    </nav>
+    <div class="flex items-center gap-3">
+      <button aria-label="Search" class="p-2 hover:bg-surface rounded-full">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      </button>
+      <a href="#" class="hidden md:inline btn-primary text-[13px]">Subscribe</a>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-[1360px] mx-auto px-6">
+
+  <!-- Breadcrumb -->
+  <div class="mono text-[12px] uppercase tracking-[0.18em] soft pt-8 pb-2">
+    <a href="index.html" class="hover:text-[color:var(--accent)]">Home</a>
+    <span class="mx-2">/</span>
+    <a href="#" class="hover:text-[color:var(--accent)]">Sectors</a>
+    <span class="mx-2">/</span>
+    <span>Consumer Discretionary</span>
+  </div>
+
+  <!-- Sector mast -->
+  <section class="pb-8 border-b rule">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+      <div class="lg:col-span-8">
+        <div class="flex items-center gap-2 mb-4">
+          <span class="chip bg-lime">Sector</span>
+          <span class="chip bg-surface">UK · Europe · US</span>
+        </div>
+        <h1 class="display text-[56px] md:text-[92px] leading-[0.92]">
+          Consumer <span class="lime-underline">Discretionary</span>.
+        </h1>
+        <p class="text-[17px] leading-[1.55] soft max-w-2xl mt-6">
+          Retail, leisure, apparel, hobby goods, hospitality, media. The sector that tells you first whether the consumer is flinching — and, increasingly, which operators have the pricing power to keep going regardless.
+        </p>
+      </div>
+
+      <aside class="lg:col-span-4">
+        <div class="rounded-2xl bg-ink text-white p-6">
+          <div class="kicker mb-3" style="color:var(--lime);">Sector pulse · today</div>
+          <div class="space-y-3 text-[14px]">
+            <div class="flex items-center justify-between"><span>Leaders</span><span class="mono up">32</span></div>
+            <div class="flex items-center justify-between"><span>Laggards</span><span class="mono down">18</span></div>
+            <div class="flex items-center justify-between"><span>Unchanged</span><span class="mono opacity-70">6</span></div>
+            <div class="border-t border-white/10 pt-3 flex items-center justify-between">
+              <span class="opacity-80">Sector index</span>
+              <span class="mono up font-bold">+0.84%</span>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Sub-sector filter -->
+  <section class="py-6 border-b rule">
+    <div class="flex items-center gap-2 overflow-x-auto pb-1">
+      <span class="mono text-[11px] uppercase tracking-widest soft shrink-0 mr-2">Sub-sector:</span>
+      <button class="sub-pill active shrink-0">All</button>
+      <button class="sub-pill shrink-0">Retail</button>
+      <button class="sub-pill shrink-0">Apparel</button>
+      <button class="sub-pill shrink-0">Leisure &amp; Hospitality</button>
+      <button class="sub-pill shrink-0">Media &amp; IP</button>
+      <button class="sub-pill shrink-0">Hobby &amp; Games</button>
+      <button class="sub-pill shrink-0">Automotive</button>
+      <button class="sub-pill shrink-0">E-commerce</button>
+    </div>
+  </section>
+
+  <!-- KPI strip -->
+  <section class="py-8 border-b rule grid grid-cols-2 md:grid-cols-4 gap-4">
+    <div class="rounded-2xl bg-surface p-5">
+      <div class="mono text-[11px] uppercase tracking-widest soft">Companies tracked</div>
+      <div class="display text-[44px] mt-2">56</div>
+      <div class="text-[12px] soft mt-1">across UK + US exchanges</div>
+    </div>
+    <div class="rounded-2xl bg-surface p-5">
+      <div class="mono text-[11px] uppercase tracking-widest soft">Stories · 30 days</div>
+      <div class="display text-[44px] mt-2">84</div>
+      <div class="text-[12px] soft mt-1">18 long-reads</div>
+    </div>
+    <div class="rounded-2xl bg-surface p-5">
+      <div class="mono text-[11px] uppercase tracking-widest soft">Avg. gross margin</div>
+      <div class="display text-[44px] mt-2">42.1%</div>
+      <div class="text-[12px] soft mt-1">top quartile: 61%+</div>
+    </div>
+    <div class="rounded-2xl bg-lime p-5">
+      <div class="mono text-[11px] uppercase tracking-widest">Sector sentiment</div>
+      <div class="display text-[44px] mt-2">+ 6.4</div>
+      <div class="text-[12px] mt-1 font-medium">vs. −1.2 at start of year</div>
+    </div>
+  </section>
+
+  <!-- Top companies grid -->
+  <section class="py-10 border-t rule">
+    <div class="flex items-end justify-between mb-6">
+      <h2 class="display text-[32px]">Companies in this sector</h2>
+      <a href="#" class="arrow-link inline-flex items-center gap-2 text-[13px] font-semibold">All 56 companies <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <a href="company-games-workshop.html" class="card p-5 rounded-2xl border rule hover:border-[color:var(--accent)]">
+        <div class="flex items-center justify-between">
+          <span class="font-bold">GAW</span>
+          <span class="mono text-[12px] up">+2.10%</span>
+        </div>
+        <div class="text-[13px] mt-1">Games Workshop</div>
+        <div class="text-[11px] soft mt-3 mono uppercase tracking-widest">Hobby &amp; Games</div>
+      </a>
+      <a href="#" class="card p-5 rounded-2xl border rule hover:border-[color:var(--accent)]">
+        <div class="flex items-center justify-between">
+          <span class="font-bold">NEXT</span>
+          <span class="mono text-[12px] up">+0.42%</span>
+        </div>
+        <div class="text-[13px] mt-1">Next plc</div>
+        <div class="text-[11px] soft mt-3 mono uppercase tracking-widest">Apparel</div>
+      </a>
+      <a href="#" class="card p-5 rounded-2xl border rule hover:border-[color:var(--accent)]">
+        <div class="flex items-center justify-between">
+          <span class="font-bold">JD.</span>
+          <span class="mono text-[12px] down">−0.68%</span>
+        </div>
+        <div class="text-[13px] mt-1">JD Sports Fashion</div>
+        <div class="text-[11px] soft mt-3 mono uppercase tracking-widest">Apparel</div>
+      </a>
+      <a href="#" class="card p-5 rounded-2xl border rule hover:border-[color:var(--accent)]">
+        <div class="flex items-center justify-between">
+          <span class="font-bold">MKS</span>
+          <span class="mono text-[12px] up">+0.28%</span>
+        </div>
+        <div class="text-[13px] mt-1">Marks &amp; Spencer</div>
+        <div class="text-[11px] soft mt-3 mono uppercase tracking-widest">Retail</div>
+      </a>
+      <a href="#" class="card p-5 rounded-2xl border rule hover:border-[color:var(--accent)]">
+        <div class="flex items-center justify-between">
+          <span class="font-bold">WTB</span>
+          <span class="mono text-[12px] up">+0.62%</span>
+        </div>
+        <div class="text-[13px] mt-1">Whitbread</div>
+        <div class="text-[11px] soft mt-3 mono uppercase tracking-widest">Leisure</div>
+      </a>
+      <a href="#" class="card p-5 rounded-2xl border rule hover:border-[color:var(--accent)]">
+        <div class="flex items-center justify-between">
+          <span class="font-bold">BOO</span>
+          <span class="mono text-[12px] up">+1.34%</span>
+        </div>
+        <div class="text-[13px] mt-1">boohoo group</div>
+        <div class="text-[11px] soft mt-3 mono uppercase tracking-widest">E-commerce</div>
+      </a>
+      <a href="#" class="card p-5 rounded-2xl border rule hover:border-[color:var(--accent)]">
+        <div class="flex items-center justify-between">
+          <span class="font-bold">ASC</span>
+          <span class="mono text-[12px] down">−0.82%</span>
+        </div>
+        <div class="text-[13px] mt-1">ASOS</div>
+        <div class="text-[11px] soft mt-3 mono uppercase tracking-widest">E-commerce</div>
+      </a>
+      <a href="#" class="card p-5 rounded-2xl border rule hover:border-[color:var(--accent)]">
+        <div class="flex items-center justify-between">
+          <span class="font-bold">HAS</span>
+          <span class="mono text-[12px] up">+0.84%</span>
+        </div>
+        <div class="text-[13px] mt-1">Hasbro</div>
+        <div class="text-[11px] soft mt-3 mono uppercase tracking-widest">Hobby &amp; Games</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Lead + two -->
+  <section class="py-10 border-t rule">
+    <div class="flex items-center gap-3 mb-6">
+      <span class="chip bg-lime">Featured</span>
+      <h2 class="display text-[30px]">The sector view</h2>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <article class="lg:col-span-7 card">
+        <div class="aspect-[16/10] overflow-hidden rounded-2xl bg-surface">
+          <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&q=80" class="w-full h-full object-cover" alt="">
+        </div>
+        <div class="mt-5">
+          <span class="chip bg-accent text-white">Analysis</span>
+          <h3 class="display text-[34px] leading-[1.05] mt-3">
+            <a href="article-01.html" class="title-link">The quiet <span class="lime-underline">repricing</span>: why midcap consumer names are rewriting the playbook</a>
+          </h3>
+          <p class="soft mt-3 text-[16px] leading-[1.55]">A shift in which discretionary brands have pricing power — and which are discovering the consumer is not, in fact, price-inelastic.</p>
+          <div class="text-[12px] soft mt-3">Sarah Mendel · 8 min read</div>
+        </div>
+      </article>
+      <div class="lg:col-span-5 space-y-6">
+        <article class="card grid grid-cols-12 gap-4">
+          <div class="col-span-5 aspect-[4/3] overflow-hidden rounded-xl bg-surface"><img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=600&q=80" class="w-full h-full object-cover" alt=""></div>
+          <div class="col-span-7">
+            <span class="chip bg-surface">Retail</span>
+            <h3 class="font-bold text-[17px] leading-snug mt-2"><a href="#" class="title-link">Next's store economics are still the blueprint nobody's copying</a></h3>
+            <div class="text-[12px] soft mt-1">Priya Shah · 6 min</div>
+          </div>
+        </article>
+        <article class="card grid grid-cols-12 gap-4">
+          <div class="col-span-5 aspect-[4/3] overflow-hidden rounded-xl bg-surface"><img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&q=80" class="w-full h-full object-cover" alt=""></div>
+          <div class="col-span-7">
+            <span class="chip bg-surface">Leisure</span>
+            <h3 class="font-bold text-[17px] leading-snug mt-2"><a href="#" class="title-link">Whitbread's quiet pivot: the budget-hotel math nobody's watching</a></h3>
+            <div class="text-[12px] soft mt-1">Marcus Holden · 7 min</div>
+          </div>
+        </article>
+        <article class="card grid grid-cols-12 gap-4">
+          <div class="col-span-5 aspect-[4/3] overflow-hidden rounded-xl bg-surface"><img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&q=80" class="w-full h-full object-cover" alt=""></div>
+          <div class="col-span-7">
+            <span class="chip bg-lime">Profile</span>
+            <h3 class="font-bold text-[17px] leading-snug mt-2"><a href="person-ashley-steel.html" class="title-link">Ashley Steel's board playbook — and why GAW keeps putting her in the room</a></h3>
+            <div class="text-[12px] soft mt-1">Nadia Carson · 9 min</div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Latest stories in sector -->
+  <section class="py-10 border-t rule">
+    <div class="flex items-end justify-between mb-6">
+      <h2 class="display text-[32px]">Latest in sector</h2>
+      <div class="mono text-[12px] uppercase tracking-widest soft">Showing 1–6 of 84</div>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <article class="card">
+        <div class="aspect-[4/3] overflow-hidden rounded-xl bg-surface mb-3"><img src="https://images.unsplash.com/photo-1605792657660-596af9009e82?w=600&q=80" class="w-full h-full object-cover" alt=""></div>
+        <span class="chip bg-surface">Apparel</span>
+        <h3 class="font-bold text-[17px] leading-snug mt-2"><a href="#" class="title-link">The quiet squeeze on fast fashion's working-capital cycle</a></h3>
+        <div class="text-[12px] soft mt-1">Priya Shah · 5 min</div>
+      </article>
+      <article class="card">
+        <div class="aspect-[4/3] overflow-hidden rounded-xl bg-surface mb-3"><img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=600&q=80" class="w-full h-full object-cover" alt=""></div>
+        <span class="chip bg-surface">Hobby &amp; Games</span>
+        <h3 class="font-bold text-[17px] leading-snug mt-2"><a href="#" class="title-link">Collectibles: why the niche became the category</a></h3>
+        <div class="text-[12px] soft mt-1">Yasmin Rahimi · 7 min</div>
+      </article>
+      <article class="card">
+        <div class="aspect-[4/3] overflow-hidden rounded-xl bg-surface mb-3"><img src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=600&q=80" class="w-full h-full object-cover" alt=""></div>
+        <span class="chip bg-surface">Leisure</span>
+        <h3 class="font-bold text-[17px] leading-snug mt-2"><a href="#" class="title-link">UK hospitality's 2026 unit-economics map — by region</a></h3>
+        <div class="text-[12px] soft mt-1">Elena Vasquez · 9 min</div>
+      </article>
+      <article class="card">
+        <div class="aspect-[4/3] overflow-hidden rounded-xl bg-surface mb-3"><img src="https://images.unsplash.com/photo-1593030103066-0093718efeb9?w=600&q=80" class="w-full h-full object-cover" alt=""></div>
+        <span class="chip bg-accent text-white">E-commerce</span>
+        <h3 class="font-bold text-[17px] leading-snug mt-2"><a href="#" class="title-link">Returns policies are becoming the new pricing lever</a></h3>
+        <div class="text-[12px] soft mt-1">Aisha Williams · 6 min</div>
+      </article>
+      <article class="card">
+        <div class="aspect-[4/3] overflow-hidden rounded-xl bg-surface mb-3"><img src="https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=600&q=80" class="w-full h-full object-cover" alt=""></div>
+        <span class="chip bg-surface">Retail</span>
+        <h3 class="font-bold text-[17px] leading-snug mt-2"><a href="#" class="title-link">Grocery's margin compression: who's playing offence</a></h3>
+        <div class="text-[12px] soft mt-1">Marcus Holden · 8 min</div>
+      </article>
+      <article class="card">
+        <div class="aspect-[4/3] overflow-hidden rounded-xl bg-surface mb-3"><img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=600&q=80" class="w-full h-full object-cover" alt=""></div>
+        <span class="chip bg-lime">Leadership</span>
+        <h3 class="font-bold text-[17px] leading-snug mt-2"><a href="#" class="title-link">The operator class eating the consumer sector's strategy decks</a></h3>
+        <div class="text-[12px] soft mt-1">Ishaan Gupta · 10 min</div>
+      </article>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-12 border-t rule">
+    <div class="rounded-3xl bg-lime p-10 md:p-14 grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+      <div class="md:col-span-8">
+        <div class="kicker mb-3">Sector intelligence</div>
+        <h2 class="display text-[40px] md:text-[50px] leading-[0.98]">Follow the consumer sector, not just the tickers.</h2>
+        <p class="text-[16px] mt-4 max-w-xl">Weekly sector briefings, our proprietary pricing-power scorecard, and the operator interview series — delivered to Pro subscribers.</p>
+      </div>
+      <div class="md:col-span-4 flex flex-col gap-3">
+        <a href="#" class="btn-primary text-center">Start 14-day trial</a>
+        <a href="#" class="text-center underline text-[13px]">See what Pro includes →</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Footer -->
+<footer class="bg-ink text-white mt-10">
+  <div class="border-b border-white/10 py-3 mono text-[12px]">
+    <div class="max-w-[1360px] mx-auto flex items-center">
+      <span class="chip bg-lime mx-4">LIVE</span>
+      <div class="ticker-wrap flex-1">
+        <div class="ticker">
+          <span>GAW <b>£145.20</b> <span class="up">+2.10%</span></span>
+          <span>NEXT <b>£98.82</b> <span class="up">+0.42%</span></span>
+          <span>JD. <b>£1.04</b> <span class="down">−0.68%</span></span>
+          <span>MKS <b>£3.82</b> <span class="up">+0.28%</span></span>
+          <span>FTSE 250 <b>20,614.3</b> <span class="up">+0.38%</span></span>
+          <span>NVDA <b>$142.88</b> <span class="up">+3.02%</span></span>
+          <span>GAW <b>£145.20</b> <span class="up">+2.10%</span></span>
+          <span>NEXT <b>£98.82</b> <span class="up">+0.42%</span></span>
+          <span>JD. <b>£1.04</b> <span class="down">−0.68%</span></span>
+          <span>MKS <b>£3.82</b> <span class="up">+0.28%</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="max-w-[1360px] mx-auto px-6 py-14 grid grid-cols-2 md:grid-cols-6 gap-8 text-[13px]">
+    <div class="col-span-2">
+      <div class="display text-[26px] mb-3">Business <span class="accent">Fortitude</span></div>
+      <p class="opacity-70 leading-relaxed max-w-xs">Independent journalism for operators, founders, and boards. Published in London.</p>
+    </div>
+    <div>
+      <div class="kicker opacity-60 mb-3">Read</div>
+      <ul class="space-y-2"><li><a href="#" class="hover:text-lime">Latest</a></li><li><a href="#" class="hover:text-lime">Markets</a></li><li><a href="#" class="hover:text-lime">Leadership</a></li><li><a href="#" class="hover:text-lime">Long Reads</a></li></ul>
+    </div>
+    <div>
+      <div class="kicker opacity-60 mb-3">Pro</div>
+      <ul class="space-y-2"><li><a href="#" class="hover:text-lime">Roundtables</a></li><li><a href="#" class="hover:text-lime">Model portfolios</a></li><li><a href="#" class="hover:text-lime">Deal database</a></li></ul>
+    </div>
+    <div>
+      <div class="kicker opacity-60 mb-3">Company</div>
+      <ul class="space-y-2"><li><a href="#" class="hover:text-lime">About</a></li><li><a href="#" class="hover:text-lime">Careers</a></li><li><a href="#" class="hover:text-lime">Advertise</a></li></ul>
+    </div>
+    <div>
+      <div class="kicker opacity-60 mb-3">Legal</div>
+      <ul class="space-y-2"><li><a href="#" class="hover:text-lime">Privacy</a></li><li><a href="#" class="hover:text-lime">Terms</a></li><li><a href="#" class="hover:text-lime">Cookies</a></li></ul>
+    </div>
+  </div>
+  <div class="border-t border-white/10 text-[12px]">
+    <div class="max-w-[1360px] mx-auto px-6 py-5 flex flex-col md:flex-row items-center justify-between gap-3 opacity-70">
+      <span>© 2026 Business Fortitude Ltd.</span>
+      <span>Not investment advice. Capital at risk.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.pill-nav a').forEach(el => {
+    el.addEventListener('click', (e) => {
+      if (el.getAttribute('href') === '#') e.preventDefault();
+      document.querySelectorAll('.pill-nav a').forEach(s => s.classList.remove('active'));
+      el.classList.add('active');
+    });
+  });
+  document.querySelectorAll('.sub-pill').forEach(el => {
+    el.addEventListener('click', () => {
+      document.querySelectorAll('.sub-pill').forEach(s => s.classList.remove('active'));
+      el.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>

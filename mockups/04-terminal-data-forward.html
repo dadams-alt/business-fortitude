@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Business Fortitude — Terminal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root {
+    --bg: #0b0d10;
+    --panel: #12161b;
+    --panel-2: #181d24;
+    --ink: #e6e9ee;
+    --muted: #8a95a4;
+    --rule: #232a33;
+    --accent: #f97316;   /* amber terminal */
+    --cyan: #06b6d4;
+    --green: #22c55e;
+    --red: #ef4444;
+    --purple: #a78bfa;
+  }
+  html, body { background: var(--bg); color: var(--ink); font-family: 'IBM Plex Sans', system-ui, sans-serif; }
+  .mono { font-family: 'IBM Plex Mono', monospace; }
+  .serif { font-family: 'IBM Plex Serif', serif; }
+  .panel { background: var(--panel); border: 1px solid var(--rule); border-radius: 4px; }
+  .panel-2 { background: var(--panel-2); border: 1px solid var(--rule); border-radius: 4px; }
+  .muted { color: var(--muted); }
+  .rule { border-color: var(--rule); }
+  .accent { color: var(--accent); }
+  .cyan { color: var(--cyan); }
+  .up { color: var(--green); }
+  .down { color: var(--red); }
+  .bg-accent { background: var(--accent); color: #0b0d10; }
+  .bg-cyan { background: var(--cyan); color: #0b0d10; }
+  .bg-green { background: var(--green); color: #0b0d10; }
+  .bg-red { background: var(--red); color: #0b0d10; }
+  .bg-purple { background: var(--purple); color: #0b0d10; }
+  .chip { font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; padding: 3px 8px; border-radius: 2px; display: inline-block; }
+  .dot { width: 6px; height: 6px; border-radius: 999px; display: inline-block; margin-right: 6px; }
+  .dot-live { background: var(--green); animation: blink 1.2s infinite; }
+  @keyframes blink { 0%,100% {opacity:1} 50% {opacity:.3} }
+  .sparkline path { stroke-width: 1.5; fill: none; }
+  .data-row:hover { background: rgba(255,255,255,0.03); }
+  .kbd { font-family: 'IBM Plex Mono', monospace; font-size: 11px; background: var(--panel-2); border: 1px solid var(--rule); padding: 1px 6px; border-radius: 3px; color: var(--muted); }
+  .nav-link { padding: 4px 10px; border-radius: 2px; font-size: 12px; font-weight: 500; color: var(--muted); }
+  .nav-link.active, .nav-link:hover { color: var(--ink); background: var(--panel-2); }
+  .headline a { color: var(--ink); }
+  .headline a:hover { color: var(--accent); }
+  .ticker-rail { overflow: hidden; white-space: nowrap; }
+  .ticker-rail .rail { display: inline-flex; gap: 30px; animation: marquee 45s linear infinite; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .scroll-x::-webkit-scrollbar { height: 6px; }
+  .scroll-x::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 3px; }
+  .heatcell { display: flex; align-items: center; justify-content: center; border: 1px solid var(--rule); border-radius: 2px; font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 600; padding: 10px 4px; }
+</style>
+</head>
+<body class="min-h-screen text-[14px]">
+
+<!-- Top nav -->
+<header class="border-b rule">
+  <div class="flex items-center justify-between px-4 py-2">
+    <div class="flex items-center gap-6">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-accent flex items-center justify-center text-[color:var(--bg)] font-black text-[12px]">BF</div>
+        <span class="font-bold tracking-tight">Business Fortitude <span class="muted mono text-[11px] ml-2">TERMINAL</span></span>
+      </div>
+      <nav class="hidden md:flex items-center gap-1">
+        <a href="#" class="nav-link active">Dashboard</a>
+        <a href="#" class="nav-link">Markets</a>
+        <a href="#" class="nav-link">News</a>
+        <a href="#" class="nav-link">Deals</a>
+        <a href="#" class="nav-link">Companies</a>
+        <a href="#" class="nav-link">Sectors</a>
+        <a href="#" class="nav-link">Research</a>
+      </nav>
+    </div>
+    <div class="flex items-center gap-4">
+      <div class="hidden md:flex items-center gap-2 panel-2 px-3 py-1.5 rounded w-80">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="muted"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input class="bg-transparent outline-none text-[12px] flex-1 mono" placeholder="Search ticker, company, person…">
+        <span class="kbd">⌘ K</span>
+      </div>
+      <div class="flex items-center gap-2 text-[12px] mono muted"><span class="dot dot-live"></span>LIVE · 13:42:07 BST</div>
+      <button class="bg-accent text-[color:var(--bg)] text-[12px] font-bold px-3 py-1.5 rounded mono">SUBSCRIBE</button>
+    </div>
+  </div>
+  <!-- Index strip -->
+  <div class="ticker-rail border-t rule text-[12px] mono py-1.5">
+    <div class="rail px-4">
+      <span class="muted">INDICES</span>
+      <span>S&amp;P 500 <b>5,842.1</b> <span class="up">+0.42%</span></span>
+      <span>NASDAQ <b>18,620.3</b> <span class="up">+0.71%</span></span>
+      <span>DOW <b>42,338.2</b> <span class="up">+0.18%</span></span>
+      <span>FTSE 100 <b>8,214.9</b> <span class="down">−0.18%</span></span>
+      <span>DAX <b>19,944.0</b> <span class="up">+0.29%</span></span>
+      <span>NIKKEI <b>37,682.4</b> <span class="down">−0.34%</span></span>
+      <span class="muted ml-6">FX</span>
+      <span>GBP/USD <b>1.2724</b> <span class="down">−0.11%</span></span>
+      <span>EUR/USD <b>1.0841</b> <span class="up">+0.07%</span></span>
+      <span>USD/JPY <b>154.28</b> <span class="up">+0.22%</span></span>
+      <span class="muted ml-6">CRYPTO</span>
+      <span>BTC <b>$87,410</b> <span class="up">+2.04%</span></span>
+      <span>ETH <b>$3,841</b> <span class="up">+1.18%</span></span>
+      <span class="muted ml-6">COMMODITIES</span>
+      <span>Brent <b>$73.14</b> <span class="down">−0.44%</span></span>
+      <span>Gold <b>$2,651</b> <span class="up">+0.12%</span></span>
+      <!-- duplicate for loop -->
+      <span class="muted">INDICES</span>
+      <span>S&amp;P 500 <b>5,842.1</b> <span class="up">+0.42%</span></span>
+      <span>NASDAQ <b>18,620.3</b> <span class="up">+0.71%</span></span>
+      <span>FTSE 100 <b>8,214.9</b> <span class="down">−0.18%</span></span>
+      <span>GBP/USD <b>1.2724</b> <span class="down">−0.11%</span></span>
+      <span>BTC <b>$87,410</b> <span class="up">+2.04%</span></span>
+    </div>
+  </div>
+</header>
+
+<!-- Layout grid -->
+<main class="px-4 py-4 grid grid-cols-12 gap-4">
+
+  <!-- Left rail: watchlist -->
+  <aside class="col-span-12 xl:col-span-3 space-y-4">
+    <section class="panel p-4">
+      <div class="flex items-center justify-between mb-3">
+        <h3 class="mono text-[11px] uppercase tracking-widest muted">Watchlist</h3>
+        <button class="text-[11px] muted hover:accent">+ Add</button>
+      </div>
+      <div class="space-y-0 text-[13px]">
+        <div class="data-row flex items-center justify-between py-2 border-b rule mono">
+          <div><b>NVDA</b><span class="muted text-[11px] ml-2">Nvidia</span></div>
+          <div class="text-right"><div>142.88</div><div class="up text-[11px]">+3.02%</div></div>
+        </div>
+        <div class="data-row flex items-center justify-between py-2 border-b rule mono">
+          <div><b>MSFT</b><span class="muted text-[11px] ml-2">Microsoft</span></div>
+          <div class="text-right"><div>418.12</div><div class="up text-[11px]">+0.65%</div></div>
+        </div>
+        <div class="data-row flex items-center justify-between py-2 border-b rule mono">
+          <div><b>AAPL</b><span class="muted text-[11px] ml-2">Apple</span></div>
+          <div class="text-right"><div>228.40</div><div class="up text-[11px]">+1.24%</div></div>
+        </div>
+        <div class="data-row flex items-center justify-between py-2 border-b rule mono">
+          <div><b>TSLA</b><span class="muted text-[11px] ml-2">Tesla</span></div>
+          <div class="text-right"><div>241.07</div><div class="down text-[11px]">−1.32%</div></div>
+        </div>
+        <div class="data-row flex items-center justify-between py-2 border-b rule mono">
+          <div><b>BARC.L</b><span class="muted text-[11px] ml-2">Barclays</span></div>
+          <div class="text-right"><div>248.30</div><div class="down text-[11px]">−0.48%</div></div>
+        </div>
+        <div class="data-row flex items-center justify-between py-2 mono">
+          <div><b>SHOP</b><span class="muted text-[11px] ml-2">Shopify</span></div>
+          <div class="text-right"><div>76.21</div><div class="up text-[11px]">+0.92%</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel p-4">
+      <h3 class="mono text-[11px] uppercase tracking-widest muted mb-3">Sector heatmap</h3>
+      <div class="grid grid-cols-3 gap-1">
+        <div class="heatcell" style="background:rgba(34,197,94,.75)">AI +3.2</div>
+        <div class="heatcell" style="background:rgba(34,197,94,.45)">Fintech +1.4</div>
+        <div class="heatcell" style="background:rgba(34,197,94,.22)">Energy +0.3</div>
+        <div class="heatcell" style="background:rgba(34,197,94,.15)">Health +0.1</div>
+        <div class="heatcell" style="background:rgba(239,68,68,.25)">Retail −0.4</div>
+        <div class="heatcell" style="background:rgba(239,68,68,.6)">Autos −1.8</div>
+        <div class="heatcell" style="background:rgba(34,197,94,.38)">Banks +1.1</div>
+        <div class="heatcell" style="background:rgba(239,68,68,.2)">Real Est −0.2</div>
+        <div class="heatcell" style="background:rgba(34,197,94,.25)">Telcos +0.4</div>
+      </div>
+    </section>
+
+    <section class="panel p-4">
+      <h3 class="mono text-[11px] uppercase tracking-widest muted mb-3">Next 24 hours</h3>
+      <ul class="space-y-3 text-[12px]">
+        <li class="flex justify-between"><span><b>MSFT</b> earnings</span><span class="mono muted">21:00 BST</span></li>
+        <li class="flex justify-between"><span><b>Fed minutes</b></span><span class="mono muted">19:00 BST</span></li>
+        <li class="flex justify-between"><span>UK CPI data</span><span class="mono muted">Wed 07:00</span></li>
+        <li class="flex justify-between"><span>ECB Lagarde speech</span><span class="mono muted">Wed 14:30</span></li>
+        <li class="flex justify-between"><span><b>TSLA</b> earnings</span><span class="mono muted">Wed 21:30</span></li>
+      </ul>
+    </section>
+  </aside>
+
+  <!-- Center: lead story + news feed -->
+  <section class="col-span-12 xl:col-span-6 space-y-4">
+    <article class="panel p-6">
+      <div class="flex items-center gap-2 mb-3 mono text-[11px]">
+        <span class="chip bg-accent">LEAD</span>
+        <span class="muted">Markets / Analysis</span>
+        <span class="muted">·</span>
+        <span class="muted">8 min read</span>
+        <span class="ml-auto muted"><span class="dot dot-live"></span>Updating</span>
+      </div>
+      <h1 class="serif text-[36px] leading-[1.08] font-bold headline"><a href="#">The quiet repricing: why midcap earnings are rewriting the playbook</a></h1>
+      <p class="muted text-[15px] mt-3 leading-[1.6]">For two years the story was megacap dominance. A new quarter of filings suggests a different kind of discipline is winning — lean operators with pricing power outpacing their larger rivals.</p>
+      <div class="aspect-[21/9] bg-[color:var(--panel-2)] mt-4 rounded overflow-hidden border rule">
+        <img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=1400&q=80&sat=-30" class="w-full h-full object-cover opacity-90" alt="">
+      </div>
+      <div class="mt-4 grid grid-cols-3 gap-3 text-[12px] mono">
+        <div class="panel-2 p-3"><div class="muted text-[10px] uppercase tracking-widest">Companies cited</div><div class="mt-1"><span class="up">NVDA</span> · <span class="up">MSFT</span> · <span class="down">BARC.L</span> · <span class="up">SHOP</span></div></div>
+        <div class="panel-2 p-3"><div class="muted text-[10px] uppercase tracking-widest">Sectors</div><div class="mt-1">AI · Fintech · Banks</div></div>
+        <div class="panel-2 p-3"><div class="muted text-[10px] uppercase tracking-widest">Byline</div><div class="mt-1">Sarah Mendel · 09:14</div></div>
+      </div>
+    </article>
+
+    <!-- News feed -->
+    <section class="panel">
+      <div class="flex items-center justify-between px-4 py-3 border-b rule">
+        <div class="flex items-center gap-3">
+          <h2 class="mono text-[11px] uppercase tracking-widest muted">News feed</h2>
+          <div class="flex items-center gap-1 mono text-[11px]">
+            <button class="nav-link active">All</button>
+            <button class="nav-link">Markets</button>
+            <button class="nav-link">Deals</button>
+            <button class="nav-link">Leadership</button>
+            <button class="nav-link">AI</button>
+          </div>
+        </div>
+        <div class="text-[11px] mono muted">Auto-refresh <span class="up">ON</span></div>
+      </div>
+      <ol class="divide-y rule">
+        <li class="data-row px-4 py-3 flex gap-3 items-start">
+          <span class="mono text-[11px] muted pt-1 w-16 shrink-0">13:38</span>
+          <div class="flex-1">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="chip bg-cyan">DEAL</span>
+              <span class="mono text-[11px] muted">VNTA · Compliance</span>
+            </div>
+            <h3 class="headline text-[15px] leading-snug font-semibold"><a href="#">Vanta raises $3bn at $12bn valuation — IPO talk intensifies</a></h3>
+          </div>
+          <span class="up mono text-[11px]">+NEW</span>
+        </li>
+        <li class="data-row px-4 py-3 flex gap-3 items-start">
+          <span class="mono text-[11px] muted pt-1 w-16 shrink-0">13:26</span>
+          <div class="flex-1">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="chip bg-red">REGULATION</span>
+              <span class="mono text-[11px] muted">FCA · Fintech</span>
+            </div>
+            <h3 class="headline text-[15px] leading-snug font-semibold"><a href="#">FCA signals sharper line on fintech safeguarding after Revolut probe</a></h3>
+          </div>
+        </li>
+        <li class="data-row px-4 py-3 flex gap-3 items-start">
+          <span class="mono text-[11px] muted pt-1 w-16 shrink-0">13:11</span>
+          <div class="flex-1">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="chip bg-purple">AI</span>
+              <span class="mono text-[11px] muted">Anthropic · OpenAI</span>
+            </div>
+            <h3 class="headline text-[15px] leading-snug font-semibold"><a href="#">The agent economy is already here — and it's breaking SaaS pricing</a></h3>
+          </div>
+        </li>
+        <li class="data-row px-4 py-3 flex gap-3 items-start">
+          <span class="mono text-[11px] muted pt-1 w-16 shrink-0">12:54</span>
+          <div class="flex-1">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="chip bg-green">LEADERSHIP</span>
+              <span class="mono text-[11px] muted">Succession</span>
+            </div>
+            <h3 class="headline text-[15px] leading-snug font-semibold"><a href="#">Why half of first-time CEOs get fired in year two — and the pattern that predicts it</a></h3>
+          </div>
+        </li>
+        <li class="data-row px-4 py-3 flex gap-3 items-start">
+          <span class="mono text-[11px] muted pt-1 w-16 shrink-0">12:40</span>
+          <div class="flex-1">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="chip bg-accent">MARKETS</span>
+              <span class="mono text-[11px] muted">FTSE · UK equities</span>
+            </div>
+            <h3 class="headline text-[15px] leading-snug font-semibold"><a href="#">Why the FTSE 250 is suddenly the most interesting index in Europe</a></h3>
+          </div>
+        </li>
+        <li class="data-row px-4 py-3 flex gap-3 items-start">
+          <span class="mono text-[11px] muted pt-1 w-16 shrink-0">12:18</span>
+          <div class="flex-1">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="chip bg-accent">MARKETS</span>
+              <span class="mono text-[11px] muted">Credit</span>
+            </div>
+            <h3 class="headline text-[15px] leading-snug font-semibold"><a href="#">Private credit's reckoning is quieter than you think — and closer</a></h3>
+          </div>
+        </li>
+        <li class="data-row px-4 py-3 flex gap-3 items-start">
+          <span class="mono text-[11px] muted pt-1 w-16 shrink-0">11:55</span>
+          <div class="flex-1">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="chip bg-cyan">DEAL</span>
+              <span class="mono text-[11px] muted">M&amp;A</span>
+            </div>
+            <h3 class="headline text-[15px] leading-snug font-semibold"><a href="#">How the Monzo–Revolut partnership died in 14 pages of redlines</a></h3>
+          </div>
+        </li>
+        <li class="data-row px-4 py-3 flex gap-3 items-start">
+          <span class="mono text-[11px] muted pt-1 w-16 shrink-0">11:30</span>
+          <div class="flex-1">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="chip bg-purple">AI</span>
+              <span class="mono text-[11px] muted">Enterprise</span>
+            </div>
+            <h3 class="headline text-[15px] leading-snug font-semibold"><a href="#">Your "AI strategy" probably needs three strategies, not one</a></h3>
+          </div>
+        </li>
+      </ol>
+      <div class="px-4 py-3 border-t rule text-center text-[12px] mono muted hover:text-[color:var(--ink)] cursor-pointer">Load earlier →</div>
+    </section>
+  </section>
+
+  <!-- Right rail -->
+  <aside class="col-span-12 xl:col-span-3 space-y-4">
+    <section class="panel p-4">
+      <h3 class="mono text-[11px] uppercase tracking-widest muted mb-3">Top movers</h3>
+      <div class="grid grid-cols-2 gap-2 text-[12px] mono">
+        <div class="panel-2 p-3">
+          <div class="flex items-center justify-between"><b>NVDA</b><span class="up">+3.02%</span></div>
+          <svg viewBox="0 0 60 20" class="sparkline mt-2 w-full"><path d="M0,15 L10,12 L20,13 L30,8 L40,6 L50,4 L60,2" stroke="#22c55e"/></svg>
+        </div>
+        <div class="panel-2 p-3">
+          <div class="flex items-center justify-between"><b>TSLA</b><span class="down">−1.32%</span></div>
+          <svg viewBox="0 0 60 20" class="sparkline mt-2 w-full"><path d="M0,4 L10,7 L20,10 L30,9 L40,13 L50,14 L60,16" stroke="#ef4444"/></svg>
+        </div>
+        <div class="panel-2 p-3">
+          <div class="flex items-center justify-between"><b>MSFT</b><span class="up">+0.65%</span></div>
+          <svg viewBox="0 0 60 20" class="sparkline mt-2 w-full"><path d="M0,12 L10,10 L20,11 L30,9 L40,8 L50,7 L60,6" stroke="#22c55e"/></svg>
+        </div>
+        <div class="panel-2 p-3">
+          <div class="flex items-center justify-between"><b>BARC.L</b><span class="down">−0.48%</span></div>
+          <svg viewBox="0 0 60 20" class="sparkline mt-2 w-full"><path d="M0,6 L10,8 L20,9 L30,10 L40,10 L50,12 L60,13" stroke="#ef4444"/></svg>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel p-4">
+      <h3 class="mono text-[11px] uppercase tracking-widest muted mb-3">Most read · 24h</h3>
+      <ol class="space-y-3 text-[13px]">
+        <li class="flex gap-3 headline"><span class="mono muted">01</span><a href="#">The 12-founder cohort that walked away from YC</a></li>
+        <li class="flex gap-3 headline"><span class="mono muted">02</span><a href="#">UK productivity's lost decade may end with a whimper</a></li>
+        <li class="flex gap-3 headline"><span class="mono muted">03</span><a href="#">The grid-scale battery boom is eating solar developers alive</a></li>
+        <li class="flex gap-3 headline"><span class="mono muted">04</span><a href="#">A COO's decision log cut meeting time by 41%</a></li>
+        <li class="flex gap-3 headline"><span class="mono muted">05</span><a href="#">Sterling's range is ending: three signals traders are watching</a></li>
+      </ol>
+    </section>
+
+    <section class="panel p-4">
+      <h3 class="mono text-[11px] uppercase tracking-widest muted mb-3">BF Terminal Pro</h3>
+      <p class="text-[13px] leading-relaxed muted">Unlock the deal database, sector heatmaps, earnings transcripts, and the Analyst's Desk live chat.</p>
+      <button class="mt-3 bg-accent text-[color:var(--bg)] w-full py-2 rounded mono font-bold text-[12px]">14-DAY TRIAL</button>
+    </section>
+
+    <section class="panel p-4">
+      <h3 class="mono text-[11px] uppercase tracking-widest muted mb-3">Keyboard</h3>
+      <ul class="text-[12px] mono space-y-2 muted">
+        <li class="flex justify-between">Search<span><span class="kbd">⌘</span> <span class="kbd">K</span></span></li>
+        <li class="flex justify-between">Newsfeed<span><span class="kbd">G</span> <span class="kbd">N</span></span></li>
+        <li class="flex justify-between">Watchlist<span><span class="kbd">G</span> <span class="kbd">W</span></span></li>
+        <li class="flex justify-between">Toggle theme<span><span class="kbd">T</span></span></li>
+      </ul>
+    </section>
+  </aside>
+</main>
+
+<!-- Footer -->
+<footer class="border-t rule mt-8">
+  <div class="max-w-[1400px] mx-auto px-4 py-6 flex flex-col md:flex-row items-center justify-between gap-3 text-[11px] mono muted">
+    <span>© 2026 Business Fortitude Ltd. · London · New York</span>
+    <span>Not investment advice. Capital at risk. Data from refinitiv/quoted sources, delayed up to 15 minutes.</span>
+  </div>
+</footer>
+
+<script>
+  // Nav toggle
+  document.querySelectorAll('.nav-link').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      const sibs = el.parentElement.querySelectorAll('.nav-link');
+      sibs.forEach(s => s.classList.remove('active'));
+      el.classList.add('active');
+    });
+  });
+  // Keyboard shortcut
+  window.addEventListener('keydown', (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+      e.preventDefault();
+      const input = document.querySelector('input[placeholder*="ticker"]');
+      input && input.focus();
+    }
+  });
+</script>
+</body>
+</html>

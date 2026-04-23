@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Business Fortitude — Mockup Index</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;900&family=Fraunces:wght@600;800&family=Newsreader:wght@500;700&family=IBM+Plex+Serif:wght@500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root {
+    --bg: #ffffff; --ink: #0a0a0a; --soft: #4a4a4a;
+    --accent: #0055ff; --lime: #d4ff3a;
+    --surface: #f5f5f4; --rule: #e7e5e4;
+  }
+  body { background: var(--bg); color: var(--ink); font-family: 'Inter', system-ui, sans-serif; }
+  .display { font-family: 'Inter', sans-serif; font-weight: 900; letter-spacing: -0.03em; line-height: 0.98; }
+  .mono { font-family: 'Space Grotesk', monospace; }
+  .accent { color: var(--accent); }
+  .bg-accent { background: var(--accent); }
+  .bg-lime { background: var(--lime); color: var(--ink); }
+  .bg-surface { background: var(--surface); }
+  .bg-ink { background: var(--ink); color: white; }
+  .soft { color: var(--soft); }
+  .rule { border-color: var(--rule); }
+  .kicker { font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; font-size: 11px; }
+  .chip { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
+  .card { transition: transform .25s ease, box-shadow .25s ease, border-color .2s; }
+  .card:hover { transform: translateY(-3px); box-shadow: 0 20px 40px -20px rgba(0,0,0,0.2); }
+  .lime-underline { background-image: linear-gradient(var(--lime), var(--lime)); background-size: 100% 0.35em; background-repeat: no-repeat; background-position: 0 88%; padding: 0 2px; }
+  .section-head { border-top: 2px solid var(--ink); padding-top: 14px; }
+</style>
+</head>
+<body class="min-h-screen">
+<div class="max-w-[1180px] mx-auto px-6 py-14">
+
+  <header class="mb-12">
+    <div class="mono text-[11px] uppercase tracking-[0.18em] soft font-bold mb-3">Business Fortitude · Design review</div>
+    <h1 class="display text-5xl md:text-7xl leading-[0.95] mb-4">The <span class="lime-underline">review pack</span>.</h1>
+    <p class="soft mt-4 max-w-2xl text-lg leading-relaxed">
+      Direction <strong class="text-[color:var(--ink)]">02 · Modern Business Tech</strong> has been selected. The five original directions are kept below for reference; the interior page set has been rebuilt in the chosen visual language.
+    </p>
+  </header>
+
+  <!-- Selected direction -->
+  <section class="mb-14">
+    <div class="section-head flex items-baseline justify-between mb-6">
+      <div>
+        <div class="kicker mb-2 accent">Selected direction</div>
+        <h2 class="display text-3xl">Modern Business <span class="accent">Tech</span></h2>
+      </div>
+      <span class="chip bg-lime">Chosen</span>
+    </div>
+    <a href="02-modern-business-tech.html" class="card block rounded-2xl p-7 border-2" style="border-color:var(--ink); background: var(--surface);">
+      <div class="flex items-start justify-between mb-3">
+        <span class="chip bg-ink">02 · Modern Business Tech</span>
+        <span class="mono text-[11px] soft font-semibold">Homepage · Entrepreneur / Axios lineage</span>
+      </div>
+      <div class="display text-4xl mt-2">Homepage — Modern Business Tech</div>
+      <p class="soft mt-3 leading-relaxed text-[15px] max-w-3xl">
+        White surface, Inter 900 display, Space Grotesk mono, pill navigation, electric-blue primary with lime attention. Rounded-2xl cards, ink footer. The reference implementation every downstream page inherits from.
+      </p>
+    </a>
+  </section>
+
+  <!-- Interior pages in the chosen direction -->
+  <section class="mb-14">
+    <div class="section-head flex items-baseline justify-between mb-6">
+      <div>
+        <div class="kicker mb-2 accent">Interior pages · Modern Business Tech</div>
+        <h2 class="display text-3xl">The full page set.</h2>
+      </div>
+      <span class="mono text-[12px] soft">6 pages · review all before sign-off</span>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+      <a href="article-01.html" class="card block bg-white rounded-2xl p-6 border rule">
+        <div class="flex items-start justify-between mb-3">
+          <span class="chip bg-ink">Article</span>
+          <span class="mono text-[11px] soft">article-01.html</span>
+        </div>
+        <div class="display text-2xl">Article page</div>
+        <p class="soft mt-2 text-[14px] leading-[1.55]">Template article chrome: sticky pill-nav header, Inter 900 headline with lime-underline keyword, ink pull-quote card, lime takeaways block, entity chips, dark newsletter CTA, FCA disclosure.</p>
+        <div class="mt-3 flex flex-wrap items-center gap-2 mono text-[11px] uppercase tracking-widest soft">
+          <span>Lime takeaways</span><span>·</span><span>Entity chips</span><span>·</span><span>Disclosure</span>
+        </div>
+      </a>
+
+      <a href="category-markets.html" class="card block bg-white rounded-2xl p-6 border rule">
+        <div class="flex items-start justify-between mb-3">
+          <span class="chip bg-ink">Category</span>
+          <span class="mono text-[11px] soft">category-markets.html</span>
+        </div>
+        <div class="display text-2xl">Category — Markets</div>
+        <p class="soft mt-2 text-[14px] leading-[1.55]">Oversized "Markets." mast with lime-underline treatment, pill filter chips, lead story + most-read ordered list, indices strip, 12-card grid, pill pagination.</p>
+        <div class="mt-3 flex flex-wrap items-center gap-2 mono text-[11px] uppercase tracking-widest soft">
+          <span>Mega mast</span><span>·</span><span>Filter pills</span><span>·</span><span>Pagination</span>
+        </div>
+      </a>
+
+      <a href="company-games-workshop.html" class="card block bg-white rounded-2xl p-6 border rule">
+        <div class="flex items-start justify-between mb-3">
+          <span class="chip bg-ink">Entity · Company</span>
+          <span class="mono text-[11px] soft">company-games-workshop.html</span>
+        </div>
+        <div class="display text-2xl">Company — Games Workshop</div>
+        <p class="soft mt-2 text-[14px] leading-[1.55]">Logo badge, surface price card with sparkline, entity tabs, lime "thesis in three lines" block, editor coverage feed, fundamentals, board list, ink sentiment bars.</p>
+        <div class="mt-3 flex flex-wrap items-center gap-2 mono text-[11px] uppercase tracking-widest soft">
+          <span>Price card</span><span>·</span><span>Sentiment bars</span><span>·</span><span>Board list</span>
+        </div>
+      </a>
+
+      <a href="ticker-ftse250.html" class="card block bg-white rounded-2xl p-6 border rule">
+        <div class="flex items-start justify-between mb-3">
+          <span class="chip bg-ink">Entity · Ticker</span>
+          <span class="mono text-[11px] soft">ticker-ftse250.html</span>
+        </div>
+        <div class="display text-2xl">Ticker — FTSE 250 (MCX)</div>
+        <p class="soft mt-2 text-[14px] leading-[1.55]">Ink live-price card, area-fill chart with range pills, gainers/laggards lists, tagged stories grid, full constituents table.</p>
+        <div class="mt-3 flex flex-wrap items-center gap-2 mono text-[11px] uppercase tracking-widest soft">
+          <span>SVG chart</span><span>·</span><span>Range pills</span><span>·</span><span>Constituents table</span>
+        </div>
+      </a>
+
+      <a href="person-ashley-steel.html" class="card block bg-white rounded-2xl p-6 border rule">
+        <div class="flex items-start justify-between mb-3">
+          <span class="chip bg-ink">Entity · Person</span>
+          <span class="mono text-[11px] soft">person-ashley-steel.html</span>
+        </div>
+        <div class="display text-2xl">Person — Ashley Steel</div>
+        <p class="soft mt-2 text-[14px] leading-[1.55]">Oversized name with lime-underline, quick-stat tiles, ink pull-quote card, career timeline with dot rail, current boards, expertise chips.</p>
+        <div class="mt-3 flex flex-wrap items-center gap-2 mono text-[11px] uppercase tracking-widest soft">
+          <span>Timeline</span><span>·</span><span>Pull quote</span><span>·</span><span>Board list</span>
+        </div>
+      </a>
+
+      <a href="sector-consumer.html" class="card block bg-white rounded-2xl p-6 border rule">
+        <div class="flex items-start justify-between mb-3">
+          <span class="chip bg-ink">Entity · Sector</span>
+          <span class="mono text-[11px] soft">sector-consumer.html</span>
+        </div>
+        <div class="display text-2xl">Sector — Consumer Discretionary</div>
+        <p class="soft mt-2 text-[14px] leading-[1.55]">Mega sector title, ink "pulse" sidebar, KPI tile row (one lime), sub-sector pills, companies grid, lead + three-up coverage, latest stories grid.</p>
+        <div class="mt-3 flex flex-wrap items-center gap-2 mono text-[11px] uppercase tracking-widest soft">
+          <span>Sector pulse</span><span>·</span><span>KPI tiles</span><span>·</span><span>Sub-sector pills</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- Today's five-story preview (real April 2026 stories, BF voice) -->
+  <section class="mb-14">
+    <div class="section-head flex items-baseline justify-between mb-6">
+      <div>
+        <div class="kicker mb-2 accent">Editorial preview · 23 April 2026</div>
+        <h2 class="display text-3xl">Today's five, in BF voice.</h2>
+      </div>
+      <span class="mono text-[12px] soft">Article template range check</span>
+    </div>
+    <p class="soft text-[14px] leading-relaxed max-w-3xl mb-6">
+      Five real stories from the RSS shortlist, each written and art-directed for the £1m–£250m UK operator. Same chrome, same tokens, different body modules — live dispatch, cohort grid, deal factbox, before/after comparison, tax-band table — to stress-test the article template's range before we lock the Next.js components.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+      <a href="article-02.html" class="card block bg-white rounded-2xl p-6 border rule">
+        <div class="flex items-start justify-between mb-3">
+          <span class="chip bg-accent text-white">Leadership</span>
+          <span class="mono text-[11px] soft">article-02.html</span>
+        </div>
+        <div class="display text-2xl">The scale-up floor, day two.</div>
+        <p class="soft mt-2 text-[14px] leading-[1.55]">Live dispatch from SCALE Expo London. Live-pulse badge, timestamped update-log rail with dot-timeline and a red "hot" marker, agenda sidecard, SCALE notebook newsletter. Byline: Rachel Okonkwo.</p>
+        <div class="mt-3 flex flex-wrap items-center gap-2 mono text-[11px] uppercase tracking-widest soft">
+          <span>Live module</span><span>·</span><span>Update log</span><span>·</span><span>Agenda card</span>
+        </div>
+      </a>
+
+      <a href="article-03.html" class="card block bg-white rounded-2xl p-6 border rule">
+        <div class="flex items-start justify-between mb-3">
+          <span class="chip bg-accent text-white">AI</span>
+          <span class="mono text-[11px] soft">article-03.html</span>
+        </div>
+        <div class="display text-2xl">Seven bets: the Sovereign AI Fund's cohort.</div>
+        <p class="soft mt-2 text-[14px] leading-[1.55]">Eight cohort cards (one lime equity-bet card, one dashed "coming before summer recess") plus a fund factbox rail — £500m size, £20m ceiling, 1m GPU-hrs. Byline: Nadia Carson.</p>
+        <div class="mt-3 flex flex-wrap items-center gap-2 mono text-[11px] uppercase tracking-widest soft">
+          <span>Cohort grid</span><span>·</span><span>Fund factbox</span><span>·</span><span>Lime accent card</span>
+        </div>
+      </a>
+
+      <a href="article-04.html" class="card block bg-white rounded-2xl p-6 border rule">
+        <div class="flex items-start justify-between mb-3">
+          <span class="chip bg-accent text-white">Deals</span>
+          <span class="mono text-[11px] soft">article-04.html</span>
+        </div>
+        <div class="display text-2xl">KeyCorp's Clearwater deal.</div>
+        <p class="soft mt-2 text-[14px] leading-[1.55]">M&amp;A dispatch. Ink deal-factbox rail (acquirer / target / value / close), four-tile Clearwater UK office grid, FCA conditionality note. Byline: Marcus Holden.</p>
+        <div class="mt-3 flex flex-wrap items-center gap-2 mono text-[11px] uppercase tracking-widest soft">
+          <span>Deal factbox</span><span>·</span><span>Office grid</span><span>·</span><span>Conditionality</span>
+        </div>
+      </a>
+
+      <a href="article-05.html" class="card block bg-white rounded-2xl p-6 border rule">
+        <div class="flex items-start justify-between mb-3">
+          <span class="chip bg-accent text-white">Regulation</span>
+          <span class="mono text-[11px] soft">article-05.html</span>
+        </div>
+        <div class="display text-2xl">The day-one rights era has begun.</div>
+        <p class="soft mt-2 text-[14px] leading-[1.55]">Five before/after change-rows (strike-through surface → bold ink), five-step numbered check-list with lime numerals, lime "this week's checklist" rail, Fair Work Agency factbox. Byline: Priya Shah.</p>
+        <div class="mt-3 flex flex-wrap items-center gap-2 mono text-[11px] uppercase tracking-widest soft">
+          <span>Before/after rows</span><span>·</span><span>Numbered steps</span><span>·</span><span>Checklist rail</span>
+        </div>
+      </a>
+
+      <a href="article-06.html" class="card block bg-white rounded-2xl p-6 border rule md:col-span-2">
+        <div class="flex items-start justify-between mb-3">
+          <span class="chip bg-accent text-white">Regulation</span>
+          <span class="mono text-[11px] soft">article-06.html</span>
+        </div>
+        <div class="display text-2xl">The quiet tax-break expansion that just changed scale-up maths.</div>
+        <p class="soft mt-2 text-[14px] leading-[1.55]">EMI / EIS / VCT uplift on 6 April. Ink-header comparison table with strikethrough old caps, worked-arithmetic surface box, three-card scheme factbox rail (EMI / EIS / lime VCT), board-pack dates mono list. Byline: David Okafor.</p>
+        <div class="mt-3 flex flex-wrap items-center gap-2 mono text-[11px] uppercase tracking-widest soft">
+          <span>Band table</span><span>·</span><span>Worked maths</span><span>·</span><span>Scheme cards</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- Original 5 directions (for reference) -->
+  <section class="mb-14">
+    <div class="section-head flex items-baseline justify-between mb-6">
+      <div>
+        <div class="kicker mb-2 soft">Reference</div>
+        <h2 class="display text-3xl">The original five directions.</h2>
+      </div>
+      <span class="mono text-[12px] soft">Kept for comparison</span>
+    </div>
+
+    <ol class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+      <a href="01-editorial-authority.html" class="card block rounded-2xl p-6 border" style="background:#f4efe6; border-color:#d9d2c4;">
+        <div class="flex items-start justify-between mb-2">
+          <span class="chip bg-white border" style="border-color:#d9d2c4; color:#a11d33;">01 · Editorial</span>
+          <span class="mono text-[11px] soft">Not selected</span>
+        </div>
+        <div class="text-xl" style="font-family:'Playfair Display',Georgia,serif; font-weight:900;">Editorial Authority</div>
+        <p class="mt-2 text-[13px] leading-[1.55]" style="color:#4a4a4a;">Serif masthead, cream ground, deep-red accents, broadsheet grid.</p>
+      </a>
+
+      <a href="02-modern-business-tech.html" class="card block bg-white rounded-2xl p-6 border-2" style="border-color:var(--ink);">
+        <div class="flex items-start justify-between mb-2">
+          <span class="chip bg-ink">02 · Modern</span>
+          <span class="chip bg-lime">Chosen</span>
+        </div>
+        <div class="display text-xl">Modern Business <span class="accent">Tech</span></div>
+        <p class="soft mt-2 text-[13px] leading-[1.55]">Bold sans-serif, card-heavy layout, electric blue + lime accents.</p>
+      </a>
+
+      <a href="03-premium-magazine.html" class="card block rounded-2xl p-6 border" style="background:#fdfbf7; border-color:#e6dfd0;">
+        <div class="flex items-start justify-between mb-2">
+          <span class="chip" style="background:#e94b29; color:white;">03 · Magazine</span>
+          <span class="mono text-[11px] soft">Not selected</span>
+        </div>
+        <div class="text-xl" style="font-family:'Fraunces',serif; font-weight:800;">Premium Magazine<span style="color:#e94b29">.</span></div>
+        <p class="mt-2 text-[13px] leading-[1.55]" style="color:#4a4a4a;">Oversized display type, color-blocked tiles, editorial swagger.</p>
+      </a>
+
+      <a href="04-terminal-data-forward.html" class="card block rounded-2xl p-6 border" style="background:#0b0d10; border-color:#232a33; color:#e6e9ee;">
+        <div class="flex items-start justify-between mb-2">
+          <span class="chip" style="background:#f97316; color:#0b0d10;">04 · Terminal</span>
+          <span class="mono text-[11px]" style="color:#8a95a4;">Not selected</span>
+        </div>
+        <div class="text-xl" style="font-family:'IBM Plex Serif',serif; font-weight:700;">Terminal · Data-Forward</div>
+        <p class="mt-2 text-[13px] leading-[1.55]" style="color:#b3bac3;">Dark-surface, live ticker, watchlist, heatmap.</p>
+      </a>
+
+      <a href="05-founder-longform.html" class="card block rounded-2xl p-6 border md:col-span-2" style="background:#fafaf8; border-color:#e5e0d4;">
+        <div class="flex items-start justify-between mb-2">
+          <span class="chip" style="background:#c6542e; color:white;">05 · Longform</span>
+          <span class="mono text-[11px] soft">Not selected</span>
+        </div>
+        <div class="text-xl" style="font-family:'Newsreader',serif; font-weight:700;">Founder Longform</div>
+        <p class="mt-2 text-[13px] leading-[1.55]" style="color:#4a4a4a;">Heavy whitespace, single essay leading the page.</p>
+      </a>
+
+    </ol>
+  </section>
+
+  <div class="p-7 bg-surface rounded-2xl border rule">
+    <div class="kicker mb-3 accent">How to review</div>
+    <ol class="text-[15px] soft space-y-2 leading-relaxed list-decimal list-inside">
+      <li>Walk the interior page set in this order: article → category → company → ticker → person → sector.</li>
+      <li>Check consistency at the chrome level: sticky pill-nav header, breadcrumb, ink footer. Each page inherits them intentionally.</li>
+      <li>Flag any module that feels like it belongs on a different direction — this is the last cheap moment to adjust.</li>
+      <li>Once signed off, this direction becomes the visual spec that Claude Code uses to build the live Next.js components.</li>
+    </ol>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FTSE 250 (MCX) — Business Fortitude</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root {
+    --bg: #ffffff; --ink: #0a0a0a; --soft: #4a4a4a;
+    --accent: #0055ff; --lime: #d4ff3a;
+    --surface: #f5f5f4; --rule: #e7e5e4;
+  }
+  body { background: var(--bg); color: var(--ink); font-family: 'Inter', system-ui, sans-serif; }
+  .display { font-family: 'Inter', sans-serif; font-weight: 900; letter-spacing: -0.03em; line-height: 0.98; }
+  .mono { font-family: 'Space Grotesk', monospace; }
+  .accent { color: var(--accent); }
+  .bg-accent { background: var(--accent); }
+  .bg-lime { background: var(--lime); color: var(--ink); }
+  .bg-surface { background: var(--surface); }
+  .bg-ink { background: var(--ink); color: white; }
+  .soft { color: var(--soft); }
+  .rule { border-color: var(--rule); }
+  .kicker { font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; font-size: 11px; }
+  .chip { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
+  .card { transition: transform .35s ease; }
+  .card:hover { transform: translateY(-3px); }
+  .card:hover .title-link { color: var(--accent); }
+  .ticker-wrap { overflow: hidden; }
+  .ticker { display: inline-flex; gap: 40px; white-space: nowrap; animation: marquee 35s linear infinite; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .up { color: #059669; } .down { color: #dc2626; }
+  .btn-primary { background: var(--ink); color: white; border-radius: 999px; padding: 10px 20px; font-weight: 600; }
+  .btn-primary:hover { background: var(--accent); }
+  .btn-secondary { background: white; color: var(--ink); border-radius: 999px; padding: 10px 20px; font-weight: 600; border: 1px solid var(--rule); }
+  .btn-secondary:hover { border-color: var(--ink); }
+  .pill-nav a.active { background: var(--ink); color: white; }
+  .pill-nav a { transition: all .2s; }
+  .lime-underline { background-image: linear-gradient(var(--lime), var(--lime)); background-size: 100% 0.35em; background-repeat: no-repeat; background-position: 0 88%; padding: 0 2px; }
+  .arrow-link svg { transition: transform .2s ease; }
+  .arrow-link:hover svg { transform: translateX(4px); }
+  .range-pill { padding: 6px 14px; border-radius: 999px; font-weight: 600; font-size: 12px; transition: all .2s; }
+  .range-pill:hover { background: var(--surface); }
+  .range-pill.active { background: var(--ink); color: white; }
+  .chart-wrap { background: var(--surface); border-radius: 24px; padding: 20px; }
+  .grid-line { stroke: var(--rule); stroke-width: 1; }
+</style>
+</head>
+<body class="min-h-screen">
+
+<!-- Header -->
+<header class="border-b rule bg-white sticky top-0 z-40">
+  <div class="max-w-[1360px] mx-auto px-6 flex items-center justify-between h-16">
+    <a href="index.html" class="flex items-center gap-2">
+      <span class="display text-[22px]">Business <span class="accent">Fortitude</span></span>
+    </a>
+    <nav class="hidden lg:flex items-center gap-1 pill-nav">
+      <a href="#" class="px-3 py-1.5 rounded-full text-[13px] font-medium hover:bg-surface">Latest</a>
+      <a href="category-markets.html" class="active px-3 py-1.5 rounded-full text-[13px] font-medium">Markets</a>
+      <a href="#" class="px-3 py-1.5 rounded-full text-[13px] font-medium hover:bg-surface">Deals</a>
+      <a href="#" class="px-3 py-1.5 rounded-full text-[13px] font-medium hover:bg-surface">Leadership</a>
+      <a href="#" class="px-3 py-1.5 rounded-full text-[13px] font-medium hover:bg-surface">AI</a>
+      <a href="#" class="px-3 py-1.5 rounded-full text-[13px] font-medium hover:bg-surface">Startups</a>
+      <a href="#" class="px-3 py-1.5 rounded-full text-[13px] font-medium hover:bg-surface">Opinion</a>
+    </nav>
+    <div class="flex items-center gap-3">
+      <button aria-label="Search" class="p-2 hover:bg-surface rounded-full">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      </button>
+      <a href="#" class="hidden md:inline btn-primary text-[13px]">Subscribe</a>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-[1360px] mx-auto px-6">
+
+  <!-- Breadcrumb -->
+  <div class="mono text-[12px] uppercase tracking-[0.18em] soft pt-8 pb-2">
+    <a href="index.html" class="hover:text-[color:var(--accent)]">Home</a>
+    <span class="mx-2">/</span>
+    <a href="category-markets.html" class="hover:text-[color:var(--accent)]">Markets</a>
+    <span class="mx-2">/</span>
+    <span>Tickers</span>
+    <span class="mx-2">/</span>
+    <span>MCX</span>
+  </div>
+
+  <!-- Hero: index header -->
+  <section class="py-8 border-b rule grid grid-cols-1 lg:grid-cols-12 gap-10 items-end">
+    <div class="lg:col-span-7">
+      <div class="flex items-center gap-2 mb-4">
+        <span class="chip bg-lime">Index</span>
+        <span class="chip bg-surface mono">LSE: MCX</span>
+      </div>
+      <h1 class="display text-[56px] md:text-[88px] leading-[0.95]">
+        FTSE <span class="lime-underline">250</span>
+      </h1>
+      <p class="text-[17px] leading-[1.6] soft max-w-2xl mt-5">
+        The 101st through 350th largest listings on the London Stock Exchange by market cap. The UK's midcap benchmark — and, increasingly, its domestic economic weather vane.
+      </p>
+    </div>
+
+    <aside class="lg:col-span-5">
+      <div class="rounded-2xl bg-ink text-white p-6">
+        <div class="flex items-center justify-between mb-2">
+          <div class="mono text-[12px] uppercase tracking-widest" style="color:var(--lime);">MCX · Live</div>
+          <span class="mono text-[12px] opacity-70">15:42 BST</span>
+        </div>
+        <div class="display text-[56px]">20,614.30</div>
+        <div class="mono text-[16px] up mt-1">+78.42 (+0.38%)</div>
+        <div class="grid grid-cols-3 gap-4 mt-5 pt-5 border-t border-white/10 text-[12px]">
+          <div><div class="opacity-70">Open</div><div class="font-bold mono mt-1">20,535.88</div></div>
+          <div><div class="opacity-70">Day high</div><div class="font-bold mono mt-1">20,648.10</div></div>
+          <div><div class="opacity-70">Day low</div><div class="font-bold mono mt-1">20,512.44</div></div>
+          <div><div class="opacity-70">52w high</div><div class="font-bold mono mt-1">20,791.00</div></div>
+          <div><div class="opacity-70">52w low</div><div class="font-bold mono mt-1">18,402.50</div></div>
+          <div><div class="opacity-70">YTD</div><div class="font-bold mono mt-1 up">+7.31%</div></div>
+        </div>
+      </div>
+    </aside>
+  </section>
+
+  <!-- Chart -->
+  <section class="py-8 border-b rule">
+    <div class="flex items-end justify-between mb-4">
+      <h2 class="display text-[28px]">Price history</h2>
+      <div class="flex items-center gap-1">
+        <button class="range-pill">1D</button>
+        <button class="range-pill">5D</button>
+        <button class="range-pill">1M</button>
+        <button class="range-pill active">6M</button>
+        <button class="range-pill">YTD</button>
+        <button class="range-pill">1Y</button>
+        <button class="range-pill">5Y</button>
+      </div>
+    </div>
+    <div class="chart-wrap">
+      <svg viewBox="0 0 800 280" class="w-full" preserveAspectRatio="none">
+        <!-- gridlines -->
+        <g>
+          <line x1="0" y1="40" x2="800" y2="40" class="grid-line" stroke-dasharray="2 4"/>
+          <line x1="0" y1="100" x2="800" y2="100" class="grid-line" stroke-dasharray="2 4"/>
+          <line x1="0" y1="160" x2="800" y2="160" class="grid-line" stroke-dasharray="2 4"/>
+          <line x1="0" y1="220" x2="800" y2="220" class="grid-line" stroke-dasharray="2 4"/>
+        </g>
+        <!-- area -->
+        <polyline points="0,220 40,210 80,195 120,202 160,185 200,178 240,188 280,160 320,155 360,170 400,140 440,130 480,145 520,115 560,100 600,108 640,85 680,78 720,60 760,55 800,45 800,280 0,280"
+          fill="rgba(0,85,255,0.10)" stroke="none"/>
+        <!-- line -->
+        <polyline points="0,220 40,210 80,195 120,202 160,185 200,178 240,188 280,160 320,155 360,170 400,140 440,130 480,145 520,115 560,100 600,108 640,85 680,78 720,60 760,55 800,45"
+          fill="none" stroke="#0055ff" stroke-width="2.5" vector-effect="non-scaling-stroke"/>
+        <!-- axis labels -->
+        <g class="mono" style="font-size:10px; fill:#4a4a4a;">
+          <text x="0" y="275">Oct</text>
+          <text x="140" y="275">Nov</text>
+          <text x="280" y="275">Dec</text>
+          <text x="420" y="275">Jan</text>
+          <text x="560" y="275">Feb</text>
+          <text x="700" y="275">Mar</text>
+          <text x="770" y="275">Apr</text>
+          <text x="805" y="48" text-anchor="end">20.6k</text>
+          <text x="805" y="108" text-anchor="end">20.0k</text>
+          <text x="805" y="168" text-anchor="end">19.4k</text>
+          <text x="805" y="228" text-anchor="end">18.8k</text>
+        </g>
+        <!-- end dot -->
+        <circle cx="800" cy="45" r="5" fill="#0055ff"/>
+        <circle cx="800" cy="45" r="9" fill="#0055ff" fill-opacity="0.2"/>
+      </svg>
+      <div class="mono text-[11px] soft mt-3">Data: LSE · Delayed 15 min · Not for trading</div>
+    </div>
+  </section>
+
+  <!-- Movers -->
+  <section class="py-10 border-t rule grid grid-cols-1 lg:grid-cols-2 gap-10">
+    <div>
+      <div class="flex items-center gap-3 mb-5">
+        <span class="chip bg-lime">Gainers</span>
+        <h2 class="display text-[26px]">Top 5 today</h2>
+      </div>
+      <div class="divide-y rule">
+        <a href="company-games-workshop.html" class="flex items-center justify-between py-4 card">
+          <div>
+            <div class="font-bold">GAW</div>
+            <div class="text-[12px] soft">Games Workshop</div>
+          </div>
+          <div class="text-right">
+            <div class="font-bold mono">£145.20</div>
+            <div class="mono text-[12px] up">+2.10%</div>
+          </div>
+        </a>
+        <a href="#" class="flex items-center justify-between py-4 card">
+          <div>
+            <div class="font-bold">RMV</div>
+            <div class="text-[12px] soft">Rightmove</div>
+          </div>
+          <div class="text-right">
+            <div class="font-bold mono">£7.18</div>
+            <div class="mono text-[12px] up">+1.82%</div>
+          </div>
+        </a>
+        <a href="#" class="flex items-center justify-between py-4 card">
+          <div>
+            <div class="font-bold">BYIT</div>
+            <div class="text-[12px] soft">Bytes Technology</div>
+          </div>
+          <div class="text-right">
+            <div class="font-bold mono">£4.92</div>
+            <div class="mono text-[12px] up">+1.44%</div>
+          </div>
+        </a>
+        <a href="#" class="flex items-center justify-between py-4 card">
+          <div>
+            <div class="font-bold">MNKS</div>
+            <div class="text-[12px] soft">Monks Investment Trust</div>
+          </div>
+          <div class="text-right">
+            <div class="font-bold mono">£11.48</div>
+            <div class="mono text-[12px] up">+1.22%</div>
+          </div>
+        </a>
+        <a href="#" class="flex items-center justify-between py-4 card">
+          <div>
+            <div class="font-bold">GNS</div>
+            <div class="text-[12px] soft">Genus</div>
+          </div>
+          <div class="text-right">
+            <div class="font-bold mono">£19.62</div>
+            <div class="mono text-[12px] up">+1.08%</div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div>
+      <div class="flex items-center gap-3 mb-5">
+        <span class="chip" style="background:#fee2e2; color:#dc2626;">Laggards</span>
+        <h2 class="display text-[26px]">Bottom 5 today</h2>
+      </div>
+      <div class="divide-y rule">
+        <a href="#" class="flex items-center justify-between py-4 card">
+          <div>
+            <div class="font-bold">ASOS</div>
+            <div class="text-[12px] soft">ASOS</div>
+          </div>
+          <div class="text-right">
+            <div class="font-bold mono">£3.62</div>
+            <div class="mono text-[12px] down">−2.44%</div>
+          </div>
+        </a>
+        <a href="#" class="flex items-center justify-between py-4 card">
+          <div>
+            <div class="font-bold">WIZZ</div>
+            <div class="text-[12px] soft">Wizz Air</div>
+          </div>
+          <div class="text-right">
+            <div class="font-bold mono">£15.08</div>
+            <div class="mono text-[12px] down">−1.88%</div>
+          </div>
+        </a>
+        <a href="#" class="flex items-center justify-between py-4 card">
+          <div>
+            <div class="font-bold">HMSO</div>
+            <div class="text-[12px] soft">Hammerson</div>
+          </div>
+          <div class="text-right">
+            <div class="font-bold mono">£0.31</div>
+            <div class="mono text-[12px] down">−1.62%</div>
+          </div>
+        </a>
+        <a href="#" class="flex items-center justify-between py-4 card">
+          <div>
+            <div class="font-bold">MOON</div>
+            <div class="text-[12px] soft">Moonpig</div>
+          </div>
+          <div class="text-right">
+            <div class="font-bold mono">£2.08</div>
+            <div class="mono text-[12px] down">−1.34%</div>
+          </div>
+        </a>
+        <a href="#" class="flex items-center justify-between py-4 card">
+          <div>
+            <div class="font-bold">SVT</div>
+            <div class="text-[12px] soft">Severn Trent</div>
+          </div>
+          <div class="text-right">
+            <div class="font-bold mono">£26.14</div>
+            <div class="mono text-[12px] down">−1.08%</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stories tagged with this ticker -->
+  <section class="py-10 border-t rule">
+    <div class="flex items-end justify-between mb-6">
+      <h2 class="display text-[32px]">Stories tagged <span class="lime-underline">FTSE 250</span></h2>
+      <a href="category-markets.html" class="arrow-link inline-flex items-center gap-2 text-[13px] font-semibold">All Markets <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <article class="card">
+        <div class="aspect-[4/3] overflow-hidden rounded-xl bg-surface mb-3"><img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&q=80" class="w-full h-full object-cover" alt=""></div>
+        <span class="chip bg-lime">Analysis</span>
+        <h3 class="font-bold text-[18px] leading-snug mt-2"><a href="article-01.html" class="title-link">The quiet repricing: why midcap earnings are rewriting the playbook</a></h3>
+        <div class="text-[12px] soft mt-1">Sarah Mendel · 8 min</div>
+      </article>
+      <article class="card">
+        <div class="aspect-[4/3] overflow-hidden rounded-xl bg-surface mb-3"><img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=600&q=80" class="w-full h-full object-cover" alt=""></div>
+        <span class="chip bg-surface">Markets</span>
+        <h3 class="font-bold text-[18px] leading-snug mt-2"><a href="#" class="title-link">Why the FTSE 250 is suddenly the most interesting index in Europe</a></h3>
+        <div class="text-[12px] soft mt-1">Priya Shah · 4 min</div>
+      </article>
+      <article class="card">
+        <div class="aspect-[4/3] overflow-hidden rounded-xl bg-surface mb-3"><img src="https://images.unsplash.com/photo-1640340434855-6084b1f4901c?w=600&q=80" class="w-full h-full object-cover" alt=""></div>
+        <span class="chip bg-surface">FTSE 250</span>
+        <h3 class="font-bold text-[18px] leading-snug mt-2"><a href="#" class="title-link">FTSE 250 earnings season: what the top-quartile names have in common</a></h3>
+        <div class="text-[12px] soft mt-1">Marcus Holden · 6 min</div>
+      </article>
+      <article class="card">
+        <div class="aspect-[4/3] overflow-hidden rounded-xl bg-surface mb-3"><img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&q=80" class="w-full h-full object-cover" alt=""></div>
+        <span class="chip bg-accent text-white">Deals</span>
+        <h3 class="font-bold text-[18px] leading-snug mt-2"><a href="#" class="title-link">Private equity eyes the UK midcap: five targets the buyside is watching</a></h3>
+        <div class="text-[12px] soft mt-1">Aisha Williams · 9 min</div>
+      </article>
+      <article class="card">
+        <div class="aspect-[4/3] overflow-hidden rounded-xl bg-surface mb-3"><img src="https://images.unsplash.com/photo-1579532582937-16c108930bf6?w=600&q=80" class="w-full h-full object-cover" alt=""></div>
+        <span class="chip bg-surface">Macro</span>
+        <h3 class="font-bold text-[18px] leading-snug mt-2"><a href="#" class="title-link">The domestic UK cycle: why the 250 moves first</a></h3>
+        <div class="text-[12px] soft mt-1">Elena Vasquez · 7 min</div>
+      </article>
+      <article class="card">
+        <div class="aspect-[4/3] overflow-hidden rounded-xl bg-surface mb-3"><img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=600&q=80" class="w-full h-full object-cover" alt=""></div>
+        <span class="chip bg-surface">IPOs</span>
+        <h3 class="font-bold text-[18px] leading-snug mt-2"><a href="#" class="title-link">The three London IPO candidates that would change the 250's shape</a></h3>
+        <div class="text-[12px] soft mt-1">Nadia Carson · 10 min</div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Constituents peek -->
+  <section class="py-10 border-t rule">
+    <div class="flex items-end justify-between mb-6">
+      <h2 class="display text-[28px]">Top constituents by weight</h2>
+      <a href="#" class="arrow-link inline-flex items-center gap-2 text-[13px] font-semibold">Full list (250) <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+    </div>
+    <div class="rounded-2xl border rule overflow-hidden">
+      <table class="w-full text-[14px]">
+        <thead class="bg-surface mono text-[11px] uppercase tracking-widest">
+          <tr>
+            <th class="text-left py-3 px-5">Ticker</th>
+            <th class="text-left py-3 px-5">Name</th>
+            <th class="text-left py-3 px-5">Sector</th>
+            <th class="text-right py-3 px-5">Price</th>
+            <th class="text-right py-3 px-5">Day %</th>
+            <th class="text-right py-3 px-5">Weight</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y rule">
+          <tr class="hover:bg-surface">
+            <td class="py-3 px-5"><a href="company-games-workshop.html" class="font-bold hover:text-[color:var(--accent)]">GAW</a></td>
+            <td class="py-3 px-5">Games Workshop</td>
+            <td class="py-3 px-5 soft">Consumer Disc.</td>
+            <td class="py-3 px-5 text-right mono">£145.20</td>
+            <td class="py-3 px-5 text-right mono up">+2.10%</td>
+            <td class="py-3 px-5 text-right mono">2.14%</td>
+          </tr>
+          <tr class="hover:bg-surface">
+            <td class="py-3 px-5"><a href="#" class="font-bold hover:text-[color:var(--accent)]">RMV</a></td>
+            <td class="py-3 px-5">Rightmove</td>
+            <td class="py-3 px-5 soft">Tech / Media</td>
+            <td class="py-3 px-5 text-right mono">£7.18</td>
+            <td class="py-3 px-5 text-right mono up">+1.82%</td>
+            <td class="py-3 px-5 text-right mono">1.88%</td>
+          </tr>
+          <tr class="hover:bg-surface">
+            <td class="py-3 px-5"><a href="#" class="font-bold hover:text-[color:var(--accent)]">MNKS</a></td>
+            <td class="py-3 px-5">Monks Investment Trust</td>
+            <td class="py-3 px-5 soft">Financials</td>
+            <td class="py-3 px-5 text-right mono">£11.48</td>
+            <td class="py-3 px-5 text-right mono up">+1.22%</td>
+            <td class="py-3 px-5 text-right mono">1.71%</td>
+          </tr>
+          <tr class="hover:bg-surface">
+            <td class="py-3 px-5"><a href="#" class="font-bold hover:text-[color:var(--accent)]">SVT</a></td>
+            <td class="py-3 px-5">Severn Trent</td>
+            <td class="py-3 px-5 soft">Utilities</td>
+            <td class="py-3 px-5 text-right mono">£26.14</td>
+            <td class="py-3 px-5 text-right mono down">−1.08%</td>
+            <td class="py-3 px-5 text-right mono">1.62%</td>
+          </tr>
+          <tr class="hover:bg-surface">
+            <td class="py-3 px-5"><a href="#" class="font-bold hover:text-[color:var(--accent)]">GNS</a></td>
+            <td class="py-3 px-5">Genus</td>
+            <td class="py-3 px-5 soft">Healthcare</td>
+            <td class="py-3 px-5 text-right mono">£19.62</td>
+            <td class="py-3 px-5 text-right mono up">+1.08%</td>
+            <td class="py-3 px-5 text-right mono">1.48%</td>
+          </tr>
+          <tr class="hover:bg-surface">
+            <td class="py-3 px-5"><a href="#" class="font-bold hover:text-[color:var(--accent)]">BYIT</a></td>
+            <td class="py-3 px-5">Bytes Technology</td>
+            <td class="py-3 px-5 soft">Tech / Services</td>
+            <td class="py-3 px-5 text-right mono">£4.92</td>
+            <td class="py-3 px-5 text-right mono up">+1.44%</td>
+            <td class="py-3 px-5 text-right mono">1.33%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-12 border-t rule">
+    <div class="rounded-3xl bg-ink text-white p-10 md:p-14 grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+      <div class="md:col-span-8">
+        <div class="kicker mb-3" style="color:var(--lime);">Markets Brief</div>
+        <h2 class="display text-[40px] md:text-[50px] leading-[0.98]">The midcap desk, in your inbox by 7.</h2>
+        <p class="text-[16px] mt-4 max-w-xl opacity-80">What moved, why, and who's positioned — curated every weekday morning before London opens.</p>
+      </div>
+      <div class="md:col-span-4 flex flex-col gap-3">
+        <form class="flex gap-2">
+          <input type="email" placeholder="you@company.com" class="flex-1 px-3 py-2 rounded-full text-[13px] text-ink">
+          <button class="bg-lime text-ink px-4 py-2 rounded-full text-[13px] font-bold">Join</button>
+        </form>
+        <a href="#" class="text-center underline text-[13px] opacity-80">See all newsletters →</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Footer -->
+<footer class="bg-ink text-white mt-10">
+  <div class="border-b border-white/10 py-3 mono text-[12px]">
+    <div class="max-w-[1360px] mx-auto flex items-center">
+      <span class="chip bg-lime mx-4">LIVE</span>
+      <div class="ticker-wrap flex-1">
+        <div class="ticker">
+          <span>FTSE 250 <b>20,614.3</b> <span class="up">+0.38%</span></span>
+          <span>FTSE 100 <b>8,214.9</b> <span class="down">−0.18%</span></span>
+          <span>S&amp;P 500 <b>5,842.1</b> <span class="up">+0.42%</span></span>
+          <span>NVDA <b>$142.88</b> <span class="up">+3.02%</span></span>
+          <span>GAW <b>£145.20</b> <span class="up">+2.10%</span></span>
+          <span>Brent <b>$73.14</b> <span class="down">−0.44%</span></span>
+          <span>FTSE 250 <b>20,614.3</b> <span class="up">+0.38%</span></span>
+          <span>FTSE 100 <b>8,214.9</b> <span class="down">−0.18%</span></span>
+          <span>NVDA <b>$142.88</b> <span class="up">+3.02%</span></span>
+          <span>GAW <b>£145.20</b> <span class="up">+2.10%</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="max-w-[1360px] mx-auto px-6 py-14 grid grid-cols-2 md:grid-cols-6 gap-8 text-[13px]">
+    <div class="col-span-2">
+      <div class="display text-[26px] mb-3">Business <span class="accent">Fortitude</span></div>
+      <p class="opacity-70 leading-relaxed max-w-xs">Independent journalism for operators, founders, and boards. Published in London.</p>
+    </div>
+    <div>
+      <div class="kicker opacity-60 mb-3">Read</div>
+      <ul class="space-y-2"><li><a href="#" class="hover:text-lime">Latest</a></li><li><a href="#" class="hover:text-lime">Markets</a></li><li><a href="#" class="hover:text-lime">Leadership</a></li><li><a href="#" class="hover:text-lime">Long Reads</a></li></ul>
+    </div>
+    <div>
+      <div class="kicker opacity-60 mb-3">Pro</div>
+      <ul class="space-y-2"><li><a href="#" class="hover:text-lime">Roundtables</a></li><li><a href="#" class="hover:text-lime">Model portfolios</a></li><li><a href="#" class="hover:text-lime">Deal database</a></li></ul>
+    </div>
+    <div>
+      <div class="kicker opacity-60 mb-3">Company</div>
+      <ul class="space-y-2"><li><a href="#" class="hover:text-lime">About</a></li><li><a href="#" class="hover:text-lime">Careers</a></li><li><a href="#" class="hover:text-lime">Advertise</a></li></ul>
+    </div>
+    <div>
+      <div class="kicker opacity-60 mb-3">Legal</div>
+      <ul class="space-y-2"><li><a href="#" class="hover:text-lime">Privacy</a></li><li><a href="#" class="hover:text-lime">Terms</a></li><li><a href="#" class="hover:text-lime">Cookies</a></li></ul>
+    </div>
+  </div>
+  <div class="border-t border-white/10 text-[12px]">
+    <div class="max-w-[1360px] mx-auto px-6 py-5 flex flex-col md:flex-row items-center justify-between gap-3 opacity-70">
+      <span>© 2026 Business Fortitude Ltd.</span>
+      <span>Not investment advice. Capital at risk.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.pill-nav a').forEach(el => {
+    el.addEventListener('click', (e) => {
+      if (el.getAttribute('href') === '#') e.preventDefault();
+      document.querySelectorAll('.pill-nav a').forEach(s => s.classList.remove('active'));
+      el.classList.add('active');
+    });
+  });
+  document.querySelectorAll('.range-pill').forEach(el => {
+    el.addEventListener('click', () => {
+      document.querySelectorAll('.range-pill').forEach(s => s.classList.remove('active'));
+      el.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>

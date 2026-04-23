@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Markets — Business Fortitude</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root {
+    --bg: #ffffff; --ink: #0a0a0a; --soft: #4a4a4a;
+    --accent: #0055ff; --lime: #d4ff3a;
+    --surface: #f5f5f4; --rule: #e7e5e4;
+  }
+  body { background: var(--bg); color: var(--ink); font-family: 'Inter', system-ui, sans-serif; }
+  .display { font-family: 'Inter', sans-serif; font-weight: 900; letter-spacing: -0.03em; line-height: 0.98; }
+  .mono { font-family: 'Space Grotesk', monospace; }
+  .accent { color: var(--accent); }
+  .bg-accent { background: var(--accent); }
+  .bg-lime { background: var(--lime); color: var(--ink); }
+  .bg-surface { background: var(--surface); }
+  .bg-ink { background: var(--ink); color: white; }
+  .soft { color: var(--soft); }
+  .rule { border-color: var(--rule); }
+  .kicker { font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; font-size: 11px; }
+  .chip { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
+  .card { transition: transform .35s ease; }
+  .card:hover { transform: translateY(-3px); }
+  .card:hover .title-link { color: var(--accent); }
+  .ticker-wrap { overflow: hidden; }
+  .ticker { display: inline-flex; gap: 40px; white-space: nowrap; animation: marquee 35s linear infinite; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .up { color: #059669; } .down { color: #dc2626; }
+  .btn-primary { background: var(--ink); color: white; border-radius: 999px; padding: 10px 20px; font-weight: 600; }
+  .btn-primary:hover { background: var(--accent); }
+  .pill-nav a.active { background: var(--ink); color: white; }
+  .pill-nav a { transition: all .2s; }
+  .lime-underline { background-image: linear-gradient(var(--lime), var(--lime)); background-size: 100% 0.35em; background-repeat: no-repeat; background-position: 0 88%; padding: 0 2px; }
+  .arrow-link svg { transition: transform .2s ease; }
+  .arrow-link:hover svg { transform: translateX(4px); }
+  .mega-mast { font-size: clamp(88px, 14vw, 196px); line-height: 0.9; letter-spacing: -0.045em; }
+  .pill-page { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 999px; font-weight: 600; font-size: 13px; }
+  .pill-page:hover { background: var(--surface); }
+  .pill-page.active { background: var(--ink); color: white; }
+</style>
+</head>
+<body class="min-h-screen">
+
+<!-- Header -->
+<header class="border-b rule bg-white sticky top-0 z-40">
+  <div class="max-w-[1360px] mx-auto px-6 flex items-center justify-between h-16">
+    <a href="index.html" class="flex items-center gap-2">
+      <span class="display text-[22px]">Business <span class="accent">Fortitude</span></span>
+    </a>
+    <nav class="hidden lg:flex items-center gap-1 pill-nav">
+      <a href="#" class="px-3 py-1.5 rounded-full text-[13px] font-medium hover:bg-surface">Latest</a>
+      <a href="#" class="active px-3 py-1.5 rounded-full text-[13px] font-medium">Markets</a>
+      <a href="#" class="px-3 py-1.5 rounded-full text-[13px] font-medium hover:bg-surface">Deals</a>
+      <a href="#" class="px-3 py-1.5 rounded-full text-[13px] font-medium hover:bg-surface">Leadership</a>
+      <a href="#" class="px-3 py-1.5 rounded-full text-[13px] font-medium hover:bg-surface">AI</a>
+      <a href="#" class="px-3 py-1.5 rounded-full text-[13px] font-medium hover:bg-surface">Startups</a>
+      <a href="#" class="px-3 py-1.5 rounded-full text-[13px] font-medium hover:bg-surface">Opinion</a>
+    </nav>
+    <div class="flex items-center gap-3">
+      <button aria-label="Search" class="p-2 hover:bg-surface rounded-full">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      </button>
+      <a href="#" class="hidden md:inline btn-primary text-[13px]">Subscribe</a>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-[1360px] mx-auto px-6">
+
+  <!-- Category mast -->
+  <section class="pt-10 pb-8 border-b rule">
+    <div class="mono text-[12px] uppercase tracking-[0.18em] soft mb-4">
+      <a href="index.html" class="hover:text-[color:var(--accent)]">Home</a>
+      <span class="mx-2">/</span>
+      <span>Category</span>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+      <div class="lg:col-span-8">
+        <h1 class="display mega-mast">Mar<span class="lime-underline">kets</span>.</h1>
+      </div>
+      <div class="lg:col-span-4">
+        <p class="text-[17px] leading-[1.55] soft max-w-md">Pricing power, positioning, flows. What the numbers are actually telling operators — not just traders.</p>
+        <div class="mt-5 flex items-center gap-3 mono text-[12px] uppercase tracking-widest">
+          <span class="chip bg-lime">Live</span>
+          <span class="soft">248 stories · 14 contributors</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filter chips -->
+  <section class="py-5 border-b rule">
+    <div class="flex items-center gap-3 overflow-x-auto pb-1 mono text-[12px] uppercase tracking-widest">
+      <span class="soft shrink-0">Filter:</span>
+      <button class="chip bg-ink text-white shrink-0">All</button>
+      <button class="chip bg-surface shrink-0 hover:bg-lime">FTSE 100</button>
+      <button class="chip bg-surface shrink-0 hover:bg-lime">FTSE 250</button>
+      <button class="chip bg-surface shrink-0 hover:bg-lime">US</button>
+      <button class="chip bg-surface shrink-0 hover:bg-lime">FX</button>
+      <button class="chip bg-surface shrink-0 hover:bg-lime">Credit</button>
+      <button class="chip bg-surface shrink-0 hover:bg-lime">Commodities</button>
+      <button class="chip bg-surface shrink-0 hover:bg-lime">Crypto</button>
+      <button class="chip bg-surface shrink-0 hover:bg-lime">IPOs</button>
+      <button class="chip bg-surface shrink-0 hover:bg-lime">Macro</button>
+    </div>
+  </section>
+
+  <!-- Lead story + sidebar -->
+  <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 py-10">
+    <article class="lg:col-span-8 card">
+      <div class="relative aspect-[16/9] overflow-hidden rounded-2xl bg-surface">
+        <img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=1600&q=80" class="w-full h-full object-cover" alt="">
+        <div class="absolute top-4 left-4 flex gap-2">
+          <span class="chip bg-lime">Lead</span>
+          <span class="chip bg-white/90">FTSE 250</span>
+        </div>
+      </div>
+      <div class="mt-5">
+        <h2 class="display text-[40px] md:text-[56px]">
+          <a href="article-01.html" class="title-link">The quiet <span class="lime-underline">repricing</span>: why midcap earnings are rewriting the playbook</a>
+        </h2>
+        <p class="text-[18px] leading-[1.55] soft mt-4 max-w-3xl">For two years the story was megacap dominance. A new quarter of filings suggests a different kind of discipline is winning — lean operators with pricing power.</p>
+        <div class="mt-4 flex items-center gap-3 text-[13px] soft">
+          <img src="https://i.pravatar.cc/64?img=41" class="w-7 h-7 rounded-full" alt="">
+          <span><b class="text-[color:var(--ink)]">Sarah Mendel</b></span>
+          <span>·</span><span>8 min read</span>
+          <span>·</span><span>Today, 09:14</span>
+        </div>
+      </div>
+    </article>
+
+    <aside class="lg:col-span-4 space-y-5">
+      <div class="bg-surface rounded-2xl p-5">
+        <div class="kicker mb-4 soft">Most read this week</div>
+        <ol class="space-y-4">
+          <li class="flex gap-4">
+            <span class="display text-[34px] soft">01</span>
+            <a href="#" class="block pt-1 title-link">
+              <h3 class="font-bold text-[15px] leading-snug">Sterling's range is ending: three signals traders are watching</h3>
+              <div class="text-[12px] soft mt-1">Elena Vasquez · 5 min</div>
+            </a>
+          </li>
+          <li class="flex gap-4 border-t rule pt-4">
+            <span class="display text-[34px] soft">02</span>
+            <a href="#" class="block pt-1 title-link">
+              <h3 class="font-bold text-[15px] leading-snug">Private credit's reckoning is quieter than you think — and closer</h3>
+              <div class="text-[12px] soft mt-1">Marcus Holden · 7 min</div>
+            </a>
+          </li>
+          <li class="flex gap-4 border-t rule pt-4">
+            <span class="display text-[34px] soft">03</span>
+            <a href="#" class="block pt-1 title-link">
+              <h3 class="font-bold text-[15px] leading-snug">The grid-scale battery boom is eating the solar developers alive</h3>
+              <div class="text-[12px] soft mt-1">Marcus Holden · 7 min</div>
+            </a>
+          </li>
+          <li class="flex gap-4 border-t rule pt-4">
+            <span class="display text-[34px] soft">04</span>
+            <a href="#" class="block pt-1 title-link">
+              <h3 class="font-bold text-[15px] leading-snug">Why the FTSE 250 is suddenly the most interesting index in Europe</h3>
+              <div class="text-[12px] soft mt-1">Priya Shah · 4 min</div>
+            </a>
+          </li>
+        </ol>
+      </div>
+
+      <div class="bg-ink text-white rounded-2xl p-6">
+        <div class="kicker mb-2" style="color:var(--lime);">Markets Brief</div>
+        <div class="display text-[24px] leading-[1.05] mb-3">Before the open. Every weekday.</div>
+        <form class="flex gap-2">
+          <input type="email" placeholder="you@company.com" class="flex-1 px-3 py-2 rounded-full text-[13px] text-ink">
+          <button class="bg-lime text-ink px-4 py-2 rounded-full text-[13px] font-bold">Join</button>
+        </form>
+        <div class="text-[11px] mt-3 opacity-70">78,000+ subscribers. No spam.</div>
+      </div>
+    </aside>
+  </section>
+
+  <!-- Indices strip -->
+  <section class="py-6 border-t rule">
+    <div class="flex items-end justify-between mb-5">
+      <h2 class="display text-[28px]">Indices</h2>
+      <a href="#" class="arrow-link inline-flex items-center gap-2 text-[13px] font-semibold">All tickers <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
+      <a href="ticker-ftse250.html" class="p-4 rounded-xl border rule hover:border-[color:var(--accent)] card">
+        <div class="flex items-center justify-between"><span class="font-bold">FTSE 250</span><span class="mono text-[12px] up">+0.38%</span></div>
+        <div class="text-[12px] soft mt-1">20,614.30</div>
+      </a>
+      <a href="#" class="p-4 rounded-xl border rule hover:border-[color:var(--accent)] card">
+        <div class="flex items-center justify-between"><span class="font-bold">FTSE 100</span><span class="mono text-[12px] down">−0.18%</span></div>
+        <div class="text-[12px] soft mt-1">8,214.90</div>
+      </a>
+      <a href="#" class="p-4 rounded-xl border rule hover:border-[color:var(--accent)] card">
+        <div class="flex items-center justify-between"><span class="font-bold">S&amp;P 500</span><span class="mono text-[12px] up">+0.42%</span></div>
+        <div class="text-[12px] soft mt-1">5,842.10</div>
+      </a>
+      <a href="#" class="p-4 rounded-xl border rule hover:border-[color:var(--accent)] card">
+        <div class="flex items-center justify-between"><span class="font-bold">NASDAQ</span><span class="mono text-[12px] up">+0.71%</span></div>
+        <div class="text-[12px] soft mt-1">18,620.30</div>
+      </a>
+      <a href="#" class="p-4 rounded-xl border rule hover:border-[color:var(--accent)] card">
+        <div class="flex items-center justify-between"><span class="font-bold">DAX</span><span class="mono text-[12px] up">+0.29%</span></div>
+        <div class="text-[12px] soft mt-1">19,944.00</div>
+      </a>
+      <a href="#" class="p-4 rounded-xl border rule hover:border-[color:var(--accent)] card">
+        <div class="flex items-center justify-between"><span class="font-bold">CAC 40</span><span class="mono text-[12px] down">−0.22%</span></div>
+        <div class="text-[12px] soft mt-1">7,512.40</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Story grid -->
+  <section class="py-10 border-t rule">
+    <div class="flex items-end justify-between mb-6">
+      <h2 class="display text-[32px]">All Markets stories</h2>
+      <div class="mono text-[12px] uppercase tracking-widest soft">Showing 1–12 of 248</div>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <article class="card">
+        <div class="aspect-[4/3] overflow-hidden rounded-xl bg-surface mb-3"><img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&q=80" class="w-full h-full object-cover" alt=""></div>
+        <span class="chip bg-surface">FTSE 250</span>
+        <h3 class="font-bold text-[17px] leading-snug mt-2"><a href="#" class="title-link">Why the FTSE 250 is suddenly the most interesting index in Europe</a></h3>
+        <div class="text-[12px] soft mt-1">Priya Shah · 4 min</div>
+      </article>
+      <article class="card">
+        <div class="aspect-[4/3] overflow-hidden rounded-xl bg-surface mb-3"><img src="https://images.unsplash.com/photo-1559523161-0fc0d8b38a7a?w=600&q=80" class="w-full h-full object-cover" alt=""></div>
+        <span class="chip bg-surface">FX</span>
+        <h3 class="font-bold text-[17px] leading-snug mt-2"><a href="#" class="title-link">Sterling's range is ending: three signals traders are watching</a></h3>
+        <div class="text-[12px] soft mt-1">Elena Vasquez · 5 min</div>
+      </article>
+      <article class="card">
+        <div class="aspect-[4/3] overflow-hidden rounded-xl bg-surface mb-3"><img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=600&q=80" class="w-full h-full object-cover" alt=""></div>
+        <span class="chip bg-surface">Credit</span>
+        <h3 class="font-bold text-[17px] leading-snug mt-2"><a href="#" class="title-link">Private credit's reckoning is quieter than you think — and closer</a></h3>
+        <div class="text-[12px] soft mt-1">Marcus Holden · 7 min</div>
+      </article>
+      <article class="card">
+        <div class="aspect-[4/3] overflow-hidden rounded-xl bg-surface mb-3"><img src="https://images.unsplash.com/photo-1528460033278-a6ba57020470?w=600&q=80" class="w-full h-full object-cover" alt=""></div>
+        <span class="chip bg-lime">Macro</span>
+        <h3 class="font-bold text-[17px] leading-snug mt-2"><a href="#" class="title-link">The Bank of England's next move is not the one markets are pricing</a></h3>
+        <div class="text-[12px] soft mt-1">Elena Vasquez · 9 min</div>
+      </article>
+      <article class="card">
+        <div class="aspect-[4/3] overflow-hidden rounded-xl bg-surface mb-3"><img src="https://images.unsplash.com/photo-1579532582937-16c108930bf6?w=600&q=80" class="w-full h-full object-cover" alt=""></div>
+        <span class="chip bg-surface">Commodities</span>
+        <h3 class="font-bold text-[17px] leading-snug mt-2"><a href="#" class="title-link">Copper breaks its correlation: why this cycle is different</a></h3>
+        <div class="text-[12px] soft mt-1">Marcus Holden · 6 min</div>
+      </article>
+      <article class="card">
+        <div class="aspect-[4/3] overflow-hidden rounded-xl bg-surface mb-3"><img src="https://images.unsplash.com/photo-1642790551116-18e150f248e9?w=600&q=80" class="w-full h-full object-cover" alt=""></div>
+        <span class="chip bg-surface">Crypto</span>
+        <h3 class="font-bold text-[17px] leading-snug mt-2"><a href="#" class="title-link">Bitcoin above $87k: where the flows are actually coming from</a></h3>
+        <div class="text-[12px] soft mt-1">Priya Shah · 5 min</div>
+      </article>
+      <article class="card">
+        <div class="aspect-[4/3] overflow-hidden rounded-xl bg-surface mb-3"><img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&q=80" class="w-full h-full object-cover" alt=""></div>
+        <span class="chip bg-surface">IPOs</span>
+        <h3 class="font-bold text-[17px] leading-snug mt-2"><a href="#" class="title-link">London's IPO pipeline quietly thickens — Arm's halo effect arrives</a></h3>
+        <div class="text-[12px] soft mt-1">Aisha Williams · 8 min</div>
+      </article>
+      <article class="card">
+        <div class="aspect-[4/3] overflow-hidden rounded-xl bg-surface mb-3"><img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=600&q=80" class="w-full h-full object-cover" alt=""></div>
+        <span class="chip bg-accent text-white">Analysis</span>
+        <h3 class="font-bold text-[17px] leading-snug mt-2"><a href="#" class="title-link">Why the mid-cap discount is finally closing — and what unlocks it</a></h3>
+        <div class="text-[12px] soft mt-1">Sarah Mendel · 10 min</div>
+      </article>
+      <article class="card">
+        <div class="aspect-[4/3] overflow-hidden rounded-xl bg-surface mb-3"><img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=600&q=80" class="w-full h-full object-cover" alt=""></div>
+        <span class="chip bg-surface">US</span>
+        <h3 class="font-bold text-[17px] leading-snug mt-2"><a href="#" class="title-link">The S&amp;P's concentration risk has a new shape this quarter</a></h3>
+        <div class="text-[12px] soft mt-1">Marcus Holden · 6 min</div>
+      </article>
+      <article class="card">
+        <div class="aspect-[4/3] overflow-hidden rounded-xl bg-surface mb-3"><img src="https://images.unsplash.com/photo-1640340434855-6084b1f4901c?w=600&q=80" class="w-full h-full object-cover" alt=""></div>
+        <span class="chip bg-surface">FTSE 100</span>
+        <h3 class="font-bold text-[17px] leading-snug mt-2"><a href="#" class="title-link">FTSE 100 earnings: the three lines investors are skipping</a></h3>
+        <div class="text-[12px] soft mt-1">Priya Shah · 5 min</div>
+      </article>
+      <article class="card">
+        <div class="aspect-[4/3] overflow-hidden rounded-xl bg-surface mb-3"><img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&q=80" class="w-full h-full object-cover" alt=""></div>
+        <span class="chip bg-surface">Macro</span>
+        <h3 class="font-bold text-[17px] leading-snug mt-2"><a href="#" class="title-link">US productivity revision: what it means for the rates path</a></h3>
+        <div class="text-[12px] soft mt-1">Elena Vasquez · 7 min</div>
+      </article>
+      <article class="card">
+        <div class="aspect-[4/3] overflow-hidden rounded-xl bg-surface mb-3"><img src="https://images.unsplash.com/photo-1605792657660-596af9009e82?w=600&q=80" class="w-full h-full object-cover" alt=""></div>
+        <span class="chip bg-surface">Commodities</span>
+        <h3 class="font-bold text-[17px] leading-snug mt-2"><a href="#" class="title-link">Oil's structural bid: why Brent stays rangebound into Q3</a></h3>
+        <div class="text-[12px] soft mt-1">Marcus Holden · 4 min</div>
+      </article>
+    </div>
+
+    <!-- Pagination -->
+    <div class="flex items-center justify-center gap-2 mt-10">
+      <a href="#" class="pill-page">‹</a>
+      <a href="#" class="pill-page active">1</a>
+      <a href="#" class="pill-page">2</a>
+      <a href="#" class="pill-page">3</a>
+      <span class="pill-page soft">…</span>
+      <a href="#" class="pill-page">21</a>
+      <a href="#" class="pill-page">›</a>
+    </div>
+  </section>
+
+  <!-- CTA band -->
+  <section class="py-12 border-t rule">
+    <div class="rounded-3xl bg-lime p-10 md:p-14 grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+      <div class="md:col-span-8">
+        <div class="kicker mb-3">Business Fortitude Pro</div>
+        <h2 class="display text-[40px] md:text-[50px] leading-[0.98]">Markets intelligence, before the desk opens.</h2>
+        <p class="text-[16px] mt-4 max-w-xl">Pro subscribers get the Markets Brief, the weekly model portfolio, and analyst calls from our desk — by 7:00 BST.</p>
+      </div>
+      <div class="md:col-span-4 flex flex-col gap-3">
+        <a href="#" class="btn-primary text-center">Start 14-day trial</a>
+        <a href="#" class="text-center underline text-[13px]">See what Pro includes →</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Footer -->
+<footer class="bg-ink text-white mt-10">
+  <div class="border-b border-white/10 py-3 mono text-[12px]">
+    <div class="max-w-[1360px] mx-auto flex items-center">
+      <span class="chip bg-lime mx-4">LIVE</span>
+      <div class="ticker-wrap flex-1">
+        <div class="ticker">
+          <span>FTSE 250 <b>20,614.3</b> <span class="up">+0.38%</span></span>
+          <span>FTSE 100 <b>8,214.9</b> <span class="down">−0.18%</span></span>
+          <span>S&amp;P 500 <b>5,842.1</b> <span class="up">+0.42%</span></span>
+          <span>NVDA <b>$142.88</b> <span class="up">+3.02%</span></span>
+          <span>GAW <b>£145.20</b> <span class="up">+2.10%</span></span>
+          <span>Brent <b>$73.14</b> <span class="down">−0.44%</span></span>
+          <span>FTSE 250 <b>20,614.3</b> <span class="up">+0.38%</span></span>
+          <span>FTSE 100 <b>8,214.9</b> <span class="down">−0.18%</span></span>
+          <span>S&amp;P 500 <b>5,842.1</b> <span class="up">+0.42%</span></span>
+          <span>NVDA <b>$142.88</b> <span class="up">+3.02%</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="max-w-[1360px] mx-auto px-6 py-14 grid grid-cols-2 md:grid-cols-6 gap-8 text-[13px]">
+    <div class="col-span-2">
+      <div class="display text-[26px] mb-3">Business <span class="accent">Fortitude</span></div>
+      <p class="opacity-70 leading-relaxed max-w-xs">Independent journalism for operators, founders, and boards. Published in London.</p>
+    </div>
+    <div>
+      <div class="kicker opacity-60 mb-3">Read</div>
+      <ul class="space-y-2"><li><a href="#" class="hover:text-lime">Latest</a></li><li><a href="#" class="hover:text-lime">Markets</a></li><li><a href="#" class="hover:text-lime">Leadership</a></li><li><a href="#" class="hover:text-lime">Long Reads</a></li></ul>
+    </div>
+    <div>
+      <div class="kicker opacity-60 mb-3">Pro</div>
+      <ul class="space-y-2"><li><a href="#" class="hover:text-lime">Roundtables</a></li><li><a href="#" class="hover:text-lime">Model portfolios</a></li><li><a href="#" class="hover:text-lime">Deal database</a></li></ul>
+    </div>
+    <div>
+      <div class="kicker opacity-60 mb-3">Company</div>
+      <ul class="space-y-2"><li><a href="#" class="hover:text-lime">About</a></li><li><a href="#" class="hover:text-lime">Careers</a></li><li><a href="#" class="hover:text-lime">Advertise</a></li></ul>
+    </div>
+    <div>
+      <div class="kicker opacity-60 mb-3">Legal</div>
+      <ul class="space-y-2"><li><a href="#" class="hover:text-lime">Privacy</a></li><li><a href="#" class="hover:text-lime">Terms</a></li><li><a href="#" class="hover:text-lime">Cookies</a></li></ul>
+    </div>
+  </div>
+  <div class="border-t border-white/10 text-[12px]">
+    <div class="max-w-[1360px] mx-auto px-6 py-5 flex flex-col md:flex-row items-center justify-between gap-3 opacity-70">
+      <span>© 2026 Business Fortitude Ltd.</span>
+      <span>Not investment advice. Capital at risk.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.pill-nav a').forEach(el => {
+    el.addEventListener('click', (e) => {
+      if (el.getAttribute('href') === '#') e.preventDefault();
+      document.querySelectorAll('.pill-nav a').forEach(s => s.classList.remove('active'));
+      el.classList.add('active');
+    });
+  });
+  document.querySelectorAll('button.chip').forEach(el => {
+    el.addEventListener('click', () => {
+      const sibs = el.parentElement.querySelectorAll('button.chip');
+      sibs.forEach(s => { s.classList.remove('bg-ink','text-white'); s.classList.add('bg-surface'); });
+      el.classList.remove('bg-surface');
+      el.classList.add('bg-ink','text-white');
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SCALE Expo, day two — Business Fortitude</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root {
+    --bg: #ffffff; --ink: #0a0a0a; --soft: #4a4a4a;
+    --accent: #0055ff; --lime: #d4ff3a;
+    --surface: #f5f5f4; --rule: #e7e5e4;
+  }
+  body { background: var(--bg); color: var(--ink); font-family: 'Inter', system-ui, sans-serif; }
+  .display { font-family: 'Inter', sans-serif; font-weight: 900; letter-spacing: -0.03em; line-height: 0.98; }
+  .mono { font-family: 'Space Grotesk', monospace; }
+  .accent { color: var(--accent); }
+  .bg-accent { background: var(--accent); }
+  .bg-lime { background: var(--lime); color: var(--ink); }
+  .bg-surface { background: var(--surface); }
+  .bg-ink { background: var(--ink); color: white; }
+  .soft { color: var(--soft); }
+  .rule { border-color: var(--rule); }
+  .kicker { font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; font-size: 11px; }
+  .chip { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
+  .card:hover .title-link { color: var(--accent); }
+  .card { transition: transform .35s ease; }
+  .card:hover { transform: translateY(-3px); }
+  .up { color: #059669; } .down { color: #dc2626; }
+  .btn-primary { background: var(--ink); color: white; border-radius: 999px; padding: 10px 20px; font-weight: 600; }
+  .btn-primary:hover { background: var(--accent); }
+  .pill-nav a.active { background: var(--ink); color: white; }
+  .lime-underline { background-image: linear-gradient(var(--lime), var(--lime)); background-size: 100% 0.35em; background-repeat: no-repeat; background-position: 0 88%; padding: 0 2px; }
+  .arrow-link svg { transition: transform .2s ease; }
+  .arrow-link:hover svg { transform: translateX(4px); }
+
+  .article-body { font-size: 18px; line-height: 1.75; color: var(--ink); }
+  .article-body > p { margin-bottom: 1.25em; }
+  .article-body .lead { font-size: 21px; line-height: 1.55; font-weight: 500; color: var(--ink); }
+  .article-body h2 { font-family: 'Inter', sans-serif; font-weight: 900; font-size: 30px; line-height: 1.1; letter-spacing: -0.02em; margin: 2.2em 0 0.5em; }
+  .article-body h3 { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 20px; line-height: 1.2; letter-spacing: -0.01em; margin: 1.8em 0 0.4em; }
+  .article-body a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+  .article-body a:hover { text-decoration-thickness: 2px; }
+  .article-body blockquote { border-left: 4px solid var(--lime); padding: 0.2em 0 0.2em 1.3em; margin: 1.5em 0; font-style: normal; font-size: 20px; font-weight: 500; color: var(--ink); }
+  .article-body ul { margin: 1em 0 1.3em 1.3em; list-style: disc; }
+  .article-body ul li { margin-bottom: 0.5em; }
+  .article-body .pull-quote { background: var(--ink); color: white; border-radius: 24px; padding: 2em 2.2em; margin: 2em 0; font-family: 'Inter', sans-serif; font-weight: 800; font-size: 26px; line-height: 1.25; letter-spacing: -0.01em; }
+  .article-body .pull-quote .attr { display: block; font-family: 'Space Grotesk', monospace; font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.12em; color: var(--lime); margin-top: 1em; }
+
+  .entity-chip { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 999px; background: var(--surface); color: var(--ink); border: 1px solid var(--rule); text-decoration: none !important; }
+  .entity-chip:hover { background: var(--accent); color: white; border-color: var(--accent); }
+  .entity-chip .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+  .entity-chip:hover .dot { background: var(--lime); }
+
+  .takeaways { background: var(--lime); border-radius: 24px; padding: 1.6em 1.8em; margin: 2em 0; }
+  .takeaways h4 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em; font-weight: 700; margin-bottom: .8em; }
+  .takeaways ul { margin: 0; list-style: none; }
+  .takeaways ul li { font-size: 15px; line-height: 1.55; padding-left: 1.4em; position: relative; margin-bottom: .6em; font-weight: 500; }
+  .takeaways ul li::before { content: "→"; position: absolute; left: 0; font-weight: 700; }
+
+  .share-btn { width: 40px; height: 40px; border-radius: 999px; background: var(--surface); display: inline-flex; align-items: center; justify-content: center; color: var(--ink); transition: all .2s; }
+  .share-btn:hover { background: var(--ink); color: white; }
+  .progress { position: fixed; top: 0; left: 0; height: 3px; background: var(--accent); width: 0; z-index: 100; }
+  .disclosure { font-size: 12.5px; line-height: 1.6; color: var(--soft); background: var(--surface); border-radius: 18px; padding: 1.2em 1.4em; margin: 2em 0; }
+  .disclosure strong { color: var(--ink); }
+
+  /* Live-dispatch specifics */
+  .live-pulse { width: 8px; height: 8px; border-radius: 999px; background: #dc2626; display: inline-block; margin-right: 6px; animation: pulse 1.4s infinite; }
+  @keyframes pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(1.3); } }
+  .update-log { border-left: 2px solid var(--rule); padding-left: 1.4em; margin: 1.5em 0; }
+  .update-log .entry { position: relative; padding-bottom: 1.4em; }
+  .update-log .entry::before { content: ""; position: absolute; left: calc(-1.4em - 5px); top: 8px; width: 10px; height: 10px; border-radius: 999px; background: var(--ink); border: 2px solid white; }
+  .update-log .entry.hot::before { background: #dc2626; }
+  .update-log .time { font-family: 'Space Grotesk', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--soft); margin-bottom: 4px; }
+  .update-log .headline { font-weight: 700; font-size: 16px; line-height: 1.35; margin-bottom: 4px; }
+  .update-log .entry p { font-size: 14px; line-height: 1.6; color: var(--soft); margin: 0; }
+</style>
+</head>
+<body class="min-h-screen">
+
+<div class="progress" id="progress"></div>
+
+<!-- Header -->
+<header class="border-b rule bg-white sticky top-0 z-40">
+  <div class="max-w-[1360px] mx-auto px-6 flex items-center justify-between h-16">
+    <a href="index.html" class="flex items-center gap-2">
+      <span class="display text-[22px]">Business <span class="accent">Fortitude</span></span>
+    </a>
+    <nav class="hidden lg:flex items-center gap-1 pill-nav">
+      <a href="02-modern-business-tech.html" class="px-3 py-1.5 rounded-full text-[13px] font-medium hover:bg-surface">Latest</a>
+      <a href="category-markets.html" class="px-3 py-1.5 rounded-full text-[13px] font-medium hover:bg-surface">Markets</a>
+      <a href="#" class="px-3 py-1.5 rounded-full text-[13px] font-medium hover:bg-surface">Deals</a>
+      <a href="#" class="active px-3 py-1.5 rounded-full text-[13px] font-medium">Leadership</a>
+      <a href="#" class="px-3 py-1.5 rounded-full text-[13px] font-medium hover:bg-surface">AI</a>
+      <a href="#" class="px-3 py-1.5 rounded-full text-[13px] font-medium hover:bg-surface">Startups</a>
+      <a href="#" class="px-3 py-1.5 rounded-full text-[13px] font-medium hover:bg-surface">Opinion</a>
+    </nav>
+    <div class="flex items-center gap-3">
+      <button aria-label="Search" class="p-2 hover:bg-surface rounded-full">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      </button>
+      <a href="#" class="hidden md:inline btn-primary text-[13px]">Subscribe</a>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-[1360px] mx-auto px-6">
+
+  <!-- Breadcrumb -->
+  <div class="pt-6 text-[12px] mono soft uppercase tracking-widest">
+    <a href="index.html" class="hover:accent">Home</a>
+    <span class="mx-2 opacity-40">/</span>
+    <span class="opacity-60">Leadership</span>
+    <span class="mx-2 opacity-40">/</span>
+    <span class="opacity-60">Live</span>
+  </div>
+
+  <!-- Article header -->
+  <section class="pt-6 pb-8">
+    <div class="max-w-[820px]">
+      <div class="flex items-center gap-2 mb-5">
+        <span class="chip bg-ink text-white"><span class="live-pulse"></span>Live dispatch</span>
+        <span class="chip bg-accent text-white">Leadership</span>
+        <span class="chip bg-surface">Rolling coverage</span>
+      </div>
+      <h1 class="display text-[46px] md:text-[72px]">The scale-up floor, <span class="lime-underline">day two</span>.</h1>
+      <p class="text-[20px] md:text-[22px] leading-[1.5] soft mt-6 font-medium">Four thousand founders, a pitch stage promising £3,000 in coaching to the winners, and a government-backed AI fund the whole room is quietly pricing into plans. Our live notebook from the Business Design Centre as Britain's growth stage meets in one room.</p>
+
+      <div class="flex flex-wrap items-center gap-5 mt-8 pt-6 border-t rule">
+        <div class="flex items-center gap-3">
+          <img src="https://i.pravatar.cc/80?img=32" class="w-11 h-11 rounded-full object-cover" alt="">
+          <div>
+            <div class="text-[14px] font-bold">Rachel Okonkwo</div>
+            <div class="text-[12px] soft">Startups correspondent · Islington</div>
+          </div>
+        </div>
+        <div class="text-[12px] soft mono">
+          23 Apr 2026 · 08:42 · Updated 14:18 BST
+        </div>
+        <div class="flex items-center gap-2 ml-auto">
+          <a href="#" class="share-btn" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+          <a href="#" class="share-btn" aria-label="LinkedIn"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          <a href="#" class="share-btn" aria-label="Save"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></a>
+          <a href="#" class="share-btn" aria-label="Copy"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.72"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.72-1.72"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <figure class="pb-8">
+    <div class="relative aspect-[16/8] overflow-hidden rounded-3xl bg-surface">
+      <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1800&q=85" class="w-full h-full object-cover" alt="">
+      <div class="absolute top-5 left-5 flex gap-2">
+        <span class="chip bg-white/90">Business Design Centre · Islington</span>
+      </div>
+    </div>
+    <figcaption class="text-[12px] soft mt-3 italic">The main auditorium fills for the day-two keynote. Photo — Business Fortitude.</figcaption>
+  </figure>
+
+  <!-- Entity chips -->
+  <div class="pb-6">
+    <div class="max-w-[820px] flex flex-wrap items-center gap-2">
+      <span class="text-[11px] mono uppercase tracking-widest soft mr-1">In this story:</span>
+      <a href="#" class="entity-chip"><span class="dot"></span>SCALE London</a>
+      <a href="#" class="entity-chip"><span class="dot"></span>SCALE Ventures</a>
+      <a href="#" class="entity-chip"><span class="dot"></span>Liz Barclay</a>
+      <a href="#" class="entity-chip"><span class="dot"></span>Dwain Reid</a>
+      <a href="#" class="entity-chip"><span class="dot"></span>UK Business Angels Association</a>
+      <a href="#" class="entity-chip"><span class="dot"></span>Sovereign AI Unit</a>
+    </div>
+  </div>
+
+  <!-- Body + rail -->
+  <div class="pb-16 grid grid-cols-1 lg:grid-cols-12 gap-10">
+    <article class="lg:col-span-8 article-body">
+      <p class="lead">The room does a particular thing in its second hour. The polite pitch-practice energy of the opening dissipates, the coffees land, and founders start talking to each other about the numbers they didn't put on the slides. That's SCALE at its best. It is also, this year, the first proper read of whether the government's scale-up posture since Easter has actually moved behaviour on the ground.</p>
+
+      <p>More than four thousand scale-up leaders are at the Business Design Centre in Islington for the two-day run, according to organisers, with roughly seven in ten attendees being founders or C-suite. That ratio matters. It is not a sponsor conference wearing a founder badge. The floor is working.</p>
+
+      <div class="pull-quote">
+        "Everyone in this room has done the ten-million number. The question is whether the rails under the next ten million have actually improved."
+        <span class="attr">Female founder, B2B SaaS · On the floor, day one</span>
+      </div>
+
+      <h2>What the day looks like</h2>
+
+      <p>The day-one pitch competition, judged by former small-business commissioner Liz Barclay, spotlighted female founders; day two, headed by Dwain Reid, gives the stage to founders from under-represented communities. Two winners walk away with a package including strategic coaching worth £3,000 from SCALE Ventures and its partners.</p>
+
+      <p>Three themes from our rounds this morning. First, the <a href="#">Sovereign AI Unit's</a> £500m remit, announced on 16 April, is being priced into plans more aggressively than we expected. Founders who are nowhere near the initial seven-company cohort are still structuring UK-first hiring assumptions around the compute-access track. Second, the 6 April tax-relief expansion of <a href="#">EMI</a>, <a href="#">EIS</a> and <a href="#">VCT</a> is changing what Series A-to-B rounds look like, and advisers on the floor are already rewriting option-grant templates. Third, the day-one employment rights that came in the same week are taking up more CFO time than any of the AI conversations.</p>
+
+      <h2>Day-two update log</h2>
+
+      <div class="update-log">
+        <div class="entry hot">
+          <div class="time">14:18 BST</div>
+          <div class="headline">Dwain Reid's panel names three finalists for the under-represented founders prize</div>
+          <p>A Manchester-based MedTech, a Leeds agri-AI platform, and a London-based fintech focused on the self-employed. Winner announced at 17:30.</p>
+        </div>
+        <div class="entry">
+          <div class="time">12:40 BST</div>
+          <div class="headline">BVCA and BBB panel: "Mid-market capital is not the problem. Sequencing is."</div>
+          <p>British Business Bank's head of growth finance and a BVCA delegate agree that capacity exists at Series B-to-C, but that founders are signing term sheets in the wrong order. "The tax-advantaged pool has just expanded. Use it first, not last."</p>
+        </div>
+        <div class="entry">
+          <div class="time">11:05 BST</div>
+          <div class="headline">Yesterday's winner: Brighton-based HR platform wins the female founder prize</div>
+          <p>The company, which serves sub-50-headcount employers, said the £3,000 coaching package was "the most practical thing the ecosystem has given us in two years."</p>
+        </div>
+        <div class="entry">
+          <div class="time">09:42 BST</div>
+          <div class="headline">Keynote: Technology Secretary addresses the hall on the Sovereign AI rollout</div>
+          <p>Liz Kendall tells founders the Unit will make a second cohort announcement "before the summer recess". No ambiguity on the direction of travel.</p>
+        </div>
+        <div class="entry">
+          <div class="time">08:15 BST</div>
+          <div class="headline">Doors open. Day-two badges are through in twelve minutes.</div>
+          <p>Faster than day one. Organisers credit the move of the badge desk to the north side of the atrium.</p>
+        </div>
+      </div>
+
+      <div class="takeaways">
+        <h4>Key takeaways</h4>
+        <ul>
+          <li>Seven in ten of the 4,000+ attendees are founders or C-suite. The ratio matters. It is a working floor, not a sponsor floor.</li>
+          <li>The Sovereign AI Unit's £500m remit is already being priced into UK-first hiring assumptions, even by founders outside the cohort.</li>
+          <li>Advisers on the floor are rewriting option-grant templates this week to reflect the 6 April EMI expansion.</li>
+          <li>Day-one employment rights are taking up more CFO-level time at SCALE than any of the AI-strategy conversations.</li>
+          <li>A second Sovereign AI cohort is flagged by the Technology Secretary for "before the summer recess".</li>
+        </ul>
+      </div>
+
+      <h2>The room's mood, in one sentence</h2>
+
+      <p>The floor is less giddy than last year and more pragmatic than the year before that. Founders are planning. They are doing arithmetic. They are not pitching each other. That is a healthier room than it looks from the outside, and a more useful one than the glossier year would suggest. Business Fortitude will continue updating through the close of day two.</p>
+
+      <div class="disclosure">
+        <strong>Disclosure.</strong> This article is for general information only. It is not financial advice, investment advice, or a recommendation to buy or sell any security, and is not a financial promotion within the meaning of the Financial Services and Markets Act 2000. Details of schemes referenced are summaries only. Founders should take independent legal and tax advice before relying on EMI, EIS or VCT structures. Business Fortitude is not authorised or regulated by the Financial Conduct Authority.
+      </div>
+
+      <div class="mt-8 pt-6 border-t rule">
+        <div class="kicker soft mb-3">Sources</div>
+        <ul class="text-[13px] space-y-2 soft list-disc pl-5">
+          <li>SCALE Expo &amp; Summit 2026 organisers briefing, Business Design Centre, 22-23 April 2026.</li>
+          <li>UK Business Angels Association event materials, April 2026.</li>
+          <li>Elite Business Magazine, "SCALE: Shaping the scaleup success stories of the future", April 2026.</li>
+          <li>Gov.uk, Sovereign AI Unit launch announcement, 16 April 2026.</li>
+          <li>Growth Platform, "Britain's innovators backed with around £100m of new investment", April 2026.</li>
+          <li>On-the-floor interviews, Business Fortitude, 22-23 April 2026.</li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- Right rail -->
+    <aside class="lg:col-span-4 space-y-5">
+      <!-- Live agenda card -->
+      <div class="bg-ink text-white rounded-2xl p-5">
+        <div class="flex items-center justify-between mb-4">
+          <div class="kicker" style="color:var(--lime);"><span class="live-pulse"></span>Live · Day two</div>
+          <span class="mono text-[11px] opacity-60">14:18 BST</span>
+        </div>
+        <div class="space-y-3 text-[13px]">
+          <div class="flex gap-3 pb-3 border-b border-white/10">
+            <span class="mono text-[11px] opacity-60 shrink-0 w-12">15:00</span>
+            <span>Dwain Reid pitch final</span>
+          </div>
+          <div class="flex gap-3 pb-3 border-b border-white/10">
+            <span class="mono text-[11px] opacity-60 shrink-0 w-12">15:45</span>
+            <span>SCALE Ventures panel: operator-led funds</span>
+          </div>
+          <div class="flex gap-3 pb-3 border-b border-white/10">
+            <span class="mono text-[11px] opacity-60 shrink-0 w-12">16:30</span>
+            <span>FSB &amp; BBB: SSP at day one — operator Q&amp;A</span>
+          </div>
+          <div class="flex gap-3 pb-3 border-b border-white/10">
+            <span class="mono text-[11px] opacity-60 shrink-0 w-12">17:30</span>
+            <span style="color:var(--lime); font-weight:700;">Prize announcement</span>
+          </div>
+          <div class="flex gap-3">
+            <span class="mono text-[11px] opacity-60 shrink-0 w-12">18:15</span>
+            <span>Closing drinks, atrium</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trending -->
+      <div class="bg-surface rounded-2xl p-5">
+        <div class="kicker soft mb-4">Trending today</div>
+        <ol class="space-y-4 divide-y rule">
+          <li class="flex gap-3 pt-0">
+            <span class="display text-[22px] accent">01</span>
+            <a href="article-03.html" class="font-bold text-[15px] leading-snug hover:accent">Seven bets: the Sovereign AI Fund's opening cohort</a>
+          </li>
+          <li class="flex gap-3 pt-4">
+            <span class="display text-[22px] accent">02</span>
+            <a href="article-04.html" class="font-bold text-[15px] leading-snug hover:accent">KeyCorp's Clearwater deal opens a transatlantic door</a>
+          </li>
+          <li class="flex gap-3 pt-4">
+            <span class="display text-[22px] accent">03</span>
+            <a href="article-05.html" class="font-bold text-[15px] leading-snug hover:accent">The day-one rights era has begun. Here's the list.</a>
+          </li>
+          <li class="flex gap-3 pt-4">
+            <span class="display text-[22px] accent">04</span>
+            <a href="article-06.html" class="font-bold text-[15px] leading-snug hover:accent">The quiet tax-break expansion that changed the maths</a>
+          </li>
+        </ol>
+      </div>
+
+      <!-- Newsletter -->
+      <div class="bg-lime rounded-2xl p-6">
+        <div class="kicker mb-2">The SCALE notebook</div>
+        <div class="display text-[24px] leading-[1.05] mb-3">Tonight's close. In your inbox by 19:00.</div>
+        <form class="flex gap-2">
+          <input type="email" placeholder="you@company.com" class="flex-1 px-3 py-2 rounded-full text-[13px]">
+          <button type="button" class="bg-ink text-white px-4 py-2 rounded-full text-[13px] font-bold">Join</button>
+        </form>
+        <div class="text-[11px] mt-3 opacity-80">One-off. Unsubscribe after the summary.</div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Author card -->
+  <section class="py-12 border-t rule">
+    <div class="bg-surface rounded-3xl p-8 md:p-10 grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+      <div class="md:col-span-2">
+        <img src="https://i.pravatar.cc/240?img=32" class="w-24 h-24 rounded-full object-cover" alt="">
+      </div>
+      <div class="md:col-span-8">
+        <div class="kicker soft mb-2">About the author</div>
+        <div class="display text-[28px] mb-2">Rachel Okonkwo</div>
+        <p class="soft text-[15px] leading-[1.6]">Startups correspondent at Business Fortitude. Reports on UK scale-up finance, operator-led funds, and the founder stage. Previously at Sifted.</p>
+      </div>
+      <div class="md:col-span-2 flex md:justify-end">
+        <a href="#" class="btn-primary text-[13px] inline-block">All articles →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Related -->
+  <section class="py-10 border-t rule">
+    <div class="flex items-end justify-between mb-6">
+      <div>
+        <div class="kicker soft mb-2">Keep reading</div>
+        <h2 class="display text-[32px]">From the same week</h2>
+      </div>
+      <a href="02-modern-business-tech.html" class="arrow-link inline-flex items-center gap-2 text-[14px] font-semibold">All latest <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <article class="card">
+        <div class="aspect-[4/3] overflow-hidden rounded-2xl bg-surface mb-3"><img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=600&q=80" class="w-full h-full object-cover" alt=""></div>
+        <span class="chip bg-accent text-white">AI</span>
+        <h3 class="font-bold text-[18px] leading-snug mt-2"><a href="article-03.html" class="title-link">Seven bets: inside the Sovereign AI Fund's opening cohort</a></h3>
+        <div class="text-[12px] soft mt-1">Nadia Carson · 9 min</div>
+      </article>
+      <article class="card">
+        <div class="aspect-[4/3] overflow-hidden rounded-2xl bg-surface mb-3"><img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&q=80" class="w-full h-full object-cover" alt=""></div>
+        <span class="chip bg-lime">Deals</span>
+        <h3 class="font-bold text-[18px] leading-snug mt-2"><a href="article-04.html" class="title-link">KeyCorp's Clearwater deal opens a transatlantic door</a></h3>
+        <div class="text-[12px] soft mt-1">Marcus Holden · 6 min</div>
+      </article>
+      <article class="card">
+        <div class="aspect-[4/3] overflow-hidden rounded-2xl bg-surface mb-3"><img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=600&q=80" class="w-full h-full object-cover" alt=""></div>
+        <span class="chip bg-surface">Regulation</span>
+        <h3 class="font-bold text-[18px] leading-snug mt-2"><a href="article-05.html" class="title-link">The day-one rights era has begun. Here's the list.</a></h3>
+        <div class="text-[12px] soft mt-1">Priya Shah · 7 min</div>
+      </article>
+    </div>
+  </section>
+
+</main>
+
+<!-- Footer -->
+<footer class="bg-ink text-white mt-10">
+  <div class="max-w-[1360px] mx-auto px-6 py-14 grid grid-cols-2 md:grid-cols-6 gap-8 text-[13px]">
+    <div class="col-span-2">
+      <div class="display text-[26px] mb-3">Business <span class="accent">Fortitude</span></div>
+      <p class="opacity-70 leading-relaxed max-w-xs">Independent journalism for operators, founders, and boards. Published in London.</p>
+    </div>
+    <div><div class="kicker opacity-60 mb-3">Read</div><ul class="space-y-2"><li><a href="02-modern-business-tech.html" class="hover:text-lime">Latest</a></li><li><a href="category-markets.html" class="hover:text-lime">Markets</a></li><li><a href="#" class="hover:text-lime">Leadership</a></li><li><a href="#" class="hover:text-lime">Long Reads</a></li></ul></div>
+    <div><div class="kicker opacity-60 mb-3">Pro</div><ul class="space-y-2"><li><a href="#" class="hover:text-lime">Roundtables</a></li><li><a href="#" class="hover:text-lime">Deal database</a></li><li><a href="#" class="hover:text-lime">Scale-up tracker</a></li></ul></div>
+    <div><div class="kicker opacity-60 mb-3">Company</div><ul class="space-y-2"><li><a href="#" class="hover:text-lime">About</a></li><li><a href="#" class="hover:text-lime">Careers</a></li><li><a href="#" class="hover:text-lime">Advertise</a></li></ul></div>
+    <div><div class="kicker opacity-60 mb-3">Legal</div><ul class="space-y-2"><li><a href="#" class="hover:text-lime">Privacy</a></li><li><a href="#" class="hover:text-lime">Terms</a></li><li><a href="#" class="hover:text-lime">Cookies</a></li></ul></div>
+  </div>
+  <div class="border-t border-white/10 text-[12px]">
+    <div class="max-w-[1360px] mx-auto px-6 py-5 flex flex-col md:flex-row items-center justify-between gap-3 opacity-70">
+      <span>© 2026 Business Fortitude Ltd.</span>
+      <span>Not investment advice. Capital at risk.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.pill-nav a').forEach(el => {
+    el.addEventListener('click', (e) => {
+      if (el.getAttribute('href') === '#') {
+        e.preventDefault();
+        document.querySelectorAll('.pill-nav a').forEach(s => s.classList.remove('active'));
+        el.classList.add('active');
+      }
+    });
+  });
+  const progress = document.getElementById('progress');
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+    progress.style.width = pct + '%';
+  });
+</script>
+</body>
+</html>

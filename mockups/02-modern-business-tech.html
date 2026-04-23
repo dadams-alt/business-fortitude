@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Business Fortitude — Modern</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root {
+    --bg: #ffffff;
+    --ink: #0a0a0a;
+    --soft: #4a4a4a;
+    --accent: #0055ff;     /* electric blue */
+    --lime: #d4ff3a;       /* attention */
+    --surface: #f5f5f4;
+    --rule: #e7e5e4;
+  }
+  body { background: var(--bg); color: var(--ink); font-family: 'Inter', system-ui, sans-serif; }
+  .display { font-family: 'Inter', sans-serif; font-weight: 900; letter-spacing: -0.03em; line-height: 0.98; }
+  .mono { font-family: 'Space Grotesk', monospace; }
+  .accent { color: var(--accent); }
+  .bg-accent { background: var(--accent); }
+  .bg-lime { background: var(--lime); color: var(--ink); }
+  .bg-surface { background: var(--surface); }
+  .bg-ink { background: var(--ink); color: white; }
+  .soft { color: var(--soft); }
+  .rule { border-color: var(--rule); }
+  .kicker { font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; font-size: 11px; }
+  .chip { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
+  .card:hover .title-link { color: var(--accent); }
+  .card { transition: transform .35s ease; }
+  .card:hover { transform: translateY(-3px); }
+  .ticker-wrap { overflow: hidden; }
+  .ticker { display: inline-flex; gap: 40px; white-space: nowrap; animation: marquee 35s linear infinite; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .up { color: #059669; }
+  .down { color: #dc2626; }
+  .btn-primary { background: var(--ink); color: white; border-radius: 999px; padding: 10px 20px; font-weight: 600; }
+  .btn-primary:hover { background: var(--accent); }
+  .pill-nav a.active { background: var(--ink); color: white; }
+  .pill-nav a { transition: all .2s; }
+  .lime-underline { background-image: linear-gradient(var(--lime), var(--lime)); background-size: 100% 0.35em; background-repeat: no-repeat; background-position: 0 88%; padding: 0 2px; }
+  .arrow-link svg { transition: transform .2s ease; }
+  .arrow-link:hover svg { transform: translateX(4px); }
+</style>
+</head>
+<body class="min-h-screen">
+
+<!-- Header -->
+<header class="border-b rule bg-white sticky top-0 z-40">
+  <div class="max-w-[1360px] mx-auto px-6 flex items-center justify-between h-16">
+    <a href="/" class="flex items-center gap-2">
+      <span class="display text-[22px]">Business <span class="accent">Fortitude</span></span>
+    </a>
+    <nav class="hidden lg:flex items-center gap-1 pill-nav">
+      <a href="#" class="active px-3 py-1.5 rounded-full text-[13px] font-medium">Latest</a>
+      <a href="#" class="px-3 py-1.5 rounded-full text-[13px] font-medium hover:bg-surface">Markets</a>
+      <a href="#" class="px-3 py-1.5 rounded-full text-[13px] font-medium hover:bg-surface">Deals</a>
+      <a href="#" class="px-3 py-1.5 rounded-full text-[13px] font-medium hover:bg-surface">Leadership</a>
+      <a href="#" class="px-3 py-1.5 rounded-full text-[13px] font-medium hover:bg-surface">AI</a>
+      <a href="#" class="px-3 py-1.5 rounded-full text-[13px] font-medium hover:bg-surface">Startups</a>
+      <a href="#" class="px-3 py-1.5 rounded-full text-[13px] font-medium hover:bg-surface">Opinion</a>
+    </nav>
+    <div class="flex items-center gap-3">
+      <button aria-label="Search" class="p-2 hover:bg-surface rounded-full">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      </button>
+      <a href="#" class="hidden md:inline btn-primary text-[13px]">Subscribe</a>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-[1360px] mx-auto px-6">
+
+  <!-- Hero -->
+  <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 py-10">
+    <article class="lg:col-span-8 card">
+      <div class="relative aspect-[16/9] overflow-hidden rounded-2xl bg-surface">
+        <img src="https://images.unsplash.com/photo-1664575600796-ffa828c5cb6e?w=1600&q=80" class="w-full h-full object-cover" alt="">
+        <div class="absolute top-4 left-4 flex gap-2">
+          <span class="chip bg-lime">Top story</span>
+          <span class="chip bg-white/90">Markets</span>
+        </div>
+      </div>
+      <div class="mt-5">
+        <h1 class="display text-[44px] md:text-[56px]"><a href="#" class="title-link"><span class="lime-underline">Midcap earnings</span> are quietly rewriting the market playbook</a></h1>
+        <p class="text-[18px] leading-[1.55] soft mt-4 max-w-3xl">For two years the story was megacap dominance. A new quarter of filings suggests a different kind of discipline is winning — lean operators with pricing power.</p>
+        <div class="mt-4 flex items-center gap-3 text-[13px] soft">
+          <img src="https://i.pravatar.cc/64?img=41" class="w-7 h-7 rounded-full" alt="">
+          <span><b class="text-[color:var(--ink)]">Sarah Mendel</b></span>
+          <span>·</span><span>8 min read</span>
+          <span>·</span><span>Today, 09:14</span>
+        </div>
+      </div>
+    </article>
+
+    <aside class="lg:col-span-4 space-y-5">
+      <div class="bg-surface rounded-2xl p-5">
+        <div class="kicker mb-4 soft">Breaking</div>
+        <div class="space-y-4 divide-y rule">
+          <a href="#" class="block pt-0 card">
+            <div class="flex gap-3 items-start">
+              <span class="chip bg-accent text-white shrink-0">Deals</span>
+              <div>
+                <h3 class="font-bold text-[15px] leading-snug title-link">Vanta raises $3bn, signals IPO track as compliance category matures</h3>
+                <div class="text-[12px] soft mt-1">06:40 BST · 3 min</div>
+              </div>
+            </div>
+          </a>
+          <a href="#" class="block pt-4 card">
+            <div class="flex gap-3 items-start">
+              <span class="chip bg-ink shrink-0">Leadership</span>
+              <div>
+                <h3 class="font-bold text-[15px] leading-snug title-link">Why half of first-time CEOs get fired in year two</h3>
+                <div class="text-[12px] soft mt-1">05:55 BST · 6 min</div>
+              </div>
+            </div>
+          </a>
+          <a href="#" class="block pt-4 card">
+            <div class="flex gap-3 items-start">
+              <span class="chip bg-surface border border-[color:var(--rule)] text-ink shrink-0" style="background:#fff;">Regulation</span>
+              <div>
+                <h3 class="font-bold text-[15px] leading-snug title-link">FCA signals sharper line on fintech safeguarding after Revolut probe</h3>
+                <div class="text-[12px] soft mt-1">Yesterday · 5 min</div>
+              </div>
+            </div>
+          </a>
+          <a href="#" class="block pt-4 card">
+            <div class="flex gap-3 items-start">
+              <span class="chip bg-lime shrink-0">AI</span>
+              <div>
+                <h3 class="font-bold text-[15px] leading-snug title-link">The agent economy is breaking SaaS pricing</h3>
+                <div class="text-[12px] soft mt-1">Yesterday · 9 min</div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="bg-ink text-white rounded-2xl p-6">
+        <div class="kicker mb-2" style="color:var(--lime);">Newsletter</div>
+        <div class="display text-[26px] leading-[1.05] mb-3">The Morning Brief, in your inbox by 7.</div>
+        <form class="flex gap-2">
+          <input type="email" placeholder="you@company.com" class="flex-1 px-3 py-2 rounded-full text-[13px] text-ink">
+          <button class="bg-lime text-ink px-4 py-2 rounded-full text-[13px] font-bold">Join</button>
+        </form>
+        <div class="text-[11px] mt-3 opacity-70">134,000+ operators. No spam.</div>
+      </div>
+    </aside>
+  </section>
+
+  <!-- Category filter strip -->
+  <section class="py-4 border-t rule">
+    <div class="flex items-center gap-3 overflow-x-auto pb-2 mono text-[12px] uppercase tracking-widest">
+      <span class="soft shrink-0">Filter:</span>
+      <button class="chip bg-ink text-white shrink-0">All</button>
+      <button class="chip bg-surface shrink-0 hover:bg-lime">Markets</button>
+      <button class="chip bg-surface shrink-0 hover:bg-lime">Deals</button>
+      <button class="chip bg-surface shrink-0 hover:bg-lime">Leadership</button>
+      <button class="chip bg-surface shrink-0 hover:bg-lime">AI &amp; Tech</button>
+      <button class="chip bg-surface shrink-0 hover:bg-lime">Startups</button>
+      <button class="chip bg-surface shrink-0 hover:bg-lime">Economy</button>
+      <button class="chip bg-surface shrink-0 hover:bg-lime">Regulation</button>
+      <button class="chip bg-surface shrink-0 hover:bg-lime">Energy</button>
+      <button class="chip bg-surface shrink-0 hover:bg-lime">Opinion</button>
+    </div>
+  </section>
+
+  <!-- Big feature block -->
+  <section class="py-10 border-t rule">
+    <div class="flex items-center gap-3 mb-6">
+      <span class="chip bg-lime">Featured</span>
+      <h2 class="display text-[30px]">The Decision</h2>
+    </div>
+    <article class="grid grid-cols-1 md:grid-cols-12 gap-8 card">
+      <div class="md:col-span-7 aspect-[16/10] overflow-hidden rounded-2xl bg-surface">
+        <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1600&q=80" class="w-full h-full object-cover" alt="">
+      </div>
+      <div class="md:col-span-5 flex flex-col justify-center">
+        <div class="kicker soft mb-2">Long read · 18 min</div>
+        <h3 class="display text-[36px] leading-[1.05]"><a href="#" class="title-link">Inside Monzo's second act: what it took to kill a beloved product</a></h3>
+        <p class="soft mt-4 text-[16px] leading-[1.6]">The call was quieter than anyone expected. An inside account of a product team that rebuilt discipline from the floor up.</p>
+        <a href="#" class="arrow-link inline-flex items-center gap-2 mt-5 font-semibold">Read the story <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+      </div>
+    </article>
+  </section>
+
+  <!-- Grid section: Latest -->
+  <section class="py-10 border-t rule">
+    <div class="flex items-end justify-between mb-6">
+      <h2 class="display text-[32px]">Latest</h2>
+      <a href="#" class="arrow-link inline-flex items-center gap-2 text-[14px] font-semibold">All stories <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <!-- 8 cards -->
+      <article class="card">
+        <div class="aspect-[4/3] overflow-hidden rounded-xl bg-surface mb-3"><img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&q=80" class="w-full h-full object-cover" alt=""></div>
+        <span class="chip bg-surface">Markets</span>
+        <h3 class="font-bold text-[17px] leading-snug mt-2"><a href="#" class="title-link">Why the FTSE 250 is suddenly the most interesting index in Europe</a></h3>
+        <div class="text-[12px] soft mt-1">Priya Shah · 4 min</div>
+      </article>
+      <article class="card">
+        <div class="aspect-[4/3] overflow-hidden rounded-xl bg-surface mb-3"><img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=600&q=80" class="w-full h-full object-cover" alt=""></div>
+        <span class="chip bg-surface">Credit</span>
+        <h3 class="font-bold text-[17px] leading-snug mt-2"><a href="#" class="title-link">Private credit's reckoning is quieter than you think — and closer</a></h3>
+        <div class="text-[12px] soft mt-1">Marcus Holden · 7 min</div>
+      </article>
+      <article class="card">
+        <div class="aspect-[4/3] overflow-hidden rounded-xl bg-surface mb-3"><img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=600&q=80" class="w-full h-full object-cover" alt=""></div>
+        <span class="chip bg-lime">Leadership</span>
+        <h3 class="font-bold text-[17px] leading-snug mt-2"><a href="#" class="title-link">A COO's decision log cut meeting time by 41% — here's the template</a></h3>
+        <div class="text-[12px] soft mt-1">Yasmin Rahimi · 12 min</div>
+      </article>
+      <article class="card">
+        <div class="aspect-[4/3] overflow-hidden rounded-xl bg-surface mb-3"><img src="https://images.unsplash.com/photo-1559523161-0fc0d8b38a7a?w=600&q=80" class="w-full h-full object-cover" alt=""></div>
+        <span class="chip bg-surface">FX</span>
+        <h3 class="font-bold text-[17px] leading-snug mt-2"><a href="#" class="title-link">Sterling's range is ending: three signals traders are watching</a></h3>
+        <div class="text-[12px] soft mt-1">Elena Vasquez · 5 min</div>
+      </article>
+      <article class="card">
+        <div class="aspect-[4/3] overflow-hidden rounded-xl bg-surface mb-3"><img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=600&q=80" class="w-full h-full object-cover" alt=""></div>
+        <span class="chip bg-surface">AI</span>
+        <h3 class="font-bold text-[17px] leading-snug mt-2"><a href="#" class="title-link">Your "AI strategy" probably needs three strategies, not one</a></h3>
+        <div class="text-[12px] soft mt-1">Priya Shah · 8 min</div>
+      </article>
+      <article class="card">
+        <div class="aspect-[4/3] overflow-hidden rounded-xl bg-surface mb-3"><img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=600&q=80" class="w-full h-full object-cover" alt=""></div>
+        <span class="chip bg-accent text-white">Profile</span>
+        <h3 class="font-bold text-[17px] leading-snug mt-2"><a href="#" class="title-link">The FTSE director who investigates every board before accepting a seat</a></h3>
+        <div class="text-[12px] soft mt-1">Nadia Carson · 9 min</div>
+      </article>
+      <article class="card">
+        <div class="aspect-[4/3] overflow-hidden rounded-xl bg-surface mb-3"><img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&q=80" class="w-full h-full object-cover" alt=""></div>
+        <span class="chip bg-surface">Startups</span>
+        <h3 class="font-bold text-[17px] leading-snug mt-2"><a href="#" class="title-link">The 12-founder cohort that walked away from YC, and what happened next</a></h3>
+        <div class="text-[12px] soft mt-1">Aisha Williams · 11 min</div>
+      </article>
+      <article class="card">
+        <div class="aspect-[4/3] overflow-hidden rounded-xl bg-surface mb-3"><img src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=600&q=80" class="w-full h-full object-cover" alt=""></div>
+        <span class="chip bg-surface">Energy</span>
+        <h3 class="font-bold text-[17px] leading-snug mt-2"><a href="#" class="title-link">The grid-scale battery boom is eating the solar developers alive</a></h3>
+        <div class="text-[12px] soft mt-1">Marcus Holden · 7 min</div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Split: Opinion + Companies watched -->
+  <section class="py-10 border-t rule grid grid-cols-1 lg:grid-cols-12 gap-10">
+    <div class="lg:col-span-7">
+      <h2 class="display text-[30px] mb-6">Opinion</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <article class="card p-5 rounded-2xl bg-surface">
+          <div class="flex items-center gap-3 mb-3">
+            <img src="https://i.pravatar.cc/80?img=12" class="w-10 h-10 rounded-full" alt="">
+            <div>
+              <div class="font-semibold text-[13px]">Ishaan Gupta</div>
+              <div class="text-[11px] soft">Columnist · Operations</div>
+            </div>
+          </div>
+          <h3 class="display text-[22px] leading-[1.1]"><a href="#" class="title-link">Stop rewarding velocity. Start rewarding removed complexity.</a></h3>
+          <p class="soft text-[14px] mt-2 leading-[1.6]">The most useful metric in your business is probably the one you're not tracking.</p>
+        </article>
+        <article class="card p-5 rounded-2xl bg-surface">
+          <div class="flex items-center gap-3 mb-3">
+            <img src="https://i.pravatar.cc/80?img=32" class="w-10 h-10 rounded-full" alt="">
+            <div>
+              <div class="font-semibold text-[13px]">Rachel Okonkwo</div>
+              <div class="text-[11px] soft">Columnist · Capital</div>
+            </div>
+          </div>
+          <h3 class="display text-[22px] leading-[1.1]"><a href="#" class="title-link">The founder dilution myth: SAFEs got their reputation wrong</a></h3>
+          <p class="soft text-[14px] mt-2 leading-[1.6]">A quiet return to priced rounds is reshaping early cap tables.</p>
+        </article>
+      </div>
+    </div>
+    <div class="lg:col-span-5">
+      <h2 class="display text-[30px] mb-6">Companies in the conversation</h2>
+      <div class="grid grid-cols-2 gap-3">
+        <a href="#" class="card p-4 rounded-xl border rule hover:border-[color:var(--accent)]">
+          <div class="flex items-center justify-between">
+            <span class="font-bold">NVDA</span>
+            <span class="mono text-[12px] up">+3.02%</span>
+          </div>
+          <div class="text-[12px] soft">Nvidia · NASDAQ</div>
+          <div class="text-[12px] mt-2">42 articles this month</div>
+        </a>
+        <a href="#" class="card p-4 rounded-xl border rule hover:border-[color:var(--accent)]">
+          <div class="flex items-center justify-between">
+            <span class="font-bold">MSFT</span>
+            <span class="mono text-[12px] up">+0.65%</span>
+          </div>
+          <div class="text-[12px] soft">Microsoft · NASDAQ</div>
+          <div class="text-[12px] mt-2">38 articles this month</div>
+        </a>
+        <a href="#" class="card p-4 rounded-xl border rule hover:border-[color:var(--accent)]">
+          <div class="flex items-center justify-between">
+            <span class="font-bold">AAPL</span>
+            <span class="mono text-[12px] up">+1.24%</span>
+          </div>
+          <div class="text-[12px] soft">Apple · NASDAQ</div>
+          <div class="text-[12px] mt-2">31 articles this month</div>
+        </a>
+        <a href="#" class="card p-4 rounded-xl border rule hover:border-[color:var(--accent)]">
+          <div class="flex items-center justify-between">
+            <span class="font-bold">BARC</span>
+            <span class="mono text-[12px] down">−0.48%</span>
+          </div>
+          <div class="text-[12px] soft">Barclays · LSE</div>
+          <div class="text-[12px] mt-2">19 articles this month</div>
+        </a>
+        <a href="#" class="card p-4 rounded-xl border rule hover:border-[color:var(--accent)]">
+          <div class="flex items-center justify-between">
+            <span class="font-bold">TSLA</span>
+            <span class="mono text-[12px] down">−1.32%</span>
+          </div>
+          <div class="text-[12px] soft">Tesla · NASDAQ</div>
+          <div class="text-[12px] mt-2">24 articles this month</div>
+        </a>
+        <a href="#" class="card p-4 rounded-xl border rule hover:border-[color:var(--accent)]">
+          <div class="flex items-center justify-between">
+            <span class="font-bold">SHOP</span>
+            <span class="mono text-[12px] up">+0.92%</span>
+          </div>
+          <div class="text-[12px] soft">Shopify · NYSE</div>
+          <div class="text-[12px] mt-2">14 articles this month</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA band -->
+  <section class="py-12 border-t rule">
+    <div class="rounded-3xl bg-lime p-10 md:p-14 grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+      <div class="md:col-span-8">
+        <div class="kicker mb-3">Business Fortitude Pro</div>
+        <h2 class="display text-[40px] md:text-[50px] leading-[0.98]">Built for operators who read before 7.</h2>
+        <p class="text-[16px] mt-4 max-w-xl">Unlimited access, the weekly model portfolio analysis, private roundtables, and the Pro-only newsletter "Nights &amp; Weekends".</p>
+      </div>
+      <div class="md:col-span-4 flex flex-col gap-3">
+        <a href="#" class="btn-primary text-center">Start 14-day trial</a>
+        <a href="#" class="text-center underline text-[13px]">See what Pro includes →</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Footer -->
+<footer class="bg-ink text-white mt-10">
+  <div class="max-w-[1360px] mx-auto px-6 py-14 grid grid-cols-2 md:grid-cols-6 gap-8 text-[13px]">
+    <div class="col-span-2">
+      <div class="display text-[26px] mb-3">Business <span class="accent">Fortitude</span></div>
+      <p class="opacity-70 leading-relaxed max-w-xs">Independent journalism for operators, founders, and boards. Published in London.</p>
+    </div>
+    <div>
+      <div class="kicker opacity-60 mb-3">Read</div>
+      <ul class="space-y-2"><li><a href="#" class="hover:text-lime">Latest</a></li><li><a href="#" class="hover:text-lime">Markets</a></li><li><a href="#" class="hover:text-lime">Leadership</a></li><li><a href="#" class="hover:text-lime">Long Reads</a></li></ul>
+    </div>
+    <div>
+      <div class="kicker opacity-60 mb-3">Pro</div>
+      <ul class="space-y-2"><li><a href="#" class="hover:text-lime">Roundtables</a></li><li><a href="#" class="hover:text-lime">Model portfolios</a></li><li><a href="#" class="hover:text-lime">Deal database</a></li></ul>
+    </div>
+    <div>
+      <div class="kicker opacity-60 mb-3">Company</div>
+      <ul class="space-y-2"><li><a href="#" class="hover:text-lime">About</a></li><li><a href="#" class="hover:text-lime">Careers</a></li><li><a href="#" class="hover:text-lime">Advertise</a></li></ul>
+    </div>
+    <div>
+      <div class="kicker opacity-60 mb-3">Legal</div>
+      <ul class="space-y-2"><li><a href="#" class="hover:text-lime">Privacy</a></li><li><a href="#" class="hover:text-lime">Terms</a></li><li><a href="#" class="hover:text-lime">Cookies</a></li></ul>
+    </div>
+  </div>
+  <div class="border-t border-white/10 text-[12px]">
+    <div class="max-w-[1360px] mx-auto px-6 py-5 flex flex-col md:flex-row items-center justify-between gap-3 opacity-70">
+      <span>© 2026 Business Fortitude Ltd.</span>
+      <span>Not investment advice. Capital at risk.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Pill nav toggle
+  document.querySelectorAll('.pill-nav a').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      document.querySelectorAll('.pill-nav a').forEach(s => s.classList.remove('active'));
+      el.classList.add('active');
+    });
+  });
+  // Filter chips
+  document.querySelectorAll('button.chip').forEach(el => {
+    el.addEventListener('click', () => {
+      const sibs = el.parentElement.querySelectorAll('button.chip');
+      sibs.forEach(s => { s.classList.remove('bg-ink','text-white'); s.classList.add('bg-surface'); });
+      el.classList.remove('bg-surface');
+      el.classList.add('bg-ink','text-white');
+    });
+  });
+</script>
+</body>
+</html>
