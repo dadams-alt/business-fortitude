@@ -1,65 +1,94 @@
-import Image from "next/image";
+// src/app/page.tsx
+// Homepage. Server component. Reads articles via the anon-key Supabase
+// client; RLS enforces status='published' visibility.
 
-export default function Home() {
+import { getPublishedArticles } from "@/lib/queries/articles";
+import { HeroCard } from "@/components/article/hero-card";
+import { BreakingSidebar } from "@/components/article/breaking-sidebar";
+import { StoryCard } from "@/components/article/story-card";
+import { FeaturedDecision } from "@/components/article/featured-decision";
+
+export const revalidate = 60;
+
+export default async function HomePage() {
+  const articles = await getPublishedArticles({ limit: 14 });
+
+  if (articles.length === 0) return <EmptyState />;
+
+  const [hero, ...rest] = articles;
+  const breaking = rest.slice(0, 4);
+  const featured = articles.length >= 6 ? rest[4] : undefined;
+  const latest = featured ? rest.slice(5) : rest.slice(4);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main className="max-w-[1360px] mx-auto px-6">
+      <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 py-10">
+        <HeroCard article={hero} />
+        <BreakingSidebar articles={breaking} />
+      </section>
+
+      {/* Decorative filter strip — chips are visual only. */}
+      <section className="py-4 border-t border-rule">
+        <div className="flex items-center gap-3 overflow-x-auto pb-2 font-mono text-[12px] uppercase tracking-widest">
+          <span className="text-soft shrink-0">Filter:</span>
+          <span className="chip bg-ink text-white shrink-0">All</span>
+          <span className="chip bg-surface shrink-0">Markets</span>
+          <span className="chip bg-surface shrink-0">Deals</span>
+          <span className="chip bg-surface shrink-0">Leadership</span>
+          <span className="chip bg-surface shrink-0">AI</span>
+          <span className="chip bg-surface shrink-0">Startups</span>
+          <span className="chip bg-surface shrink-0">Regulation</span>
+          <span className="chip bg-surface shrink-0">Opinion</span>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      </section>
+
+      {featured && <FeaturedDecision article={featured} />}
+
+      {latest.length > 0 && (
+        <section className="py-10 border-t border-rule">
+          <div className="flex items-end justify-between mb-6">
+            <h2 className="display text-[32px]">Latest</h2>
+            <a
+              href="#"
+              className="arrow-link inline-flex items-center gap-2 text-[14px] font-semibold"
+            >
+              All stories{" "}
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <path d="M5 12h14M13 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {latest.map((article) => (
+              <StoryCard key={article.id} article={article} />
+            ))}
+          </div>
+        </section>
+      )}
+    </main>
+  );
+}
+
+function EmptyState() {
+  return (
+    <main className="max-w-[1360px] mx-auto px-6 py-20">
+      <div className="max-w-xl mx-auto text-center">
+        <div className="kicker text-soft mb-4">No published articles yet</div>
+        <h1 className="display text-[48px] mb-4">
+          <span className="lime-underline">Coming soon.</span>
+        </h1>
+        <p className="text-soft text-[16px] leading-[1.6]">
+          The Business Fortitude editorial pipeline is being seeded. Check back
+          shortly for the first wave of stories.
+        </p>
+      </div>
+    </main>
   );
 }

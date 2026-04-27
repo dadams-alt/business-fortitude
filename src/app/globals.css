@@ -1,26 +1,73 @@
 @import "tailwindcss";
 
+/* BF design tokens — direction 02 ("Modern Business Tech"). Lifted from
+   mockups/02-modern-business-tech.html and mockups/article-01.html. */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #ffffff;
+  --ink: #0a0a0a;
+  --soft: #4a4a4a;
+  --accent: #0055ff;
+  --lime: #d4ff3a;
+  --surface: #f5f5f4;
+  --rule: #e7e5e4;
 }
 
+/* Tailwind v4 theme tokens. These expose the BF palette + max-width as
+   utility classes (bg-ink, text-soft, border-rule, max-w-bf, font-mono). */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-ink: var(--ink);
+  --color-soft: var(--soft);
+  --color-accent: var(--accent);
+  --color-lime: var(--lime);
+  --color-surface: var(--surface);
+  --color-rule: var(--rule);
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-mono: var(--font-space-grotesk), ui-monospace, monospace;
+  --container-bf: 1360px;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-inter), system-ui, sans-serif;
 }
+
+/* ----- BF utility classes (semantic, non-Tailwind) ----- */
+
+.display { font-family: var(--font-inter), system-ui, sans-serif; font-weight: 900; letter-spacing: -0.03em; line-height: 0.98; }
+.kicker  { font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; font-size: 11px; }
+.chip    { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
+.btn-primary { background: var(--ink); color: white; border-radius: 999px; padding: 10px 20px; font-weight: 600; transition: background .2s; display: inline-block; }
+.btn-primary:hover { background: var(--accent); }
+.lime-underline { background-image: linear-gradient(var(--lime), var(--lime)); background-size: 100% 0.35em; background-repeat: no-repeat; background-position: 0 88%; padding: 0 2px; }
+.card { transition: transform .35s ease; }
+.card:hover { transform: translateY(-3px); }
+.card:hover .title-link { color: var(--accent); }
+.arrow-link svg { transition: transform .2s ease; }
+.arrow-link:hover svg { transform: translateX(4px); }
+.up   { color: #059669; }
+.down { color: #dc2626; }
+
+/* ----- Article body (lifted from mockups/article-01.html) ----- */
+
+.article-body { font-size: 18px; line-height: 1.75; color: var(--ink); }
+.article-body > p { margin-bottom: 1.25em; }
+.article-body > p:first-of-type { font-size: 21px; line-height: 1.55; font-weight: 500; color: var(--ink); }
+.article-body h2 { font-family: var(--font-inter), system-ui, sans-serif; font-weight: 900; font-size: 30px; line-height: 1.1; letter-spacing: -0.02em; margin: 2.2em 0 0.5em; }
+.article-body h3 { font-family: var(--font-inter), system-ui, sans-serif; font-weight: 800; font-size: 20px; line-height: 1.2; letter-spacing: -0.01em; margin: 1.8em 0 0.4em; }
+.article-body a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.article-body a:hover { text-decoration-thickness: 2px; }
+.article-body blockquote { border-left: 4px solid var(--lime); padding: 0.2em 0 0.2em 1.3em; margin: 1.5em 0; font-style: normal; font-size: 20px; font-weight: 500; color: var(--ink); }
+.article-body ul { margin: 1em 0 1.3em 1.3em; list-style: disc; }
+.article-body ol { margin: 1em 0 1.3em 1.3em; list-style: decimal; }
+.article-body li { margin-bottom: 0.5em; }
+.article-body strong { font-weight: 700; }
+.article-body em { font-style: italic; }
+
+.disclosure { font-size: 12.5px; line-height: 1.6; color: var(--soft); background: var(--surface); border-radius: 18px; padding: 1.2em 1.4em; margin: 2em 0; }
+.disclosure strong { color: var(--ink); }
+
+.share-btn { width: 40px; height: 40px; border-radius: 999px; background: var(--surface); display: inline-flex; align-items: center; justify-content: center; color: var(--ink); transition: all .2s; }
+.share-btn:hover { background: var(--ink); color: white; }
+
+.progress { position: fixed; top: 0; left: 0; height: 3px; background: var(--accent); width: 0; z-index: 100; }
