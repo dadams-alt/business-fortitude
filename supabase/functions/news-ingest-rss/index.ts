@@ -13,6 +13,7 @@
 
 import { createServiceClient } from '../_shared/supabase-client.ts';
 import { fetchWithTimeout } from '../_shared/http.ts';
+import { isServiceRoleBearer } from '../_shared/auth.ts';
 import { parseFeed } from './feed-parser.ts';
 import { normalise, sha256Hex } from './content-hash.ts';
 import type { FeedItem, FeedRow, IngestResult } from './types.ts';
@@ -240,30 +241,4 @@ function json(body: unknown, status: number): Response {
     status,
     headers: { 'Content-Type': 'application/json' },
   });
-}
-
-// Returns true iff Authorization is "Bearer <jwt>" and the JWT payload
-// claims role=service_role. Does NOT verify the signature — Supabase's
-// platform verify_jwt has already done that before the function runs.
-function isServiceRoleBearer(header: string | null): boolean {
-  if (!header) return false;
-  const m = header.match(/^Bearer\s+(.+)$/i);
-  if (!m) return false;
-  const token = m[1].trim();
-  const parts = token.split('.');
-  if (parts.length !== 3) return false;
-  try {
-    const payload = JSON.parse(b64urlDecode(parts[1]));
-    return payload?.role === 'service_role';
-  } catch {
-    return false;
-  }
-}
-
-function b64urlDecode(s: string): string {
-  const pad = s.length % 4;
-  const padded = pad ? s + '='.repeat(4 - pad) : s;
-  const b64 = padded.replace(/-/g, '+').replace(/_/g, '/');
-  // Deno has atob globally.
-  return new TextDecoder().decode(Uint8Array.from(atob(b64), c => c.charCodeAt(0)));
 }
