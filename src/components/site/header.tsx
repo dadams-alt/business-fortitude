@@ -1,20 +1,29 @@
+"use client";
+
 // src/components/site/header.tsx
-// Sticky top nav. Lifted from mockups/02-modern-business-tech.html L52–73.
-// Nav links are placeholders (#) for v1 — only the logo links to /.
+// Sticky top nav with usePathname-driven active state. Categories are
+// drawn from src/lib/data/categories.ts so the nav order matches the
+// canonical display order across the site.
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { CATEGORIES } from "@/lib/data/categories";
 
-const NAV = [
-  { label: "Latest", href: "/", active: true },
-  { label: "Markets", href: "#" },
-  { label: "Deals", href: "#" },
-  { label: "Leadership", href: "#" },
-  { label: "AI", href: "#" },
-  { label: "Startups", href: "#" },
-  { label: "Opinion", href: "#" },
+const NAV_ITEMS: Array<{ label: string; href: string }> = [
+  { label: "Latest", href: "/" },
+  // The 6 categories that surface in nav. 'regulation' is omitted from
+  // the top bar to keep it compact; readers reach it from the footer
+  // or sitemap.
+  { label: CATEGORIES.markets.name, href: "/category/markets" },
+  { label: CATEGORIES.deals.name, href: "/category/deals" },
+  { label: CATEGORIES.leadership.name, href: "/category/leadership" },
+  { label: CATEGORIES.ai.name, href: "/category/ai" },
+  { label: CATEGORIES.startups.name, href: "/category/startups" },
+  { label: CATEGORIES.opinion.name, href: "/category/opinion" },
 ];
 
 export function SiteHeader() {
+  const pathname = usePathname();
   return (
     <header className="border-b border-rule bg-white sticky top-0 z-40">
       <div className="max-w-[1360px] mx-auto px-6 flex items-center justify-between h-16">
@@ -24,23 +33,26 @@ export function SiteHeader() {
           </span>
         </Link>
         <nav className="hidden lg:flex items-center gap-1">
-          {NAV.map((item) => (
-            <Link
-              key={item.label}
-              href={item.href}
-              className={
-                item.active
-                  ? "px-3 py-1.5 rounded-full text-[13px] font-medium bg-ink text-white"
-                  : "px-3 py-1.5 rounded-full text-[13px] font-medium hover:bg-surface"
-              }
-            >
-              {item.label}
-            </Link>
-          ))}
+          {NAV_ITEMS.map((item) => {
+            const active = pathname === item.href;
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={
+                  active
+                    ? "px-3 py-1.5 rounded-full text-[13px] font-medium bg-ink text-white"
+                    : "px-3 py-1.5 rounded-full text-[13px] font-medium hover:bg-surface transition"
+                }
+              >
+                {item.label}
+              </Link>
+            );
+          })}
         </nav>
         <div className="flex items-center gap-3">
-          <button
-            type="button"
+          <Link
+            href="/search"
             aria-label="Search"
             className="p-2 hover:bg-surface rounded-full"
           >
@@ -55,7 +67,7 @@ export function SiteHeader() {
               <circle cx="11" cy="11" r="7" />
               <path d="m20 20-3.5-3.5" />
             </svg>
-          </button>
+          </Link>
           <a href="#" className="hidden md:inline btn-primary text-[13px]">
             Subscribe
           </a>

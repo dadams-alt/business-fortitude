@@ -1,23 +1,26 @@
 // src/components/site/footer.tsx
 // Lifted from mockups/02-modern-business-tech.html L350–379.
+// "Read" column links to real category routes; the other three columns
+// remain placeholder until those features land.
 
-const COLUMNS = [
-  {
-    heading: "Read",
-    links: ["Latest", "Markets", "Leadership", "Long Reads"],
-  },
-  {
-    heading: "Pro",
-    links: ["Roundtables", "Model portfolios", "Deal database"],
-  },
-  {
-    heading: "Company",
-    links: ["About", "Careers", "Advertise"],
-  },
-  {
-    heading: "Legal",
-    links: ["Privacy", "Terms", "Cookies"],
-  },
+import Link from "next/link";
+
+interface ReadLink {
+  label: string;
+  href: string;
+}
+
+const READ_LINKS: ReadLink[] = [
+  { label: "Latest", href: "/" },
+  { label: "Markets", href: "/category/markets" },
+  { label: "Leadership", href: "/category/leadership" },
+  { label: "Opinion", href: "/category/opinion" },
+];
+
+const PLACEHOLDER_COLUMNS: Array<{ heading: string; links: string[] }> = [
+  { heading: "Pro", links: ["Roundtables", "Model portfolios", "Deal database"] },
+  { heading: "Company", links: ["About", "Careers", "Advertise"] },
+  { heading: "Legal", links: ["Privacy", "Terms", "Cookies"] },
 ];
 
 export function SiteFooter() {
@@ -33,7 +36,19 @@ export function SiteFooter() {
             Published in London.
           </p>
         </div>
-        {COLUMNS.map((col) => (
+        <div>
+          <div className="kicker opacity-60 mb-3">Read</div>
+          <ul className="space-y-2">
+            {READ_LINKS.map((item) => (
+              <li key={item.href}>
+                <Link href={item.href} className="hover:text-lime">
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+        {PLACEHOLDER_COLUMNS.map((col) => (
           <div key={col.heading}>
             <div className="kicker opacity-60 mb-3">{col.heading}</div>
             <ul className="space-y-2">

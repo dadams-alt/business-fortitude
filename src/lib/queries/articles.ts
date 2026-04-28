@@ -52,3 +52,39 @@ export async function getRelatedArticles(
     .limit(limit);
   return data ?? [];
 }
+
+export async function getArticlesByAuthor(
+  authorSlug: string,
+  opts?: { limit?: number },
+): Promise<Article[]> {
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("articles")
+    .select("*")
+    .eq("status", "published")
+    .eq("author_slug", authorSlug)
+    .order("published_at", { ascending: false })
+    .limit(opts?.limit ?? 30);
+  return data ?? [];
+}
+
+// Title-only search for v1. Body/lead search is a follow-up — needs a
+// tsvector column for safe wildcard handling and ranking. ILIKE wildcard
+// chars in user input are escaped so the query string can't be coerced
+// into a pattern.
+export async function searchArticles(
+  query: string,
+  opts?: { limit?: number },
+): Promise<Article[]> {
+  if (!query.trim()) return [];
+  const supabase = await createClient();
+  const pattern = `%${query.replace(/[%_\\]/g, "\\$&")}%`;
+  const { data } = await supabase
+    .from("articles")
+    .select("*")
+    .eq("status", "published")
+    .ilike("title", pattern)
+    .order("published_at", { ascending: false })
+    .limit(opts?.limit ?? 50);
+  return data ?? [];
+}

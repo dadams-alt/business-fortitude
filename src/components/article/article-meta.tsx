@@ -1,13 +1,15 @@
 // src/components/article/article-meta.tsx
 // Byline strip on article detail. Mockup article-01.html L144–161.
-// "Role" line is derived from category since we don't have an authors
-// table yet.
+// Byline now links to /author/[slug] when the article has an
+// author_slug; falls back to plain text when absent.
 
 import Image from "next/image";
+import Link from "next/link";
 import type { Article } from "@/lib/queries/articles";
 import { avatarUrl, formatPublishedAt } from "@/lib/format";
+import { getAuthor } from "@/lib/data/authors";
 
-const ROLES: Record<string, string> = {
+const FALLBACK_ROLES: Record<string, string> = {
   markets: "Markets editor · London",
   deals: "Deals desk · London",
   leadership: "Leadership editor · London",
@@ -18,25 +20,39 @@ const ROLES: Record<string, string> = {
 };
 
 export function ArticleMeta({ article }: { article: Article }) {
-  const role = ROLES[article.category] ?? "Business Fortitude";
+  const author = article.author_slug ? getAuthor(article.author_slug) : null;
+  const role = author?.role ?? FALLBACK_ROLES[article.category] ?? "Business Fortitude";
+  const displayName = author?.name ?? article.author_name ?? "Business Fortitude";
+
+  const bylineInner = (
+    <>
+      <Image
+        src={author?.avatarUrl ?? avatarUrl(article.author_slug, 80)}
+        alt=""
+        width={44}
+        height={44}
+        className="rounded-full object-cover"
+        unoptimized
+      />
+      <div>
+        <div className="text-[14px] font-bold">{displayName}</div>
+        <div className="text-[12px] text-soft">{role}</div>
+      </div>
+    </>
+  );
+
   return (
     <div className="flex flex-wrap items-center gap-5 mt-8 pt-6 border-t border-rule">
-      <div className="flex items-center gap-3">
-        <Image
-          src={avatarUrl(article.author_slug, 80)}
-          alt=""
-          width={44}
-          height={44}
-          className="rounded-full object-cover"
-          unoptimized
-        />
-        <div>
-          <div className="text-[14px] font-bold">
-            {article.author_name ?? "Business Fortitude"}
-          </div>
-          <div className="text-[12px] text-soft">{role}</div>
-        </div>
-      </div>
+      {author ? (
+        <Link
+          href={`/author/${author.slug}`}
+          className="flex items-center gap-3 hover:text-accent"
+        >
+          {bylineInner}
+        </Link>
+      ) : (
+        <div className="flex items-center gap-3">{bylineInner}</div>
+      )}
       <div className="text-[12px] text-soft font-mono">
         {formatPublishedAt(article.published_at)}
       </div>

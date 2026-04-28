@@ -15,11 +15,55 @@ import {
 import { Chip, categoryLabel } from "@/components/ui/chip";
 import { ArticleMeta } from "@/components/article/article-meta";
 import { ArticleBody } from "@/components/article/article-body";
+import { AuthorCard } from "@/components/article/author-card";
 import { DisclosureBox } from "@/components/article/disclosure-box";
 import { ProgressBar } from "@/components/article/progress-bar";
 import { StoryCard } from "@/components/article/story-card";
 import { NewsletterCard } from "@/components/site/newsletter-card";
-import { avatarUrl, readMinutes } from "@/lib/format";
+import { readMinutes } from "@/lib/format";
+import { getAuthor } from "@/lib/data/authors";
+
+const SITE_URL = "https://business-fortitude.vercel.app";
+
+function buildArticleJsonLd(
+  article: Awaited<ReturnType<typeof getArticleBySlug>>,
+): Record<string, unknown> {
+  if (!article) return {};
+  const author = article.author_slug ? getAuthor(article.author_slug) : null;
+  const authorObj = author
+    ? {
+        "@type": "Person",
+        name: article.author_name ?? author.name,
+        url: `${SITE_URL}/author/${author.slug}`,
+      }
+    : article.author_name
+      ? { "@type": "Person", name: article.author_name }
+      : undefined;
+
+  const raw: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": "NewsArticle",
+    headline: article.title,
+    description: article.lead ?? article.subtitle ?? undefined,
+    image: article.hero_image_url ? [article.hero_image_url] : undefined,
+    datePublished: article.published_at ?? undefined,
+    dateModified: article.updated_at,
+    author: authorObj ? [authorObj] : undefined,
+    publisher: {
+      "@type": "Organization",
+      name: "Business Fortitude",
+      url: SITE_URL,
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${SITE_URL}/article/${article.slug}`,
+    },
+    articleSection: article.category,
+  };
+  return Object.fromEntries(
+    Object.entries(raw).filter(([, v]) => v !== undefined),
+  );
+}
 
 export const revalidate = 300;
 
@@ -63,9 +107,16 @@ export default async function ArticlePage({
 
   const minutes = readMinutes(article.body_md);
   const { highlighted, rest } = splitTitle(article.title);
+  const author = article.author_slug ? getAuthor(article.author_slug) : null;
+  const jsonLd = buildArticleJsonLd(article);
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <ProgressBar />
       <main className="max-w-[1360px] mx-auto px-6">
         {/* Breadcrumb */}
@@ -160,37 +211,12 @@ export default async function ArticlePage({
           </aside>
         </div>
 
-        {/* Author card */}
-        <section className="py-12 border-t border-rule">
-          <div className="bg-surface rounded-3xl p-8 md:p-10 grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-            <div className="md:col-span-2">
-              <Image
-                src={avatarUrl(article.author_slug, 240)}
-                alt=""
-                width={96}
-                height={96}
-                className="rounded-full object-cover"
-                unoptimized
-              />
-            </div>
-            <div className="md:col-span-8">
-              <div className="kicker text-soft mb-2">About the author</div>
-              <div className="display text-[28px] mb-2">
-                {article.author_name ?? "Business Fortitude"}
-              </div>
-              <p className="text-soft text-[15px] leading-[1.6]">
-                Writes for Business Fortitude on{" "}
-                {categoryLabel(article.category).toLowerCase()} for an audience
-                of UK operators, founders, and senior professionals.
-              </p>
-            </div>
-            <div className="md:col-span-2 flex md:justify-end">
-              <a href="#" className="btn-primary text-[13px]">
-                All articles →
-              </a>
-            </div>
-          </div>
-        </section>
+        {/* Author card — links to /author/[slug] when the slug resolves to a known author */}
+        {author && (
+          <section className="py-12 border-t border-rule">
+            <AuthorCard author={author} />
+          </section>
+        )}
 
         {/* Related */}
         {related.length > 0 && (
