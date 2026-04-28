@@ -43,6 +43,5 @@ export interface WriteError {
 
 export interface WriteResult {
   drafted: number;
-  published_smoke: string | null;
   errors: WriteError[];
 }

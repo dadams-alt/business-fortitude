@@ -1,15 +1,15 @@
 // supabase/functions/news-write/index.ts
-// Stage 3 of the news pipeline. Claims up to 2 'ready' candidates via the
-// claim_news_candidates RPC, runs a two-pass Opus draft (brief → article),
-// and inserts as status='draft'. Smoke-test: the newest draft from the
-// run is auto-published so it shows up on the live site.
+// Stage 3 of the news pipeline. Claims up to BATCH_SIZE 'ready' candidates
+// via the claim_news_candidates RPC, runs a two-pass Opus draft
+// (brief → article), and inserts as status='draft' with hero_image_url
+// NULL — news-images picks up the gating signal from there. news-publish
+// owns the final flip to 'published'; this function does NOT publish.
 
 import { createServiceClient } from '../_shared/supabase-client.ts';
 import { isServiceRoleBearer } from '../_shared/auth.ts';
 import { callAIJson } from '../_shared/news-ai.ts';
 import { BRIEF_PROMPT, ARTICLE_PROMPT } from './prompts.ts';
 import { checkCompliance } from './compliance.ts';
-import { heroForCategory } from './hero-defaults.ts';
 import { authorForCategory } from './authors.ts';
 import type {
   ArticleAIResponse,
@@ -19,8 +19,10 @@ import type {
   WriteResult,
 } from './types.ts';
 
-const BATCH_SIZE = 2;
-const WORKER_ID = 'news-write/v1';
+// 1 article = 2 sequential Opus calls ≈ 60-110s. Keeps us comfortably
+// under the 150s edge function timeout while still drafting on every run.
+const BATCH_SIZE = 1;
+const WORKER_ID = 'news-write/v2';
 const VALID_CATEGORIES = new Set([
   'markets', 'deals', 'leadership', 'ai', 'startups', 'regulation', 'opinion',
 ]);
@@ -46,19 +48,13 @@ Deno.serve(async (req) => {
 
   const result: WriteResult = {
     drafted: 0,
-    published_smoke: null,
     errors: [],
   };
-
-  const draftedArticleIds: string[] = [];
 
   for (const candidate of claimed) {
     try {
       const articleId = await draftOne(client, candidate, result.errors);
-      if (articleId) {
-        result.drafted++;
-        draftedArticleIds.push(articleId);
-      }
+      if (articleId) result.drafted++;
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err);
       result.errors.push({ candidate_id: candidate.id, stage: 'unknown', message: msg });
@@ -67,26 +63,6 @@ Deno.serve(async (req) => {
         .from('news_candidates')
         .update({ status: 'ready', claimed_at: null, claimed_by: null })
         .eq('id', candidate.id);
-    }
-  }
-
-  // 2. Smoke-test publish: pick the newest drafted article and publish it.
-  if (draftedArticleIds.length > 0) {
-    const newest = draftedArticleIds[draftedArticleIds.length - 1];
-    const nowIso = new Date().toISOString();
-    const pub = await client
-      .from('articles')
-      .update({ status: 'published', published_at: nowIso })
-      .eq('id', newest);
-    if (pub.error) {
-      result.errors.push({ candidate_id: '(smoke)', stage: 'unknown', message: `publish: ${pub.error.message}` });
-    } else {
-      // Mirror the candidate row state.
-      await client
-        .from('news_candidates')
-        .update({ status: 'published' })
-        .eq('article_id', newest);
-      result.published_smoke = newest;
     }
   }
 
@@ -150,11 +126,10 @@ async function draftOne(
   // Slug + uniqueness.
   const slug = await uniqueSlug(client, article.title);
 
-  // Hero + author.
-  const hero = heroForCategory(category);
+  // Author by category. Hero image is left NULL — news-images picks up
+  // the NULL as its gating signal and fills hero_image_url + alt + credit.
   const author = authorForCategory(category);
 
-  // Insert.
   const { data: insertData, error: insertError } = await client
     .from('articles')
     .insert({
@@ -163,9 +138,9 @@ async function draftOne(
       subtitle: trimLen(article.subtitle, 300),
       lead: trimLen(article.lead, 600),
       body_md: article.body_md,
-      hero_image_url: hero.url,
-      hero_image_alt: hero.alt,
-      hero_image_credit: hero.credit,
+      hero_image_url: null,
+      hero_image_alt: null,
+      hero_image_credit: null,
       category,
       author_name: author.name,
       author_slug: author.slug,
