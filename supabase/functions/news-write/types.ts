@@ -7,7 +7,12 @@ export interface ClaimedCandidate {
   source_summary: string | null;
   source_pub_date: string | null;
   suggested_category: string | null;
+  // All four suggested_* arrays are NOT NULL DEFAULT '{}' in schema 004,
+  // but we type them defensively for postgrest's deserialiser.
   suggested_companies: string[] | null;
+  suggested_tickers: string[] | null;
+  suggested_executives: string[] | null;
+  suggested_sectors: string[] | null;
   priority_score: number | null;
 }
 
@@ -43,5 +48,9 @@ export interface WriteError {
 
 export interface WriteResult {
   drafted: number;
+  // Total article_entities rows actually inserted across the run.
+  // Sum across all candidates processed; conflicts (rare — see notes
+  // in index.ts) reduce this below the attempted count.
+  entity_links: number;
   errors: WriteError[];
 }

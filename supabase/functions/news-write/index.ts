@@ -48,13 +48,17 @@ Deno.serve(async (req) => {
 
   const result: WriteResult = {
     drafted: 0,
+    entity_links: 0,
     errors: [],
   };
 
   for (const candidate of claimed) {
     try {
-      const articleId = await draftOne(client, candidate, result.errors);
-      if (articleId) result.drafted++;
+      const draftResult = await draftOne(client, candidate, result.errors);
+      if (draftResult) {
+        result.drafted++;
+        result.entity_links += draftResult.entityLinks;
+      }
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err);
       result.errors.push({ candidate_id: candidate.id, stage: 'unknown', message: msg });
@@ -72,11 +76,16 @@ Deno.serve(async (req) => {
 
 // ---------- per-candidate workflow ----------
 
+interface DraftResult {
+  articleId: string;
+  entityLinks: number;
+}
+
 async function draftOne(
   client: Client,
   candidate: ClaimedCandidate,
   errors: WriteError[],
-): Promise<string | null> {
+): Promise<DraftResult | null> {
   const category = pickCategory(candidate.suggested_category);
 
   // Pass 1: editorial brief.
@@ -170,7 +179,47 @@ async function draftOne(
     .update({ article_id: insertData.id })
     .eq('id', candidate.id);
 
-  return insertData.id as string;
+  const articleId = insertData.id as string;
+
+  // Tag the article with the candidate's resolved entities. These were
+  // populated by news-filter when entity tables had matching rows; for
+  // candidates filtered before the entity seed (or for stories with no
+  // seeded entities) the arrays will be empty and we skip the upsert.
+  //
+  // Composite PK on (article_id, entity_type, entity_id) handles dedup;
+  // article_id is fresh per insert so collisions only happen on a
+  // re-run, which shouldn't occur under SKIP LOCKED claim semantics.
+  // Failure here logs and continues — entity tagging is an enhancement,
+  // not a publishing blocker.
+  const entityRows = [
+    ...(candidate.suggested_companies  ?? []).map((id) => ({ article_id: articleId, entity_type: 'company',   entity_id: id })),
+    ...(candidate.suggested_tickers    ?? []).map((id) => ({ article_id: articleId, entity_type: 'ticker',    entity_id: id })),
+    ...(candidate.suggested_executives ?? []).map((id) => ({ article_id: articleId, entity_type: 'executive', entity_id: id })),
+    ...(candidate.suggested_sectors    ?? []).map((id) => ({ article_id: articleId, entity_type: 'sector',    entity_id: id })),
+  ];
+
+  let entityLinks = 0;
+  if (entityRows.length > 0) {
+    const { data: linkData, error: linkError } = await client
+      .from('article_entities')
+      .upsert(entityRows, {
+        onConflict: 'article_id,entity_type,entity_id',
+        ignoreDuplicates: true,
+      })
+      .select('article_id');
+    if (linkError) {
+      console.error(`article_entities insert failed for ${articleId}:`, linkError.message);
+      errors.push({
+        candidate_id: candidate.id,
+        stage: 'insert',
+        message: `article_entities: ${linkError.message}`,
+      });
+    } else {
+      entityLinks = linkData?.length ?? 0;
+    }
+  }
+
+  return { articleId, entityLinks };
 }
 
 async function revert(client: Client, candidateId: string): Promise<void> {
