@@ -2,8 +2,15 @@
 // Shared hero scaffold for company / ticker / person / sector pages.
 // Each entity-type wrapper composes this with its own kicker, subline,
 // and optional side visual.
+//
+// Body is rendered as Markdown so company descriptions and executive
+// bios from entity-enrich (multi-paragraph, with **bold** emphasis)
+// land correctly. Plain-text bodies (sectors, the bare 1-sentence
+// fallback) render fine through the same path — react-markdown is a
+// no-op on text without markdown syntax.
 
 import type { ReactNode } from "react";
+import ReactMarkdown from "react-markdown";
 
 export function EntityHero({
   kicker,
@@ -37,7 +44,9 @@ export function EntityHero({
             <p className="text-[14px] font-mono text-soft mb-5">{subline}</p>
           )}
           {body && (
-            <p className="text-[18px] leading-[1.55] max-w-3xl">{body}</p>
+            <div className="article-body max-w-3xl entity-body">
+              <ReactMarkdown>{body}</ReactMarkdown>
+            </div>
           )}
         </div>
         {side && <div className="lg:col-span-3 flex lg:justify-end">{side}</div>}

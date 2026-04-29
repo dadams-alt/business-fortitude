@@ -106,3 +106,12 @@ body {
   display: inline-block;
 }
 .ticker-inline:hover { background: var(--accent); }
+
+/* Entity-page body — reuses article-body typography but neutralises the
+   first-paragraph lead boost. Company profiles and exec bios are short,
+   uniform prose; the article-page lead size would dominate. */
+.article-body.entity-body > p:first-of-type {
+  font-size: 18px;
+  line-height: 1.55;
+  font-weight: 400;
+}
