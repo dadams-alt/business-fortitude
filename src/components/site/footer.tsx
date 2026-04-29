@@ -1,24 +1,32 @@
 // src/components/site/footer.tsx
 // Lifted from mockups/02-modern-business-tech.html L350–379.
-// "Read" column links to real category routes; the other three columns
-// remain placeholder until those features land.
+// Four columns: Read (categories), Directory (entity indexes),
+// Company (placeholder), Legal (placeholder). The Pro column dropped
+// when we wired the Directory column — keeps the layout to four
+// columns + the brand block.
 
 import Link from "next/link";
 
-interface ReadLink {
+interface FooterLink {
   label: string;
   href: string;
 }
 
-const READ_LINKS: ReadLink[] = [
+const READ_LINKS: FooterLink[] = [
   { label: "Latest", href: "/" },
   { label: "Markets", href: "/category/markets" },
   { label: "Leadership", href: "/category/leadership" },
   { label: "Opinion", href: "/category/opinion" },
 ];
 
+const DIRECTORY_LINKS: FooterLink[] = [
+  { label: "Companies", href: "/companies" },
+  { label: "People", href: "/people" },
+  { label: "Sectors", href: "/sectors" },
+  { label: "Tickers", href: "/tickers" },
+];
+
 const PLACEHOLDER_COLUMNS: Array<{ heading: string; links: string[] }> = [
-  { heading: "Pro", links: ["Roundtables", "Model portfolios", "Deal database"] },
   { heading: "Company", links: ["About", "Careers", "Advertise"] },
   { heading: "Legal", links: ["Privacy", "Terms", "Cookies"] },
 ];
@@ -40,6 +48,18 @@ export function SiteFooter() {
           <div className="kicker opacity-60 mb-3">Read</div>
           <ul className="space-y-2">
             {READ_LINKS.map((item) => (
+              <li key={item.href}>
+                <Link href={item.href} className="hover:text-lime">
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <div className="kicker opacity-60 mb-3">Directory</div>
+          <ul className="space-y-2">
+            {DIRECTORY_LINKS.map((item) => (
               <li key={item.href}>
                 <Link href={item.href} className="hover:text-lime">
                   {item.label}

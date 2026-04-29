@@ -8,17 +8,30 @@ import type { MetadataRoute } from "next";
 import { createClient } from "@/lib/supabase/server";
 import { CATEGORIES } from "@/lib/data/categories";
 import { AUTHORS } from "@/lib/data/authors";
+import {
+  listCompanies,
+  listExecutives,
+  listSectors,
+  listTickers,
+} from "@/lib/queries/entities";
 
 const BASE_URL = "https://business-fortitude.vercel.app";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const supabase = await createClient();
-  const { data: articles } = await supabase
-    .from("articles")
-    .select("slug, updated_at")
-    .eq("status", "published")
-    .order("published_at", { ascending: false })
-    .limit(5000);
+  const [{ data: articles }, companies, executives, tickers, sectors] =
+    await Promise.all([
+      supabase
+        .from("articles")
+        .select("slug, updated_at")
+        .eq("status", "published")
+        .order("published_at", { ascending: false })
+        .limit(5000),
+      listCompanies(),
+      listExecutives(),
+      listTickers(),
+      listSectors(),
+    ]);
 
   const now = new Date();
   const staticEntries: MetadataRoute.Sitemap = [
@@ -46,6 +59,41 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "daily",
     }),
   );
+  const indexEntries: MetadataRoute.Sitemap = [
+    "companies",
+    "people",
+    "sectors",
+    "tickers",
+  ].map((slug) => ({
+    url: `${BASE_URL}/${slug}`,
+    lastModified: now,
+    priority: 0.5,
+    changeFrequency: "daily" as const,
+  }));
+  const companyEntries: MetadataRoute.Sitemap = companies.map((c) => ({
+    url: `${BASE_URL}/company/${c.slug}`,
+    lastModified: now,
+    priority: 0.6,
+    changeFrequency: "weekly",
+  }));
+  const personEntries: MetadataRoute.Sitemap = executives.map((e) => ({
+    url: `${BASE_URL}/person/${e.slug}`,
+    lastModified: now,
+    priority: 0.5,
+    changeFrequency: "weekly",
+  }));
+  const tickerEntries: MetadataRoute.Sitemap = tickers.map((t) => ({
+    url: `${BASE_URL}/ticker/${t.slug}`,
+    lastModified: now,
+    priority: 0.5,
+    changeFrequency: "weekly",
+  }));
+  const sectorEntries: MetadataRoute.Sitemap = sectors.map((s) => ({
+    url: `${BASE_URL}/sector/${s.slug}`,
+    lastModified: now,
+    priority: 0.6,
+    changeFrequency: "weekly",
+  }));
   const articleEntries: MetadataRoute.Sitemap = (articles ?? []).map((a) => ({
     url: `${BASE_URL}/article/${a.slug}`,
     lastModified: new Date(a.updated_at),
@@ -56,6 +104,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...staticEntries,
     ...categoryEntries,
     ...authorEntries,
+    ...indexEntries,
+    ...companyEntries,
+    ...personEntries,
+    ...tickerEntries,
+    ...sectorEntries,
     ...articleEntries,
   ];
 }

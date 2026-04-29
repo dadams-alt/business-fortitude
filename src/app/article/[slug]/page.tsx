@@ -12,6 +12,8 @@ import {
   getPublishedArticles,
   getRelatedArticles,
 } from "@/lib/queries/articles";
+import { getEntitiesForArticle } from "@/lib/queries/entities";
+import { EntityChips } from "@/components/entity/entity-chips";
 import { Chip, categoryLabel } from "@/components/ui/chip";
 import { ArticleMeta } from "@/components/article/article-meta";
 import { ArticleBody } from "@/components/article/article-body";
@@ -100,9 +102,10 @@ export default async function ArticlePage({
   const article = await getArticleBySlug(slug);
   if (!article) notFound();
 
-  const [trending, related] = await Promise.all([
+  const [trending, related, entities] = await Promise.all([
     getPublishedArticles({ limit: 4 }),
     getRelatedArticles(article.category, article.id, 3),
+    getEntitiesForArticle(article.id),
   ]);
 
   const minutes = readMinutes(article.body_md);
@@ -180,6 +183,9 @@ export default async function ArticlePage({
             )}
           </figure>
         )}
+
+        {/* Entity chips — sourced from article_entities */}
+        <EntityChips entities={entities} />
 
         {/* Body + rail */}
         <div className="pb-16 grid grid-cols-1 lg:grid-cols-12 gap-10">

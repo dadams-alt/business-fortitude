@@ -71,3 +71,38 @@ body {
 .share-btn:hover { background: var(--ink); color: white; }
 
 .progress { position: fixed; top: 0; left: 0; height: 3px; background: var(--accent); width: 0; z-index: 100; }
+
+/* ----- Entity chips (article-page in-this-story strip + entity pages) ----- */
+
+.entity-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  text-decoration: none !important;
+  transition: background .15s ease, color .15s ease, border-color .15s ease;
+}
+.entity-chip:hover { background: var(--accent); color: white; border-color: var(--accent); }
+.entity-chip .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); display: inline-block; }
+.entity-chip:hover .dot { background: var(--lime); }
+
+.ticker-inline {
+  font-family: var(--font-space-grotesk), ui-monospace, monospace;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: white;
+  text-decoration: none !important;
+  letter-spacing: 0.04em;
+  transition: background .15s ease;
+  display: inline-block;
+}
+.ticker-inline:hover { background: var(--accent); }
