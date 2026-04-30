@@ -26,9 +26,20 @@ const DIRECTORY_LINKS: FooterLink[] = [
   { label: "Tickers", href: "/tickers" },
 ];
 
-const PLACEHOLDER_COLUMNS: Array<{ heading: string; links: string[] }> = [
-  { heading: "Company", links: ["About", "Careers", "Advertise"] },
-  { heading: "Legal", links: ["Privacy", "Terms", "Cookies"] },
+const COMPANY_LINKS: FooterLink[] = [
+  { label: "About", href: "/about" },
+  { label: "How BF Works", href: "/how-bf-works" },
+];
+
+const LEGAL_LINKS: FooterLink[] = [
+  { label: "Privacy", href: "/privacy" },
+  { label: "Terms", href: "/terms" },
+  { label: "Cookies", href: "/cookies" },
+];
+
+const COLUMNS: Array<{ heading: string; links: FooterLink[] }> = [
+  { heading: "Company", links: COMPANY_LINKS },
+  { heading: "Legal", links: LEGAL_LINKS },
 ];
 
 export function SiteFooter() {
@@ -68,15 +79,15 @@ export function SiteFooter() {
             ))}
           </ul>
         </div>
-        {PLACEHOLDER_COLUMNS.map((col) => (
+        {COLUMNS.map((col) => (
           <div key={col.heading}>
             <div className="kicker opacity-60 mb-3">{col.heading}</div>
             <ul className="space-y-2">
               {col.links.map((link) => (
-                <li key={link}>
-                  <a href="#" className="hover:text-lime">
-                    {link}
-                  </a>
+                <li key={link.href}>
+                  <Link href={link.href} className="hover:text-lime">
+                    {link.label}
+                  </Link>
                 </li>
               ))}
             </ul>

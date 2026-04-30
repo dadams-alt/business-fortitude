@@ -36,12 +36,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
   const staticEntries: MetadataRoute.Sitemap = [
     { url: BASE_URL, lastModified: now, priority: 1.0, changeFrequency: "hourly" },
-    {
-      url: `${BASE_URL}/search`,
-      lastModified: now,
-      priority: 0.4,
-      changeFrequency: "monthly",
-    },
+    { url: `${BASE_URL}/search`, lastModified: now, priority: 0.4, changeFrequency: "monthly" },
+    { url: `${BASE_URL}/about`, lastModified: now, priority: 0.6, changeFrequency: "monthly" },
+    { url: `${BASE_URL}/how-bf-works`, lastModified: now, priority: 0.6, changeFrequency: "monthly" },
+    { url: `${BASE_URL}/privacy`, lastModified: now, priority: 0.3, changeFrequency: "yearly" },
+    { url: `${BASE_URL}/terms`, lastModified: now, priority: 0.3, changeFrequency: "yearly" },
+    { url: `${BASE_URL}/cookies`, lastModified: now, priority: 0.3, changeFrequency: "yearly" },
   ];
   const categoryEntries: MetadataRoute.Sitemap = Object.keys(CATEGORIES).map(
     (slug) => ({
