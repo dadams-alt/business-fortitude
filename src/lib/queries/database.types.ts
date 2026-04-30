@@ -188,6 +188,7 @@ export type Database = {
           id: string
           linkedin_url: string | null
           name: string
+          photo_lookup_attempted_at: string | null
           photo_url: string | null
           role: string | null
           slug: string
@@ -202,6 +203,7 @@ export type Database = {
           id?: string
           linkedin_url?: string | null
           name: string
+          photo_lookup_attempted_at?: string | null
           photo_url?: string | null
           role?: string | null
           slug: string
@@ -216,6 +218,7 @@ export type Database = {
           id?: string
           linkedin_url?: string | null
           name?: string
+          photo_lookup_attempted_at?: string | null
           photo_url?: string | null
           role?: string | null
           slug?: string
@@ -318,6 +321,36 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      newsletter_subscribers: {
+        Row: {
+          confirmed: boolean
+          email: string
+          id: string
+          source: string
+          subscribed_at: string
+          unsubscribed_at: string | null
+          user_agent: string | null
+        }
+        Insert: {
+          confirmed?: boolean
+          email: string
+          id?: string
+          source?: string
+          subscribed_at?: string
+          unsubscribed_at?: string | null
+          user_agent?: string | null
+        }
+        Update: {
+          confirmed?: boolean
+          email?: string
+          id?: string
+          source?: string
+          subscribed_at?: string
+          unsubscribed_at?: string | null
+          user_agent?: string | null
+        }
+        Relationships: []
       }
       rss_feeds: {
         Row: {
@@ -472,6 +505,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      call_edge_fn: { Args: { fn_name: string }; Returns: number }
       claim_news_candidates: {
         Args: { batch_size: number; worker_id: string }
         Returns: {

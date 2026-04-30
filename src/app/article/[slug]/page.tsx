@@ -213,7 +213,7 @@ export default async function ArticlePage({
                 ))}
               </ol>
             </div>
-            <NewsletterCard />
+            <NewsletterCard source="article-rail" />
           </aside>
         </div>
 

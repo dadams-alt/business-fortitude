@@ -39,7 +39,7 @@ export function BreakingSidebar({ articles }: { articles: Article[] }) {
           ))}
         </div>
       </div>
-      <NewsletterCard />
+      <NewsletterCard source="homepage" />
     </aside>
   );
 }
