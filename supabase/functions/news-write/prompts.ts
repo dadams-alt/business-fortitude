@@ -32,7 +32,7 @@ Reply with ONLY a JSON object, no prose, no markdown fences:
   "core_story":      "<2 sentences: what happened, who it affects>",
   "why_it_matters":  "<2 sentences: the operator-relevant 'so what'>",
   "editorial_angle": "<1 sentence: the BF angle a competitor wouldn't take>",
-  "context_needed":  "<bullet list of background the writer should research and weave in — financial figures, prior reporting, sector context. 3-5 items>",
+  "context_needed":  "<exactly 3 bullet items: financial figures, prior reporting, sector context. Hard cap at 3 — quality over coverage>",
   "target_word_count": 600 | 800 | 1000 | 1200,
   "suggested_h2_sections": ["<3-4 H2 headlines for the article structure>"],
   "named_entities": {
