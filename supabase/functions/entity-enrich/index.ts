@@ -239,10 +239,16 @@ async function loadCompanyName(client: Client, id: string | null): Promise<strin
 // ---------- 3. Executive photos via Wikipedia ----------
 
 async function fillPhotos(client: Client, result: EnrichResult): Promise<void> {
+  // Gate retries on photo_lookup_attempted_at so we don't re-query
+  // Wikipedia for the same unmatched executives every drain. 30-day
+  // window: long enough not to spam, short enough that newly-added
+  // Wikipedia photos still get picked up.
+  const cutoff = new Date(Date.now() - 30 * 86400_000).toISOString();
   const { data: rawRows } = await client
     .from('executives')
     .select('id, slug, name, role, current_company_id')
     .is('photo_url', null)
+    .or(`photo_lookup_attempted_at.is.null,photo_lookup_attempted_at.lt.${cutoff}`)
     .order('name')
     .limit(BATCH_PHOTOS);
   const candidates = (rawRows ?? []) as ExecutiveRow[];
@@ -254,10 +260,15 @@ async function fillPhotos(client: Client, result: EnrichResult): Promise<void> {
     try {
       const companyName = await loadCompanyName(client, exec.current_company_id);
       const photo = await lookupPersonPhoto(exec.name, exec.role, companyName);
-      if (!photo) continue;
+      // Always stamp photo_lookup_attempted_at, even on miss. photo_url
+      // stays NULL on miss; only set the URL on hit.
+      const update: Record<string, unknown> = {
+        photo_lookup_attempted_at: new Date().toISOString(),
+      };
+      if (photo) update.photo_url = photo.url;
       const { error: updateError } = await client
         .from('executives')
-        .update({ photo_url: photo.url })
+        .update(update)
         .eq('id', exec.id);
       if (updateError) {
         result.errors.push({
@@ -267,7 +278,7 @@ async function fillPhotos(client: Client, result: EnrichResult): Promise<void> {
         });
         continue;
       }
-      result.photos_found++;
+      if (photo) result.photos_found++;
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err);
       result.errors.push({ slug: exec.slug, kind: 'photo', message: msg });
@@ -279,6 +290,11 @@ async function fillPhotos(client: Client, result: EnrichResult): Promise<void> {
 // ---------- 4. Remaining counts ----------
 
 async function fillRemainingCounts(client: Client, result: EnrichResult): Promise<void> {
+  // photos_remaining counts only execs without a photo AND without a
+  // recent attempt — same gate as the fillPhotos query. After one full
+  // drain pass everyone has been attempted, so the queue empties even
+  // when Wikipedia turned up nothing for them.
+  const photosCutoff = new Date(Date.now() - 30 * 86400_000).toISOString();
   const [{ count: companiesNullOrEmpty }, allCompaniesWithDesc, { count: photosRemaining }] =
     await Promise.all([
       client
@@ -289,7 +305,8 @@ async function fillRemainingCounts(client: Client, result: EnrichResult): Promis
       client
         .from('executives')
         .select('id', { count: 'exact', head: true })
-        .is('photo_url', null),
+        .is('photo_url', null)
+        .or(`photo_lookup_attempted_at.is.null,photo_lookup_attempted_at.lt.${photosCutoff}`),
     ]);
 
   // Length-based remaining (postgrest can't filter by length, so compute in JS).
