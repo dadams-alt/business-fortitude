@@ -13,7 +13,7 @@
 import { createServiceClient } from '../_shared/supabase-client.ts';
 import { isServiceRoleBearer } from '../_shared/auth.ts';
 import { callAIJson } from '../_shared/news-ai.ts';
-import { COMPANY_PROMPT, EXECUTIVE_PROMPT } from './prompts.ts';
+import { COMPANY_PROMPT, EXECUTIVE_PROMPT, SECTOR_PROMPT } from './prompts.ts';
 import { checkCompliance } from './compliance.ts';
 import { lookupPersonPhoto } from './wikipedia.ts';
 import type {
@@ -23,8 +23,11 @@ import type {
   EnrichResult,
   ExecutiveAIResponse,
   ExecutiveRow,
+  SectorAIResponse,
+  SectorRow,
 } from './types.ts';
 
+const BATCH_SECTORS = 8;
 const BATCH_COMPANIES = 5;
 const BATCH_EXECUTIVES = 8;
 const BATCH_PHOTOS = 30;
@@ -39,16 +42,19 @@ Deno.serve(async (req) => {
 
   const client = createServiceClient();
   const result: EnrichResult = {
+    sectors_enriched: 0,
     companies_enriched: 0,
     bios_enriched: 0,
     photos_found: 0,
     compliance_reverts: 0,
+    sectors_remaining: 0,
     companies_remaining: 0,
     bios_remaining: 0,
     photos_remaining: 0,
     errors: [],
   };
 
+  await enrichSectors(client, result);
   await enrichCompanies(client, result);
   await enrichExecutives(client, result);
   await fillPhotos(client, result);
@@ -56,6 +62,77 @@ Deno.serve(async (req) => {
 
   return json(result, 200);
 });
+
+
+// ---------- 0. Sectors ----------
+
+async function enrichSectors(client: Client, result: EnrichResult): Promise<void> {
+  const { data: rawNull } = await client
+    .from('sectors')
+    .select('id, slug, name, description')
+    .or('description.is.null,description.eq.')
+    .order('name')
+    .limit(BATCH_SECTORS);
+
+  let candidates = (rawNull ?? []) as SectorRow[];
+  if (candidates.length < BATCH_SECTORS) {
+    const remaining = BATCH_SECTORS - candidates.length;
+    const seenIds = new Set(candidates.map((c) => c.id));
+    const { data: rawShort } = await client
+      .from('sectors')
+      .select('id, slug, name, description')
+      .not('description', 'is', null)
+      .order('name')
+      .limit(1000);
+    const shorts = ((rawShort ?? []) as SectorRow[])
+      .filter((s) => !seenIds.has(s.id) && (s.description?.length ?? 0) < 100)
+      .slice(0, remaining);
+    candidates = [...candidates, ...shorts];
+  }
+
+  for (const sector of candidates) {
+    try {
+      const ai = await callAIJson<SectorAIResponse>({
+        model: 'sonnet',
+        system: SECTOR_PROMPT,
+        user: `Sector: ${sector.name}`,
+        max_tokens: 1000,
+        temperature: 0.5,
+      });
+      const description = (ai.description ?? '').trim();
+      if (!description) {
+        result.errors.push({ slug: sector.slug, kind: 'company', message: 'empty sector description' });
+        continue;
+      }
+      const compliance = checkCompliance(description);
+      if (!compliance.ok) {
+        result.compliance_reverts++;
+        result.errors.push({
+          slug: sector.slug,
+          kind: 'company',
+          message: `compliance: ${compliance.hits.join(', ')}`,
+        });
+        continue;
+      }
+      const { error: updateError } = await client
+        .from('sectors')
+        .update({ description })
+        .eq('id', sector.id);
+      if (updateError) {
+        result.errors.push({
+          slug: sector.slug,
+          kind: 'company',
+          message: `update: ${updateError.message}`,
+        });
+        continue;
+      }
+      result.sectors_enriched++;
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
+      result.errors.push({ slug: sector.slug, kind: 'company', message: msg });
+    }
+  }
+}
 
 
 // ---------- 1. Companies ----------
@@ -328,6 +405,20 @@ async function fillRemainingCounts(client: Client, result: EnrichResult): Promis
   result.bios_remaining = (biosNullOrEmpty ?? 0) + shortBios;
 
   result.photos_remaining = photosRemaining ?? 0;
+
+  // Sectors remaining: NULL/empty + length < 100 (same threshold as
+  // the enrichSectors selection above).
+  const [{ count: sectorsNullOrEmpty }, allSectorsWithDesc] = await Promise.all([
+    client
+      .from('sectors')
+      .select('id', { count: 'exact', head: true })
+      .or('description.is.null,description.eq.'),
+    client.from('sectors').select('description').not('description', 'is', null),
+  ]);
+  const shortSectors = (
+    (allSectorsWithDesc.data ?? []) as Array<{ description: string | null }>
+  ).filter((r) => (r.description?.length ?? 0) < 100).length;
+  result.sectors_remaining = (sectorsNullOrEmpty ?? 0) + shortSectors;
 }
 
 

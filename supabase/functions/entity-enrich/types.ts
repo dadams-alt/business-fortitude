@@ -32,11 +32,24 @@ export interface EnrichError {
   message: string;
 }
 
+export interface SectorRow {
+  id: string;
+  slug: string;
+  name: string;
+  description: string | null;
+}
+
+export interface SectorAIResponse {
+  description: string;
+}
+
 export interface EnrichResult {
+  sectors_enriched: number;
   companies_enriched: number;
   bios_enriched: number;
   photos_found: number;
   compliance_reverts: number;
+  sectors_remaining: number;
   companies_remaining: number;
   bios_remaining: number;
   photos_remaining: number;
