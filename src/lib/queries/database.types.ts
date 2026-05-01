@@ -506,11 +506,63 @@ export type Database = {
           },
         ]
       }
+      user_roles: {
+        Row: {
+          granted_at: string
+          granted_by: string | null
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          granted_at?: string
+          granted_by?: string | null
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          granted_at?: string
+          granted_by?: string | null
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
+      admin_list_cron_jobs: {
+        Args: never
+        Returns: {
+          active: boolean
+          command: string
+          jobid: number
+          jobname: string
+          schedule: string
+        }[]
+      }
+      admin_recent_cron_runs: {
+        Args: { p_limit?: number }
+        Returns: {
+          end_time: string
+          jobid: number
+          jobname: string
+          return_message: string
+          start_time: string
+          status: string
+        }[]
+      }
+      admin_recent_http_responses: {
+        Args: { p_limit?: number }
+        Returns: {
+          content: string
+          content_type: string
+          created: string
+          id: number
+          status_code: number
+        }[]
+      }
       call_edge_fn: { Args: { fn_name: string }; Returns: number }
       claim_news_candidates: {
         Args: { batch_size: number; worker_id: string }
@@ -544,13 +596,20 @@ export type Database = {
           isSetofReturn: true
         }
       }
+      has_role: {
+        Args: {
+          check_role: Database["public"]["Enums"]["app_role"]
+          check_user_id: string
+        }
+        Returns: boolean
+      }
       release_stale_writing_candidates: {
         Args: { max_age_minutes?: number }
         Returns: number
       }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "moderator" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -677,6 +736,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "moderator", "user"],
+    },
   },
 } as const
