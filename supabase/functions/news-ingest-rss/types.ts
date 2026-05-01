@@ -37,4 +37,6 @@ export interface FeedRow {
   last_fetched_at: string | null;
   consecutive_failure_count: number;
   is_active: boolean;
+  /** Optional per-feed UA override; NULL falls through to function default. */
+  user_agent: string | null;
 }

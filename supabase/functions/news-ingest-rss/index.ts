@@ -56,7 +56,7 @@ Deno.serve(async (req) => {
 
   const { data: feeds, error } = await client
     .from('rss_feeds')
-    .select('id, name, url, fetch_interval_minutes, last_fetched_at, consecutive_failure_count, is_active')
+    .select('id, name, url, fetch_interval_minutes, last_fetched_at, consecutive_failure_count, is_active, user_agent')
     .eq('is_active', true);
 
   if (error) return json({ error: error.message }, 500);
@@ -158,7 +158,11 @@ function withinWindow(items: FeedItem[]): FeedItem[] {
 async function ingestFeed(client: Client, feed: FeedRow, result: IngestResult): Promise<void> {
   let response: Response;
   try {
-    response = await fetchWithTimeout(feed.url, { ua: UA, timeoutMs: FETCH_TIMEOUT_MS });
+    // Per-feed UA override falls through to the BF default. Used for
+    // publishers whose WAF rejects the identified-bot UA (Marketing
+    // Week being the canonical case).
+    const ua = feed.user_agent ?? UA;
+    response = await fetchWithTimeout(feed.url, { ua, timeoutMs: FETCH_TIMEOUT_MS });
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
     await recordFailure(client, feed, 0, msg);
