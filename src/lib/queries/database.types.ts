@@ -329,6 +329,7 @@ export type Database = {
           id: string
           source: string
           subscribed_at: string
+          unsubscribe_token: string
           unsubscribed_at: string | null
           user_agent: string | null
         }
@@ -338,6 +339,7 @@ export type Database = {
           id?: string
           source?: string
           subscribed_at?: string
+          unsubscribe_token?: string
           unsubscribed_at?: string | null
           user_agent?: string | null
         }
@@ -347,6 +349,7 @@ export type Database = {
           id?: string
           source?: string
           subscribed_at?: string
+          unsubscribe_token?: string
           unsubscribed_at?: string | null
           user_agent?: string | null
         }
@@ -368,6 +371,7 @@ export type Database = {
           source_name: string
           updated_at: string
           url: string
+          user_agent: string | null
         }
         Insert: {
           category?: string | null
@@ -384,6 +388,7 @@ export type Database = {
           source_name: string
           updated_at?: string
           url: string
+          user_agent?: string | null
         }
         Update: {
           category?: string | null
@@ -400,6 +405,7 @@ export type Database = {
           source_name?: string
           updated_at?: string
           url?: string
+          user_agent?: string | null
         }
         Relationships: []
       }
