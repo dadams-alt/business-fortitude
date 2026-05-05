@@ -4,7 +4,8 @@
 
 import { createClient } from "@/lib/supabase/server";
 
-const BASE_URL = "https://business-fortitude.vercel.app";
+const BASE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://business-fortitude.vercel.app";
 const PUBLICATION = "Business Fortitude";
 
 export const revalidate = 3600;

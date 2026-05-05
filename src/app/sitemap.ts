@@ -15,7 +15,8 @@ import {
   listTickers,
 } from "@/lib/queries/entities";
 
-const BASE_URL = "https://business-fortitude.vercel.app";
+const BASE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://business-fortitude.vercel.app";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const supabase = await createClient();

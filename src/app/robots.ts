@@ -4,6 +4,9 @@
 
 import type { MetadataRoute } from "next";
 
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://business-fortitude.vercel.app";
+
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
@@ -13,6 +16,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/api/", "/admin/"],
       },
     ],
-    sitemap: "https://business-fortitude.vercel.app/sitemap.xml",
+    sitemap: [`${SITE_URL}/sitemap.xml`, `${SITE_URL}/news-sitemap.xml`],
   };
 }
