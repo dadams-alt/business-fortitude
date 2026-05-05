@@ -1,7 +1,7 @@
 // src/app/admin/layout.tsx
-// Admin shell — sidebar nav, user identity, sign-out. The middleware
-// has already gated the route, but layout double-checks via
-// supabase.auth.getUser() before render so the page itself can
+// Admin shell — sidebar nav, user identity, sign-out. The proxy
+// (src/proxy.ts) has already gated the route, but layout double-checks
+// via supabase.auth.getUser() before render so the page itself can
 // trust user is authenticated.
 
 import Link from "next/link";

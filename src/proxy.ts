@@ -1,4 +1,4 @@
-// src/middleware.ts
+// src/proxy.ts
 // Gate /admin/* on (a) authenticated session and (b) admin role.
 // Runs at the edge, before the route component. Anything else is
 // passed through.
@@ -10,7 +10,7 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
-export async function middleware(req: NextRequest) {
+export async function proxy(req: NextRequest) {
   if (!req.nextUrl.pathname.startsWith("/admin")) {
     return NextResponse.next();
   }

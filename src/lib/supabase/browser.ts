@@ -3,8 +3,8 @@
 // src/lib/supabase/browser.ts
 // Client-side Supabase client used by the magic-link login form. The
 // browser client handles its own session cookie reads/writes — pair it
-// with the SSR server.ts client in middleware/route handlers for
-// session propagation.
+// with the SSR server.ts client in proxy/route handlers for session
+// propagation.
 
 import { createBrowserClient } from "@supabase/ssr";
 
