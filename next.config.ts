@@ -4,6 +4,9 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       { protocol: "https", hostname: "images.unsplash.com" },
+      // Legacy Lovable archive sources its hero images directly from
+      // Pexels CDN (583 of 589 articles); Unsplash covers the rest.
+      { protocol: "https", hostname: "images.pexels.com" },
       { protocol: "https", hostname: "i.pravatar.cc" },
       // news-images Storage bucket on the linked Supabase project.
       {
