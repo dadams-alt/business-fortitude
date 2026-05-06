@@ -5,8 +5,8 @@
 const ENDPOINT = 'https://api.indexnow.org/indexnow';
 
 export interface IndexNowConfig {
-  host: string;       // 'business-fortitude.vercel.app'
-  siteUrl: string;    // 'https://business-fortitude.vercel.app'
+  host: string;       // e.g. 'www.businessfortitude.com'
+  siteUrl: string;    // e.g. 'https://www.businessfortitude.com'
   key: string;
 }
 

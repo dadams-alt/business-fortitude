@@ -11,6 +11,6 @@ export async function POST() {
   await supabase.auth.signOut();
   return NextResponse.redirect(
     process.env.NEXT_PUBLIC_SITE_URL ??
-      "https://business-fortitude.vercel.app",
+      "https://www.businessfortitude.com",
   );
 }

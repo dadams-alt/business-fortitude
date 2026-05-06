@@ -13,7 +13,8 @@ import { createServiceClient } from "@/lib/supabase/service";
 import { welcomeEmailTemplate } from "@/lib/email/templates";
 
 const VALID_SOURCES = new Set(["homepage", "article-rail", "footer", "website"]);
-const SITE_URL = "https://business-fortitude.vercel.app";
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.businessfortitude.com";
 // Resend test-mode sender. Switch to a custom-domain address (e.g.
 // hello@businessfortitude.com) once the domain is verified in Resend.
 const FROM = "Business Fortitude <onboarding@resend.dev>";

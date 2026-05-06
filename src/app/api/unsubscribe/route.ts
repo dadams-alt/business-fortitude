@@ -14,6 +14,8 @@ import type { NextRequest } from "next/server";
 import { createServiceClient } from "@/lib/supabase/service";
 
 const TOKEN_RE = /^[a-f0-9]{48}$/;
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.businessfortitude.com";
 
 function htmlPage(headline: string, message: string): Response {
   const html = `<!DOCTYPE html>
@@ -35,7 +37,7 @@ function htmlPage(headline: string, message: string): Response {
 <h1>${headline}</h1>
 <p>${message}</p>
 <hr>
-<p><a href="https://business-fortitude.vercel.app/">Back to Business <span>Fortitude</span></a></p>
+<p><a href="${SITE_URL}/">Back to Business <span>Fortitude</span></a></p>
 </body>
 </html>`;
   return new Response(html, {

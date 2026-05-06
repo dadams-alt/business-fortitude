@@ -25,7 +25,7 @@ import { readMinutes } from "@/lib/format";
 import { getAuthor } from "@/lib/data/authors";
 
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://business-fortitude.vercel.app";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.businessfortitude.com";
 
 function buildArticleJsonLd(article: Article): Record<string, unknown> {
   const author = article.author_slug ? getAuthor(article.author_slug) : null;

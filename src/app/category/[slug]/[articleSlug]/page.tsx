@@ -18,7 +18,7 @@ import { ArticleView } from "@/components/article/article-view";
 import { isValidCategory } from "@/lib/data/categories";
 
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://business-fortitude.vercel.app";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.businessfortitude.com";
 
 export const revalidate = 300;
 

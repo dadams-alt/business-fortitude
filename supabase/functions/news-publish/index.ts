@@ -11,8 +11,12 @@ import { revalidatePaths } from './revalidate.ts';
 import type { PublishableArticle, PublishError, PublishResult } from './types.ts';
 
 const BATCH_SIZE = 5;
-const SITE_URL = 'https://business-fortitude.vercel.app';
-const HOST = 'business-fortitude.vercel.app';
+// SITE_URL drives both IndexNow submission URLs and ISR revalidate
+// targets. Reads from the function-secret SITE_URL with the brand
+// domain as fallback. HOST is derived from SITE_URL once.
+const SITE_URL =
+  Deno.env.get('SITE_URL') ?? 'https://www.businessfortitude.com';
+const HOST = SITE_URL.replace(/^https?:\/\//, '').replace(/\/$/, '');
 
 type Client = ReturnType<typeof createServiceClient>;
 
