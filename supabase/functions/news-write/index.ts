@@ -4,6 +4,12 @@
 // (brief → article), and inserts as status='draft' with hero_image_url
 // NULL — news-images picks up the gating signal from there. news-publish
 // owns the final flip to 'published'; this function does NOT publish.
+//
+// Throttle policy (migration 015):
+//   NEWS_DAILY_CAP    (default 5)  — exit early once today (UTC) has this
+//                                    many published articles
+//   NEWS_MIN_PRIORITY (default 70) — only claim candidates whose
+//                                    priority_score is at least this
 
 import { createServiceClient } from '../_shared/supabase-client.ts';
 import { isServiceRoleBearer } from '../_shared/auth.ts';
@@ -23,6 +29,8 @@ import type {
 // under the 150s edge function timeout while still drafting on every run.
 const BATCH_SIZE = 1;
 const WORKER_ID = 'news-write/v2';
+const DAILY_CAP = parseInt(Deno.env.get('NEWS_DAILY_CAP') ?? '5', 10);
+const MIN_PRIORITY = parseInt(Deno.env.get('NEWS_MIN_PRIORITY') ?? '70', 10);
 const VALID_CATEGORIES = new Set([
   'markets', 'deals', 'leadership', 'ai', 'startups', 'regulation', 'opinion',
 ]);
@@ -36,11 +44,44 @@ Deno.serve(async (req) => {
 
   const client = createServiceClient();
 
+  // 0. Daily cap check. Counts articles published since the start of the
+  // current UTC day; bails early if the cap is hit. Soft target: a Supabase
+  // blip falls through (fail-open) rather than stalling the pipeline.
+  const startOfUtcDay = new Date(
+    new Date().toISOString().slice(0, 10) + 'T00:00:00.000Z',
+  ).toISOString();
+  const { count: publishedToday, error: countErr } = await client
+    .from('articles')
+    .select('id', { count: 'exact', head: true })
+    .eq('status', 'published')
+    .gte('published_at', startOfUtcDay);
+
+  if (countErr) {
+    console.error('daily cap check failed:', countErr.message);
+  } else if ((publishedToday ?? 0) >= DAILY_CAP) {
+    console.log(
+      `daily cap reached: ${publishedToday}/${DAILY_CAP} — exiting`,
+    );
+    return json(
+      {
+        skipped: true,
+        reason: 'daily_cap_reached',
+        published_today: publishedToday ?? 0,
+        daily_cap: DAILY_CAP,
+      },
+      200,
+    );
+  }
+
   // 1. Claim up to BATCH_SIZE candidates atomically (FOR UPDATE SKIP LOCKED).
-  // Schema: claim_news_candidates(batch_size int, worker_id text).
+  // Schema: claim_news_candidates(batch_size int, worker_id text, min_priority int).
   const { data: claimedRaw, error: claimError } = await client.rpc(
     'claim_news_candidates',
-    { batch_size: BATCH_SIZE, worker_id: WORKER_ID },
+    {
+      batch_size: BATCH_SIZE,
+      worker_id: WORKER_ID,
+      min_priority: MIN_PRIORITY,
+    },
   );
 
   if (claimError) return json({ error: `claim: ${claimError.message}` }, 500);
