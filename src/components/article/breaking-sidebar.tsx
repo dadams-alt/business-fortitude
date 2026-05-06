@@ -19,20 +19,15 @@ export function BreakingSidebar({ articles }: { articles: Article[] }) {
               href={`/article/${article.slug}`}
               className={`block card ${i === 0 ? "pt-0" : "pt-4"}`}
             >
-              <div className="flex gap-3 items-start">
-                <Chip
-                  variant={variantForCategory(article.category)}
-                  className="shrink-0"
-                >
+              <div>
+                <Chip variant={variantForCategory(article.category)}>
                   {categoryLabel(article.category)}
                 </Chip>
-                <div>
-                  <h3 className="font-bold text-[15px] leading-snug title-link">
-                    {article.title}
-                  </h3>
-                  <div className="text-[12px] text-soft mt-1">
-                    {formatPublishedAt(article.published_at)} · {readMinutes(article.body_md)} min
-                  </div>
+                <h3 className="font-bold text-[15px] leading-snug title-link mt-2">
+                  {article.title}
+                </h3>
+                <div className="text-[12px] text-soft mt-1">
+                  {formatPublishedAt(article.published_at)} · {readMinutes(article.body_md)} min
                 </div>
               </div>
             </Link>
