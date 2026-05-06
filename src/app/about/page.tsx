@@ -3,7 +3,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "About — Business Fortitude",
+  title: "About",
   description:
     "Business Fortitude is an independent UK business publication for entrepreneurs, scale-up operators, and senior professionals. Published in London.",
 };

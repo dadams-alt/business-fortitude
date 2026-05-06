@@ -30,7 +30,7 @@ export async function generateMetadata({
   const c = await getCompanyBySlug(slug);
   if (!c) return {};
   return {
-    title: `${c.name} — Business Fortitude`,
+    title: c.name,
     description:
       c.meta_description ??
       c.description ??

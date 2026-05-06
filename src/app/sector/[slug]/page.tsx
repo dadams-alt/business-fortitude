@@ -28,7 +28,7 @@ export async function generateMetadata({
   const s = await getSectorBySlug(slug);
   if (!s) return {};
   return {
-    title: `${s.name} — Business Fortitude`,
+    title: s.name,
     description: s.description ?? `${s.name} on Business Fortitude.`,
   };
 }

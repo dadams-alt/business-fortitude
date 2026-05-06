@@ -30,7 +30,7 @@ export async function generateMetadata({
   const t = await getTickerBySlug(slug);
   if (!t) return {};
   return {
-    title: `${t.exchange}:${t.symbol} — Business Fortitude`,
+    title: `${t.exchange}:${t.symbol}`,
     description: `${t.name}. ${t.exchange} listing tracked on Business Fortitude.`,
   };
 }

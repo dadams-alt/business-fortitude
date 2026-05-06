@@ -3,7 +3,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "How BF Works — Business Fortitude",
+  title: "How BF Works",
   description:
     "How the Business Fortitude editorial pipeline ingests, filters, writes, illustrates, and publishes UK business news.",
 };

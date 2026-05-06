@@ -11,7 +11,7 @@ import { SearchForm } from "@/components/article/search-form";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Search — Business Fortitude",
+  title: "Search",
   description: "Search Business Fortitude articles by title.",
 };
 

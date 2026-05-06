@@ -3,7 +3,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Terms — Business Fortitude",
+  title: "Terms",
   description: "Terms of use for the Business Fortitude website.",
 };
 

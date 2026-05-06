@@ -7,7 +7,7 @@ import { listSectors } from "@/lib/queries/entities";
 export const revalidate = 1800;
 
 export const metadata: Metadata = {
-  title: "Sectors — Business Fortitude",
+  title: "Sectors",
   description: "Industry sectors tracked by Business Fortitude.",
 };
 
