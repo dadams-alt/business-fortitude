@@ -31,7 +31,7 @@ export async function generateMetadata({
   const e = await getExecutiveBySlug(slug);
   if (!e) return {};
   return {
-    title: `${e.name} — Business Fortitude`,
+    title: e.name,
     description: e.bio ?? `${e.name} on Business Fortitude.`,
   };
 }

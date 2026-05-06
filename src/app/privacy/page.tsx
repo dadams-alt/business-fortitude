@@ -3,7 +3,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Privacy — Business Fortitude",
+  title: "Privacy",
   description:
     "How Business Fortitude collects, uses, and retains personal data. UK GDPR-shaped privacy notice.",
 };

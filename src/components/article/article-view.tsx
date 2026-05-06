@@ -137,6 +137,7 @@ export async function ArticleView({ article }: { article: Article }) {
                 alt={article.hero_image_alt ?? ""}
                 fill
                 priority
+                fetchPriority="high"
                 sizes="(min-width: 1024px) 1360px, 100vw"
                 className="object-cover"
               />

@@ -3,7 +3,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Cookies — Business Fortitude",
+  title: "Cookies",
   description: "Cookies used on the Business Fortitude website.",
 };
 

@@ -24,7 +24,7 @@ export async function generateMetadata({
   if (!isValidCategory(slug)) return {};
   const cat = CATEGORIES[slug];
   return {
-    title: `${cat.name} — Business Fortitude`,
+    title: cat.name,
     description: cat.description,
   };
 }

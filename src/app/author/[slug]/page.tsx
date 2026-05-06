@@ -25,7 +25,7 @@ export async function generateMetadata({
   const author = getAuthor(slug);
   if (!author) return {};
   return {
-    title: `${author.name} — Business Fortitude`,
+    title: author.name,
     description: author.bio,
   };
 }

@@ -9,7 +9,7 @@ import { createAnonClient } from "@/lib/supabase/anon";
 export const revalidate = 1800;
 
 export const metadata: Metadata = {
-  title: "Tickers — Business Fortitude",
+  title: "Tickers",
   description:
     "Listed equities tracked by Business Fortitude across LSE, NASDAQ, and other exchanges.",
 };

@@ -11,7 +11,7 @@ import { SearchForm } from "@/components/article/search-form";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Search — Business Fortitude",
+  title: "Search",
   description: "Search Business Fortitude articles by title.",
 };
 
@@ -30,7 +30,7 @@ export default async function SearchPage({
       {query && (
         <div className="mt-10">
           <p className="text-soft text-[14px] mb-6">
-            {articles.length} result{articles.length === 1 ? "" : "s"} for
+            {`${articles.length} result${articles.length === 1 ? "" : "s"} for `}
             &ldquo;{query}&rdquo;
           </p>
           {articles.length > 0 && (

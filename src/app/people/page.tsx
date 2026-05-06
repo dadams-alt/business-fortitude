@@ -10,7 +10,7 @@ import {
 export const revalidate = 1800;
 
 export const metadata: Metadata = {
-  title: "People — Business Fortitude",
+  title: "People",
   description: "Named individuals tracked by Business Fortitude.",
 };
 
