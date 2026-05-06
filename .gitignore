@@ -43,3 +43,8 @@ next-env.d.ts
 # Claude Code agent runtime artifacts
 .claude/
 .env*.local
+
+# Legacy import — generated SQL batches (regenerate with the import script)
+legacy-content/import-batches/
+# Legacy import — npm modules pulled in by the deno script
+scripts/legacy-import/node_modules/

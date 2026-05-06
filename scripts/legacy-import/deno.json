@@ -1,0 +1,9 @@
+{
+  "nodeModulesDir": "auto",
+  "imports": {
+    "@std/csv": "jsr:@std/csv@1.0.3",
+    "supabase": "npm:@supabase/supabase-js@2.45.0",
+    "turndown": "npm:turndown@7.2.0",
+    "turndown-plugin-gfm": "npm:turndown-plugin-gfm@1.0.2"
+  }
+}
