@@ -18,6 +18,7 @@ const NAV_ITEMS: Array<{ label: string; href: string }> = [
   { label: CATEGORIES.leadership.name, href: "/category/leadership" },
   { label: CATEGORIES.ai.name, href: "/category/ai" },
   { label: CATEGORIES.startups.name, href: "/category/startups" },
+  { label: CATEGORIES.regulation.name, href: "/category/regulation" },
   { label: CATEGORIES.opinion.name, href: "/category/opinion" },
 ];
 

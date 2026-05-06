@@ -15,7 +15,11 @@ interface FooterLink {
 const READ_LINKS: FooterLink[] = [
   { label: "Latest", href: "/" },
   { label: "Markets", href: "/category/markets" },
+  { label: "Deals", href: "/category/deals" },
   { label: "Leadership", href: "/category/leadership" },
+  { label: "AI", href: "/category/ai" },
+  { label: "Startups", href: "/category/startups" },
+  { label: "Regulation", href: "/category/regulation" },
   { label: "Opinion", href: "/category/opinion" },
 ];
 
