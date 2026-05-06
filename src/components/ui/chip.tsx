@@ -53,16 +53,8 @@ export function variantForCategory(category: string): ChipVariant {
   }
 }
 
-const CATEGORY_LABELS: Record<string, string> = {
-  markets: "Markets",
-  deals: "Deals",
-  leadership: "Leadership",
-  ai: "AI",
-  startups: "Startups",
-  regulation: "Regulation",
-  opinion: "Opinion",
-};
+import { CATEGORIES, isValidCategory } from "@/lib/data/categories";
 
 export function categoryLabel(category: string): string {
-  return CATEGORY_LABELS[category] ?? category;
+  return isValidCategory(category) ? CATEGORIES[category].name : category;
 }

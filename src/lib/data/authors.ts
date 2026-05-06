@@ -48,6 +48,60 @@ export const AUTHORS = {
     photoUrl: 'https://i.pravatar.cc/240?img=20',
     avatarUrl: 'https://i.pravatar.cc/64?img=20',
   },
+  // Legacy authors from the Lovable archive. Some legacy posts still
+  // reference the deprecated 'david' / 'ross' slugs from before cleaner
+  // 'david-adams' / 'ross-williams' versions were created — both kept
+  // so byline links don't 404. Photo URLs still point at Lovable
+  // storage; mirroring author photos is a future task (out of scope of
+  // the legacy-content migration batch).
+  'david-adams': {
+    slug: 'david-adams',
+    name: 'David Adams',
+    role: 'Co-Founder',
+    bio: 'Former COO at Venntro Media Group with 13+ years scaling SaaS and dating platforms. Founding partner at Lucennio Consultancy, focused on GTM automation and AI-powered revenue systems. Co-founder of Business Fortitude.',
+    photoUrl:
+      'https://pelxzjrnqjsfabtvtaeb.supabase.co/storage/v1/object/public/media/authors/david-adams.jpeg',
+    avatarUrl:
+      'https://pelxzjrnqjsfabtvtaeb.supabase.co/storage/v1/object/public/media/authors/david-adams.jpeg',
+  },
+  david: {
+    slug: 'david',
+    name: 'David Adams',
+    role: 'Co-Founder',
+    bio: 'David Adams writes for Business Fortitude on entrepreneurship, technology, and growth.',
+    photoUrl:
+      'https://pelxzjrnqjsfabtvtaeb.supabase.co/storage/v1/object/public/media/authors/david-adams.jpeg',
+    avatarUrl:
+      'https://pelxzjrnqjsfabtvtaeb.supabase.co/storage/v1/object/public/media/authors/david-adams.jpeg',
+  },
+  'ross-williams': {
+    slug: 'ross-williams',
+    name: 'Ross Williams',
+    role: 'Co-Founder',
+    bio: 'Multi-award winning serial entrepreneur and founder/CEO of Venntro Media Group, the company behind White Label Dating. Awards include Ernst & Young Entrepreneur of the Year (2013) and IoD Young Director of the Year (2014). Co-founder of Business Fortitude.',
+    photoUrl:
+      'https://pelxzjrnqjsfabtvtaeb.supabase.co/storage/v1/object/public/media/authors/ross-williams.jpeg',
+    avatarUrl:
+      'https://pelxzjrnqjsfabtvtaeb.supabase.co/storage/v1/object/public/media/authors/ross-williams.jpeg',
+  },
+  ross: {
+    slug: 'ross',
+    name: 'Ross Williams',
+    role: 'Founder, Editor-in-Chief',
+    bio: 'Founder and Editor-in-Chief of Business Fortitude. Passionate about entrepreneurship and innovation.',
+    photoUrl:
+      'https://pelxzjrnqjsfabtvtaeb.supabase.co/storage/v1/object/public/media/authors/ross-williams.jpeg',
+    avatarUrl:
+      'https://pelxzjrnqjsfabtvtaeb.supabase.co/storage/v1/object/public/media/authors/ross-williams.jpeg',
+  },
+  'business-fortitude-team': {
+    slug: 'business-fortitude-team',
+    name: 'Business Fortitude Team',
+    role: 'Editorial Team',
+    bio: 'The editorial team at Business Fortitude, delivering insights and analysis on business, finance, and leadership.',
+    photoUrl: 'https://i.pravatar.cc/240?img=8',
+    avatarUrl: 'https://i.pravatar.cc/64?img=8',
+  },
 } as const;
 
 export type Author = (typeof AUTHORS)[keyof typeof AUTHORS];
