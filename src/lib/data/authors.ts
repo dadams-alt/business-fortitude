@@ -57,8 +57,8 @@ export const AUTHORS = {
   'david-adams': {
     slug: 'david-adams',
     name: 'David Adams',
-    role: 'Co-Founder',
-    bio: 'Former COO at Venntro Media Group with 13+ years scaling SaaS and dating platforms. Founding partner at Lucennio Consultancy, focused on GTM automation and AI-powered revenue systems. Co-founder of Business Fortitude.',
+    role: 'Co-founder · London',
+    bio: 'Co-founder of Business Fortitude. Thirteen years in B2B technology and subscription platforms, finishing as Chief Operating Officer. Built and scaled partner ecosystems covering more than 1,500 relationships globally and managed over $30m in annual B2B partner revenue. Founding Partner at Lucennio Consultancy. Writes occasionally on B2B operations, GTM automation, and revenue pipeline.',
     photoUrl:
       'https://lsdjxhqocslefawseotl.supabase.co/storage/v1/object/public/news-images/authors/david-adams.jpeg',
     avatarUrl:
@@ -67,8 +67,8 @@ export const AUTHORS = {
   david: {
     slug: 'david',
     name: 'David Adams',
-    role: 'Co-Founder',
-    bio: 'David Adams writes for Business Fortitude on entrepreneurship, technology, and growth.',
+    role: 'Co-founder · London',
+    bio: 'Co-founder of Business Fortitude. Thirteen years in B2B technology and subscription platforms, finishing as Chief Operating Officer. Built and scaled partner ecosystems covering more than 1,500 relationships globally and managed over $30m in annual B2B partner revenue. Founding Partner at Lucennio Consultancy. Writes occasionally on B2B operations, GTM automation, and revenue pipeline.',
     photoUrl:
       'https://lsdjxhqocslefawseotl.supabase.co/storage/v1/object/public/news-images/authors/david-adams.jpeg',
     avatarUrl:
@@ -77,8 +77,8 @@ export const AUTHORS = {
   'ross-williams': {
     slug: 'ross-williams',
     name: 'Ross Williams',
-    role: 'Co-Founder',
-    bio: 'Multi-award winning serial entrepreneur and founder/CEO of Venntro Media Group, the company behind White Label Dating. Awards include Ernst & Young Entrepreneur of the Year (2013) and IoD Young Director of the Year (2014). Co-founder of Business Fortitude.',
+    role: 'Co-founder · London',
+    bio: 'Co-founder of Business Fortitude. Founded Venntro Media Group in 2003, bootstrapping it to nearly $50m annual revenue and powering more than 1,000 subscription brands globally before its acquisition by Ambervine in 2024. EY Entrepreneur of the Year and author of Subscribe and Conquer. Writes on subscription strategy, leadership, and long-horizon operating.',
     photoUrl:
       'https://lsdjxhqocslefawseotl.supabase.co/storage/v1/object/public/news-images/authors/ross-williams.jpeg',
     avatarUrl:
@@ -87,8 +87,8 @@ export const AUTHORS = {
   ross: {
     slug: 'ross',
     name: 'Ross Williams',
-    role: 'Founder, Editor-in-Chief',
-    bio: 'Founder and Editor-in-Chief of Business Fortitude. Passionate about entrepreneurship and innovation.',
+    role: 'Co-founder · London',
+    bio: 'Co-founder of Business Fortitude. Founded Venntro Media Group in 2003, bootstrapping it to nearly $50m annual revenue and powering more than 1,000 subscription brands globally before its acquisition by Ambervine in 2024. EY Entrepreneur of the Year and author of Subscribe and Conquer. Writes on subscription strategy, leadership, and long-horizon operating.',
     photoUrl:
       'https://lsdjxhqocslefawseotl.supabase.co/storage/v1/object/public/news-images/authors/ross-williams.jpeg',
     avatarUrl:
